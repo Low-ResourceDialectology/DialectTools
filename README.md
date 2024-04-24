@@ -22,7 +22,7 @@
   <h3 align="center">Dialect Data</h3>
 
   Dialect Tools is an auxiliary project for collecting and transforming data in Low-Resource contexts.
-
+</div>
 
 
 

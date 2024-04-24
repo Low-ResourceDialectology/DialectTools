@@ -1,0 +1,29 @@
+{
+    "2023AhmadiSouthernCorpus":
+    {
+        "Text Format":"sentence",
+        "Notes":"Northern Kurdish in Latin and Arabic script.",
+        "Languages":["ckb","kmr","zza"],
+        "Access":"",
+        "Platform":"github",
+        "Platform ID":
+        [
+            "https://raw.githubusercontent.com/sinaahmadi/KurdishLID/main/datasets/NorthernKurdish-latn_train.txt",
+            "https://raw.githubusercontent.com/sinaahmadi/KurdishLID/main/datasets/NorthernKurdish-arab_train.txt"
+        ],
+        "Name":"Language Identification of Kurdish & Zaza-Gorani Languages",
+        "Description":"Approaches to Corpus Creation for Low-Resource Language Technology: the Case of Southern Kurdish and Laki",
+        "Year":2023,
+        "URL":"https://github.com/sinaahmadi/KurdishLID/tree/main"
+    },
+    "test":
+    {
+        "Text Format":"word",
+        "Language":""
+    },
+    "test2":
+    {
+        "Text Format":"paragraph",
+        "Language":""
+    }
+}
