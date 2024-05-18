@@ -26,7 +26,24 @@
 
 
 
+## Setup
+Prerequisites
+```
+sudo apt install jq
+```
 
+Takes a directory as input to install and set up various tools for language processing.
+
+
+
+## Using the Tools
+
+### Morfessor
+```
+source /media/AllBlue/LanguageData/TOOLS/vMorfessor/bin/activate
+
+
+```
 
 
 
