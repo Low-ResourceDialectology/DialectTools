@@ -1,7 +1,7 @@
 #!/bin/bash
 # Download parallel data for Sockeye
 # Use: cd ./setup
-#         bash Sockeye-Test-bar-eng.sh /media/AllBlue/LanguageData/PREP/opustools bar en /media/AllBlue/LanguageData/DOWNLOAD/opustools
+#         bash Sockeye-Data-Test-bar-eng.sh /media/AllBlue/LanguageData/PREP/opustools bar en /media/AllBlue/LanguageData/DOWNLOAD/opustools
 
 CURRENT="$PWD"
 

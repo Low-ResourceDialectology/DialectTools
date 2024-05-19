@@ -21,54 +21,6 @@ TOOL="$2"
 # TODO: VENV as argument
 #VENV="$2"
 
-# spaCy is a library for advanced Natural Language Processing in Python and Cython. 
-# https://pypi.org/project/spacy/
-if [[ "${TOOL}" == *"spaCy"* ]]; then
-	# Create venv for tool to be installed in
-	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
-
-	# Python packages inside default venv
-	cd "${TOOLDIR}"
-	source "./v${TOOL}/bin/activate"
-	
-    echo "Installing ${TOOL}"
-    pip install -U pip setuptools wheel
-    pip install -U 'spacy[cuda12x]'
-    # Download a few default files for working with Chinese, English, and German data
-    python -m spacy download zh_core_web_sm
-    python -m spacy download en_core_web_sm
-    python -m spacy download de_core_news_sm
-fi
-
-# Language Identification with Support for More Than 2000 Labels
-# https://github.com/cisnlp/GlotLID
-if [[ "${TOOL}" == *"GlotLID"* ]]; then
-#elif [ "${TOOL}" = "GlotLID" ];
-	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
-
-	cd "${TOOLDIR}"
-	source "./v${TOOL}/bin/activate"	
-	
-    echo "Installing ${TOOL}"
-    git clone git@github.com:cisnlp/GlotLID.git ./${TOOL}
-    pip install fasttext
-    pip install huggingface_hub
-fi
-
-if [[ "${TOOL}" == *"Morfessor"* ]]; then
-#elif [ "${TOOL}" = "Morfessor" ];
-#then
-	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
-
-	cd "${TOOLDIR}"
-	source "./v${TOOL}/bin/activate"	
-	
-    echo "Installing ${TOOL}"
-    pip install morfessor
-fi
 
 if [[ "${TOOL}" == *"fairseq"* ]]; then
 #elif [ "${TOOL}" = "fairseq" ];
@@ -109,6 +61,35 @@ if [[ "${TOOL}" == *"fast_align"* ]]; then
 	make
 fi
 
+# Language Identification with Support for More Than 2000 Labels
+# https://github.com/cisnlp/GlotLID
+if [[ "${TOOL}" == *"GlotLID"* ]]; then
+#elif [ "${TOOL}" = "GlotLID" ];
+	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+
+	cd "${TOOLDIR}"
+	source "./v${TOOL}/bin/activate"	
+	
+    echo "Installing ${TOOL}"
+    git clone git@github.com:cisnlp/GlotLID.git ./${TOOL}
+    pip install fasttext
+    pip install huggingface_hub
+fi
+
+if [[ "${TOOL}" == *"Morfessor"* ]]; then
+#elif [ "${TOOL}" = "Morfessor" ];
+#then
+	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+
+	cd "${TOOLDIR}"
+	source "./v${TOOL}/bin/activate"	
+	
+    echo "Installing ${TOOL}"
+    pip install morfessor
+fi
+
 # https://github.com/Helsinki-NLP/OpusTools/tree/master
 if [[ "${TOOL}" == *"OpusTools"* ]]; then 
 #elif [ "${TOOL}" = "OpusTools" ]; 
@@ -122,6 +103,44 @@ if [[ "${TOOL}" == *"OpusTools"* ]]; then
     echo "Installing ${TOOL}"
     pip install opustools[all]
 fi
+
+# Sockeye → https://github.com/awslabs/sockeye
+# subword-nmt → https://github.com/rsennrich/subword-nmt
+if [[ "${TOOL}" == *"Sockeye"* ]]; then 
+	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+
+	cd "${TOOLDIR}"
+	source "./v${TOOL}/bin/activate"	
+	
+    echo "Installing ${TOOL}"
+	git clone git@github.com:awslabs/sockeye.git ./${TOOL}
+	cd ./${TOOL}
+    pip install --editable .
+
+	pip install subword-nmt
+fi
+
+# spaCy is a library for advanced Natural Language Processing in Python and Cython. 
+# https://pypi.org/project/spacy/
+if [[ "${TOOL}" == *"spaCy"* ]]; then
+	# Create venv for tool to be installed in
+	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+
+	# Python packages inside default venv
+	cd "${TOOLDIR}"
+	source "./v${TOOL}/bin/activate"
+	
+    echo "Installing ${TOOL}"
+    pip install -U pip setuptools wheel
+    pip install -U 'spacy[cuda12x]'
+    # Download a few default files for working with Chinese, English, and German data
+    python -m spacy download zh_core_web_sm
+    python -m spacy download en_core_web_sm
+    python -m spacy download de_core_news_sm
+fi
+
 
 # https://github.com/stanfordnlp/stanza?tab=readme-ov-file
 if [[ "${TOOL}" == *"Stanza"* ]]; then 
@@ -180,20 +199,7 @@ if [[ "${TOOL}" == *"KLPT"* ]]; then
 fi
 
 
-# Sockeye → https://github.com/awslabs/sockeye
-# subword-nmt → https://github.com/rsennrich/subword-nmt
-if [[ "${TOOL}" == *"Sockeye"* ]]; then 
-	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
 
-	cd "${TOOLDIR}"
-	source "./v${TOOL}/bin/activate"	
-	
-    echo "Installing ${TOOL}"
-	git clone git@github.com:awslabs/sockeye.git ./${TOOL}
-	cd ./${TOOL}
-    pip install --editable .
-fi
 
 # URL
 #if [[ "${TOOL}" == *"spaCy"* ]]; then
