@@ -137,9 +137,63 @@ if [[ "${TOOL}" == *"Stanza"* ]]; then
     pip install -e .
 fi
 
-# URL
-#if [[ "${TOOL}" == *"spaCy"* ]]; then
-#fi
+# KLPT → https://github.com/sinaahmadi/klpt
+# Cyhunspell → https://pypi.org/project/cyhunspell/
+# Hunspell → https://github.com/hunspell/hunspell
+if [[ "${TOOL}" == *"KLPT"* ]]; then
+	echo "ISSUE: Installing KLTP requires Cyhunspell, which requires Hunspell, which I could not get to work on my system..."
+	
+	# Part of error message:
+	# Building wheel for cyhunspell (setup.py) ... error
+  	#error: subprocess-exited-with-error  
+  	#× python setup.py bdist_wheel did not run successfully.
+  	#│ exit code: 1
+  	#╰─> [257 lines of output]
+      	#/media/AllBlue/LanguageData/TOOLS/vKLPT/lib/python3.10/site-packages/setuptools/dist.py:723: UserWarning: Usage of dash-separated 'description-file' will not be supported in future versions. Please use the underscore name 'description_file' instead
+
+	#echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	#bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+
+	#cd "${TOOLDIR}"
+	#source "./v${TOOL}/bin/activate"	
+	
+    #echo "Installing ${TOOL}"
+
+	# Cyhunspell requires hunspell → https://github.com/hunspell/hunspell
+	# START OF PART TO BE COMMENTED OUT 
+	# git clone git@github.com:hunspell/hunspell.git ./Hunspell
+	# cd ./Hunspell
+	# autoreconf -vfi
+	# ./configure
+	# make
+	# echo "MANUAL PART OF INSTALLATION"
+	# echo "Navigate to ${TOOLDIR}/Hunspell and execute: sudo make install"
+	# echo "Navigate to ${TOOLDIR}/Hunspell and execute: sudo ldconfig"
+	# echo "Open the /DialectTools/install/tools.sh file and comment out the lines for hunspell (above this very line)"
+	# echo "Open the /DialectTools/install/tools.sh file and uncomment the lines for cyhunspell and kltp (below this very line)"
+	# END OF PART TO BE COMMENTED OUT 
+
+	# NLTK requires cyhunspell version >= 2.0.1 → https://pypi.org/project/cyhunspell/
+	#pip install wheel
+	#pip install cyhunspell
+    #pip install klpt
+fi
+
+
+# Sockeye → https://github.com/awslabs/sockeye
+# subword-nmt → https://github.com/rsennrich/subword-nmt
+if [[ "${TOOL}" == *"Sockeye"* ]]; then 
+	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+
+	cd "${TOOLDIR}"
+	source "./v${TOOL}/bin/activate"	
+	
+    echo "Installing ${TOOL}"
+	git clone git@github.com:awslabs/sockeye.git ./${TOOL}
+	cd ./${TOOL}
+    pip install --editable .
+fi
 
 # URL
 #if [[ "${TOOL}" == *"spaCy"* ]]; then
