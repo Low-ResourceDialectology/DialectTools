@@ -21,6 +21,56 @@ TOOL="$2"
 # TODO: VENV as argument
 #VENV="$2"
 
+# Apertium → https://github.com/apertium
+# Apertium Install → https://wiki.apertium.org/wiki/Installation
+# Apertium Install core using packaging → https://wiki.apertium.org/wiki/Install_Apertium_core_using_packaging
+if [[ "${TOOL}" == *"Apertium"* ]]; then
+	echo "Installing ${TOOL}"
+	echo "Note: If you get any errors such as uninstallable unmet dependencies, try updating your ubuntu to the latest normal version."
+	cd "${TOOLDIR}"
+	mkdir "./${TOOL}"
+	cd "./${TOOL}"
+
+	# Add the repository
+	curl -sS https://apertium.projectjj.com/apt/install-nightly.sh | sudo bash
+
+	echo "Installation requires the use of suda and should be done manually via:"
+	echo "sudo apt-get -f install apertium-all-dev"
+	echo "List all available language packages for Apertium via:"
+	echo "apt search apertium"
+	echo "Install language packages via:"
+	echo "sudo apt-get install apertium-eng-deu"
+
+	echo "Apertium Help:"
+	echo "lt-proc"
+
+	echo "Use Apertium to translate a sentence:"
+	echo "'This is a test sentence' | apertium eo-en "
+
+fi
+
+# Argos Translate → https://github.com/argosopentech/argos-translate
+# Argos Translate Files → https://github.com/LibreTranslate/argos-translate-files
+if [[ "${TOOL}" == *"ArgosTranslate"* ]]; then
+	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+
+	cd "${TOOLDIR}"
+	source "./v${TOOL}/bin/activate"	
+
+    echo "Installing ${TOOL}"
+	cd "${TOOLDIR}"
+    git clone git@github.com:argosopentech/argos-translate.git ./${TOOL}
+	cd ./${TOOL}
+	pip install -e .
+	# Install all translation packages
+	argospm install translate
+	
+	# Separate github repository for Argos Translate Files
+	cd "${TOOLDIR}"
+	git clone git@github.com:LibreTranslate/argos-translate-files.git ./${TOOL}Files
+	pip install argos-translate-files
+fi
 
 if [[ "${TOOL}" == *"fairseq"* ]]; then
 #elif [ "${TOOL}" = "fairseq" ];
@@ -34,7 +84,7 @@ if [[ "${TOOL}" == *"fairseq"* ]]; then
     echo "Installing ${TOOL}"
     #git clone https://github.com/pytorch/fairseq  # According to instructions(?)
     git clone git@github.com:facebookresearch/fairseq.git ./${TOOL}
-    cd fairseq
+    cd ./${TOOL}
     pip install --editable ./
     
     # Optional - TODO: Test
@@ -54,7 +104,7 @@ if [[ "${TOOL}" == *"fast_align"* ]]; then
     echo "Installing ${TOOL}"
 	cd "${TOOLDIR}"
     git clone git@github.com:clab/fast_align.git ./${TOOL}
-	cd ./fast_align
+	cd ./${TOOL}
 	mkdir build
 	cd build
 	cmake ..
@@ -90,6 +140,22 @@ if [[ "${TOOL}" == *"Morfessor"* ]]; then
     pip install morfessor
 fi
 
+# NLLB → https://github.com/facebookresearch/fairseq/tree/nllb
+# ? Open-NLLB → https://github.com/gordicaleksa/Open-NLLB
+if [[ "${TOOL}" == *"NLLB"* ]]; then
+	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+
+	cd "${TOOLDIR}"
+	source "./v${TOOL}/bin/activate"	
+	
+    echo "Installing ${TOOL}"
+    pip install transformers
+	pip install torch
+    
+	# TODO: Look into "Open-NLLB" for more development options (?)
+fi
+
 # https://github.com/Helsinki-NLP/OpusTools/tree/master
 if [[ "${TOOL}" == *"OpusTools"* ]]; then 
 #elif [ "${TOOL}" = "OpusTools" ]; 
@@ -102,6 +168,20 @@ if [[ "${TOOL}" == *"OpusTools"* ]]; then
 	
     echo "Installing ${TOOL}"
     pip install opustools[all]
+fi
+
+# SacreBLEU → https://github.com/mjpost/sacreBLEU
+if [[ "${TOOL}" == *"SacreBLEU"* ]]; then 
+	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+
+	cd "${TOOLDIR}"
+	source "./v${TOOL}/bin/activate"	
+	
+    echo "Installing ${TOOL}"
+	git clone git@github.com:mjpost/sacrebleu.git ./${TOOL}
+	
+    pip install sacrebleu
 fi
 
 # Sockeye → https://github.com/awslabs/sockeye
@@ -119,6 +199,8 @@ if [[ "${TOOL}" == *"Sockeye"* ]]; then
     pip install --editable .
 
 	pip install subword-nmt
+	pip install tensorboard
+	pip install tensorflow
 fi
 
 # spaCy is a library for advanced Natural Language Processing in Python and Cython. 
@@ -141,7 +223,6 @@ if [[ "${TOOL}" == *"spaCy"* ]]; then
     python -m spacy download de_core_news_sm
 fi
 
-
 # https://github.com/stanfordnlp/stanza?tab=readme-ov-file
 if [[ "${TOOL}" == *"Stanza"* ]]; then 
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
@@ -155,6 +236,40 @@ if [[ "${TOOL}" == *"Stanza"* ]]; then
 	cd ./${TOOL}
     pip install -e .
 fi
+
+# TranslateLocally → https://github.com/XapaJIaMnu/translateLocally
+if [[ "${TOOL}" == *"TranslateLocally"* ]]; then
+	echo "Make sure to install the build dependencies prior to running the installation script below!"
+	# sudo apt-get install -y libxkbcommon-x11-dev libpcre++-dev libvulkan-dev libgl1-mesa-dev qt6-base-dev qt6-base-dev-tools qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools qt6-translations-l10n libqt6svg6-dev libarchive-dev libpcre2-dev
+
+    # echo "Installing ${TOOL}"
+	# cd "${TOOLDIR}"
+    # git clone git@github.com:XapaJIaMnu/translateLocally.git ./${TOOL}
+	# cd ./${TOOL}
+	# mkdir build
+	# cd build
+	# cmake ..
+	# make -j5
+
+	# To start the GUI, run:
+	#./translateLocally
+
+	echo "App starts and can be called via CLI- but any time I try to translate something, I get something like -Aborted (core dumped)- and get kicked out..."
+fi
+
+
+# Translate Shell → https://github.com/soimort/translate-shell
+if [[ "${TOOL}" == *"TranslateShell"* ]]; then
+	echo "Easy install on Ubuntu, just execute in terminal:"
+	echo "sudo apt install translate-shell"
+
+	echo "Alternatively: Download the self-contained executable and place it into your path via:"
+	echo "wget git.io/trans"
+	echo "and then:"
+	echo "chmod +x ./trans"
+fi
+
+
 
 # KLPT → https://github.com/sinaahmadi/klpt
 # Cyhunspell → https://pypi.org/project/cyhunspell/
@@ -198,7 +313,21 @@ if [[ "${TOOL}" == *"KLPT"* ]]; then
     #pip install klpt
 fi
 
+# Whisper → https://github.com/openai/whisper
+if [[ "${TOOL}" == *"Whisper"* ]]; then 
+	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
 
+	cd "${TOOLDIR}"
+	source "./v${TOOL}/bin/activate"	
+	
+    echo "Installing ${TOOL}"
+	#git clone git@github.com:openai/whisper.git ./${TOOL}
+	#cd ./${TOOL}
+	#python3 ./setup.py
+	
+	pip install git+https://github.com/openai/whisper.git
+fi
 
 
 # URL

@@ -1,11 +1,10 @@
 #!/bin/bash
 # Install all tools
 # Use: cd ./install
-#      bash install_all.sh "/media/AllBlue/LanguageData/TOOLS/"
+# bash install_all.sh
 
 CURRENT="$PWD"
 
-# First (optional) input argument
 TOOLDIRIN="${1:-$(jq .data_root_dir ./../config.json)}"
 TOOLDIRCLEAN="${TOOLDIRIN//\"/$''}"
 TOOLDIR="${TOOLDIRCLEAN}/TOOLS/"
@@ -18,17 +17,22 @@ TOOLDIR="${TOOLDIRCLEAN}/TOOLS/"
 
 
 # Functional
-#bash tools.sh "${TOOLDIR}" "fairseq fast_align GlotLID KLPT Morfessor OpusTools spaCy Stanza"
+#bash tools.sh "${TOOLDIR}" "ArgosTranslate fairseq fast_align GlotLID KLPT Morfessor NLLB OpusTools SacreBLEU Sockeye spaCy Stanza TranslateLocally Whisper"
 
+#bash tools.sh "${TOOLDIR}" "ArgosTranslate"
 #bash tools.sh "${TOOLDIR}" "fairseq" 
 #bash tools.sh "${TOOLDIR}" "fast_align"
 #bash tools.sh "${TOOLDIR}" "GlotLID"
 #bash tools.sh "${TOOLDIR}" "KLPT"
 #bash tools.sh "${TOOLDIR}" "Morfessor"
+#bash tools.sh "${TOOLDIR}" "NLLB"
 #bash tools.sh "${TOOLDIR}" "OpusTools"
+#bash tools.sh "${TOOLDIR}" "SacreBLEU"
 #bash tools.sh "${TOOLDIR}" "Sockeye"
 #bash tools.sh "${TOOLDIR}" "spaCy"
 #bash tools.sh "${TOOLDIR}" "Stanza"
+#bash tools.sh "${TOOLDIR}" "TranslateLocally"
+bash tools.sh "${TOOLDIR}" "Whisper"
 
 #bash tools.sh "${TOOLDIR}" ""
 

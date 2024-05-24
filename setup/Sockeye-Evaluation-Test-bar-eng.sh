@@ -1,7 +1,7 @@
 #!/bin/bash
 # Preprovess parallel data for Sockeye via subword-nmt
 # Use: cd ./setup
-# bash Sockeye-Preprocess-Test-bar-eng.sh /media/AllBlue/LanguageData/PREP/opustools bar en /media/AllBlue/LanguageData/PREP/subwordnmt
+# bash Sockeye-Evaluation-Test-bar-eng.sh /media/AllBlue/LanguageData/PREP/subwordnmt bar en /media/AllBlue/LanguageData/PREP/opustools
 
 CURRENT="$PWD"
 
@@ -10,19 +10,38 @@ INPUTDIR="$1"
 SOURCE="$2"
 TARGET="$3"
 DATADIR="${INPUTDIR}/${SOURCE}-${TARGET}"
+INDIR="$4/${SOURCE}-${TARGET}"
 
-OUTDIR="$4"
-mkdir "${OUTDIR}" -p
-cd "${OUTDIR}"
-source /media/AllBlue/LanguageData/TOOLS/vSockeye/bin/activate
+source /media/AllBlue/LanguageData/TOOLS/vSacreBLEU/bin/activate
+
+# When training is complete, we translate the preprocessed test set:
+###############################################################################
+# One direction
+# sockeye-translate \
+#     --input "${DATADIR}"/test."${SOURCE}".bpe \
+#     --output "${DATADIR}"/out-"${SOURCE}"-"${TARGET}".bpe \
+#     --model "${DATADIR}"/model \
+#     --dtype float16 \
+#     --beam-size 5 \
+#     --batch-size 64
+
+# Other direction
+# sockeye-translate \
+#     --input "${DATADIR}"/test."${TARGET}".bpe \
+#     --output "${DATADIR}"/out-"${TARGET}"-"${SOURCE}".bpe \
+#     --model "${DATADIR}"/model \
+#     --dtype float16 \
+#     --beam-size 5 \
+#     --batch-size 64
 
 
+# We then reverse BPE and score the translations against the reference using sacreBLEU:
+###############################################################################
+sed -re 's/(@@ |@@$)//g' <"${DATADIR}"/out-"${SOURCE}"-"${TARGET}".bpe >"${DATADIR}"/out-"${SOURCE}"-"${TARGET}".tok
+sacrebleu "${INDIR}"/test."${TARGET}" -tok none -i "${DATADIR}"/out-"${SOURCE}"-"${TARGET}".tok
 
-cat "${DATADIR}"/train."${SOURCE}" "${DATADIR}"/train."${TARGET}" |subword-nmt learn-bpe -s 32000 >codes
-for SET in train dev test; do
-  subword-nmt apply-bpe -c codes <"${DATADIR}"/"${SET}"."${SOURCE}" >"${DATADIR}"/"${SET}"."${SOURCE}".bpe
-  subword-nmt apply-bpe -c codes <"${DATADIR}"/"${SET}"."${TARGET}" >"${DATADIR}"/"${SET}"."${TARGET}".bpe
-done
+sed -re 's/(@@ |@@$)//g' <"${DATADIR}"/out-"${TARGET}"-"${SOURCE}".bpe >"${DATADIR}"/out-"${TARGET}"-"${SOURCE}".tok
+sacrebleu "${INDIR}"/test."${SOURCE}" -tok none -i "${DATADIR}"/out-"${TARGET}"-"${SOURCE}".tok
 
 cd "$CURRENT"
 
