@@ -237,6 +237,22 @@ if [[ "${TOOL}" == *"Stanza"* ]]; then
     pip install -e .
 fi
 
+# Various Tools and Packages for Cleaning of Text Data
+if [[ "${TOOL}" == *"TextCleaning"* ]]; then 
+	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+
+	cd "${TOOLDIR}"
+	source "./v${TOOL}/bin/activate"	
+	
+    echo "Installing ${TOOL}"
+    pip install pandas
+	pip install seaborn
+	pip install numpy
+	pip install scikit-learn
+	pip install nltk
+fi
+
 # TranslateLocally → https://github.com/XapaJIaMnu/translateLocally
 if [[ "${TOOL}" == *"TranslateLocally"* ]]; then
 	echo "Make sure to install the build dependencies prior to running the installation script below!"

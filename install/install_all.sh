@@ -17,7 +17,7 @@ TOOLDIR="${TOOLDIRCLEAN}/TOOLS/"
 
 
 # Functional
-#bash tools.sh "${TOOLDIR}" "ArgosTranslate fairseq fast_align GlotLID KLPT Morfessor NLLB OpusTools SacreBLEU Sockeye spaCy Stanza TranslateLocally Whisper"
+#bash tools.sh "${TOOLDIR}" "ArgosTranslate fairseq fast_align GlotLID KLPT Morfessor NLLB OpusTools SacreBLEU Sockeye spaCy Stanza TextCleaning TranslateLocally Whisper"
 
 #bash tools.sh "${TOOLDIR}" "ArgosTranslate"
 #bash tools.sh "${TOOLDIR}" "fairseq" 
@@ -31,8 +31,9 @@ TOOLDIR="${TOOLDIRCLEAN}/TOOLS/"
 #bash tools.sh "${TOOLDIR}" "Sockeye"
 #bash tools.sh "${TOOLDIR}" "spaCy"
 #bash tools.sh "${TOOLDIR}" "Stanza"
+#bash tools.sh "${TOOLDIR}" "TextCleaning"
 #bash tools.sh "${TOOLDIR}" "TranslateLocally"
-bash tools.sh "${TOOLDIR}" "Whisper"
+#bash tools.sh "${TOOLDIR}" "Whisper"
 
 #bash tools.sh "${TOOLDIR}" ""
 

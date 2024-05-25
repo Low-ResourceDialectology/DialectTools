@@ -1,15 +1,11 @@
 #!/bin/bash
-# Preprocess parallel data for Sockeye via subword-nmt
-# Use: cd ./setup
-# bash Sockeye-German-DialectBLI-Preprocess.sh
-
-# Parameters closer to the work of (Her and Kruschwitz, 2024) in nmt-de-bar
+# Acquired data via OpusTools and preprocessed close to (Her and Kruschhwitz, 2024)'s setup for comparison baseline
 
 CURRENT="$PWD"
 
 source /media/AllBlue/LanguageData/TOOLS/vSockeye/bin/activate
 
-INPUTDIR="/media/AllBlue/LanguageData/PREP/2024SchuMATh-barL-Sock-deuL-DBLI-0001"
+INPUTDIR="/media/AllBlue/LanguageData/PREP/2024SchuMATh-barL-Sock-deuL-Opus-0001"
 SOURCE="bar"
 TARGET="deu"
 EXPID="0002"
