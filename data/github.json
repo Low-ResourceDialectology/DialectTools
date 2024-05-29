@@ -1,5 +1,13 @@
 {
 	"githubrepos": {
+		"2024Xie_Inte":{
+			"URL":"https://github.com/ruoyuxie/interpretable_dialect_classifier",
+			"Authors":"Roy Xie and Orevaoghene Ahia and Yulia Tsvetkov and Antonios Anastasopoulos",
+			"Publications":{
+				"Extracting Lexical Features from Dialects via Interpretable Dialect Classifiers":""
+			},
+			"Languages":["Mandarin","Italian","Low Saxon"]
+		},
 		"2023ArteDial":{
 			"URL":"https://github.com/mainlp/dialect-BLI",
 			"Authors":"Artemova, Ekaterina and Plank, Barbara",

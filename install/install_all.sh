@@ -12,7 +12,7 @@
 # Function to read config file
 read_config() {
     local script_dir="$(dirname "$0")"
-    local config_file="$script_dir/config.txt"
+    local config_file="$script_dir/../config.txt"
     source "$config_file"
 }
 
@@ -48,8 +48,10 @@ main() {
     shift $((OPTIND - 1))
 
     # If no target directory or string list provided, read from config
-    if [ -z "$target_dir" ] || [ ${#tools[@]} -eq 0 ]; then
+    if [ -z "$target_dir" ]; then
         target_dir="$data_root_dir"
+    fi
+    if [ ${#tools[@]} -eq 0 ]; then
         tools=($tool_list)
     fi
 

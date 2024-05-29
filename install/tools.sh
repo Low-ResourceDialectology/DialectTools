@@ -4,9 +4,10 @@
 
 CURRENT="$PWD"
 
+script_dir="$(dirname "$0")"
+venv_script="$script_dir/create_venv.sh"
 # Target directory for the tool to be installed to
 TOOLDIR="$1"
-
 # List of tools to be installed
 TOOL="$2"
 
@@ -42,7 +43,7 @@ fi
 # Argos Translate Files → https://github.com/LibreTranslate/argos-translate-files
 if [[ "${TOOL}" == *"ArgosTranslate"* ]]; then
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	cd "${TOOLDIR}"
 	source "./v${TOOL}/bin/activate"	
@@ -65,7 +66,7 @@ if [[ "${TOOL}" == *"fairseq"* ]]; then
 #elif [ "${TOOL}" = "fairseq" ];
 #then
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	cd "${TOOLDIR}"
 	source "./v${TOOL}/bin/activate"	
@@ -105,7 +106,7 @@ fi
 if [[ "${TOOL}" == *"GlotLID"* ]]; then
 #elif [ "${TOOL}" = "GlotLID" ];
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	cd "${TOOLDIR}"
 	source "./v${TOOL}/bin/activate"	
@@ -120,7 +121,7 @@ if [[ "${TOOL}" == *"Morfessor"* ]]; then
 #elif [ "${TOOL}" = "Morfessor" ];
 #then
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	cd "${TOOLDIR}"
 	source "./v${TOOL}/bin/activate"	
@@ -133,7 +134,7 @@ fi
 # ? Open-NLLB → https://github.com/gordicaleksa/Open-NLLB
 if [[ "${TOOL}" == *"NLLB"* ]]; then
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	cd "${TOOLDIR}"
 	source "./v${TOOL}/bin/activate"	
@@ -150,7 +151,7 @@ if [[ "${TOOL}" == *"OpusTools"* ]]; then
 #elif [ "${TOOL}" = "OpusTools" ]; 
 #then
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	cd "${TOOLDIR}"
 	source "./v${TOOL}/bin/activate"	
@@ -162,7 +163,7 @@ fi
 # SacreBLEU → https://github.com/mjpost/sacreBLEU
 if [[ "${TOOL}" == *"SacreBLEU"* ]]; then 
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	cd "${TOOLDIR}"
 	source "./v${TOOL}/bin/activate"	
@@ -177,7 +178,7 @@ fi
 # subword-nmt → https://github.com/rsennrich/subword-nmt
 if [[ "${TOOL}" == *"Sockeye"* ]]; then 
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	cd "${TOOLDIR}"
 	source "./v${TOOL}/bin/activate"	
@@ -197,7 +198,7 @@ fi
 if [[ "${TOOL}" == *"spaCy"* ]]; then
 	# Create venv for tool to be installed in
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	# Python packages inside default venv
 	cd "${TOOLDIR}"
@@ -215,7 +216,7 @@ fi
 # https://github.com/stanfordnlp/stanza?tab=readme-ov-file
 if [[ "${TOOL}" == *"Stanza"* ]]; then 
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	cd "${TOOLDIR}"
 	source "./v${TOOL}/bin/activate"	
@@ -229,7 +230,7 @@ fi
 # Various Tools and Packages for Cleaning of Text Data
 if [[ "${TOOL}" == *"TextCleaning"* ]]; then 
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	cd "${TOOLDIR}"
 	source "./v${TOOL}/bin/activate"	
@@ -292,7 +293,7 @@ if [[ "${TOOL}" == *"KLPT"* ]]; then
       	#/media/AllBlue/LanguageData/TOOLS/vKLPT/lib/python3.10/site-packages/setuptools/dist.py:723: UserWarning: Usage of dash-separated 'description-file' will not be supported in future versions. Please use the underscore name 'description_file' instead
 
 	#echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	#bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	#bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	#cd "${TOOLDIR}"
 	#source "./v${TOOL}/bin/activate"	
@@ -322,7 +323,7 @@ fi
 # Whisper → https://github.com/openai/whisper
 if [[ "${TOOL}" == *"Whisper"* ]]; then 
 	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
-	bash create_venv.sh "${TOOL}" "${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
 
 	cd "${TOOLDIR}"
 	source "./v${TOOL}/bin/activate"	
@@ -333,6 +334,23 @@ if [[ "${TOOL}" == *"Whisper"* ]]; then
 	#python3 ./setup.py
 	
 	pip install git+https://github.com/openai/whisper.git
+fi
+
+# Wikiextractor → https://github.com/attardi/wikiextractor
+if [[ "${TOOL}" == *"Wikiextractor"* ]]; then 
+	echo "Installing venv for ${TOOL} in: ${TOOLDIR}"
+	bash "${venv_script}" "${TOOL}" "${TOOLDIR}"
+
+	cd "${TOOLDIR}"
+	source "./v${TOOL}/bin/activate"	
+	
+    echo "Installing ${TOOL}"
+	git clone git@github.com:attardi/wikiextractor.git ./${TOOL}
+	# Alternative: Install locally
+	#cd ./${TOOL}
+	#python3 ./setup.py install
+	
+	pip install wikiextractor
 fi
 
 
