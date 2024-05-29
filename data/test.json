@@ -1,0 +1,20 @@
+{
+	"githubrepos": {
+		"2020AhmaKurd":{
+			"URL":"https://github.com/sinaahmadi/KurdishTokenization",
+			"Authors":"",
+			"Publications":{
+				"TITLE":"URL_or_DOI"
+			},
+			"Languages":[""]
+		},
+		"2023AhmaSout":{
+			"URL":"https://github.com/sinaahmadi/KurdishLID",
+			"Authors":"",
+			"Publications":{
+				"Approaches to Corpus Creation for Low-Resource Language Technology: the Case of Southern Kurdish and Laki":"URL_or_DOI"
+			},
+			"Languages":["kmr","ckb","sdh","hac","zza","ar","fa","tr"]
+		}
+	}
+}

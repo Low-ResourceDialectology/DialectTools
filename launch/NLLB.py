@@ -7,14 +7,26 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 
 # source /media/AllBlue/LanguageData/TOOLS/vNLLB/bin/activate
 # python3 NLLB.py --input_lang eng_Latn --input_file /media/AllBlue/LanguageData/CLEAN/English/2022NLLBNLLB_devtest.engL --output_lang deu_Latn --output_file /media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh-engL-mult-deuL-NLLB-0001/2022NLLBNLLB-NLLB.deuL
+# Newly added: --authorid 
+# Newly added: --modelid
+
+# NLLB Models on HuggingFace
+# https://huggingface.co/facebook/nllb-200-3.3B
+# https://huggingface.co/facebook/nllb-200-1.3B
+# https://huggingface.co/facebook/nllb-200-distilled-1.3B
+# https://huggingface.co/facebook/nllb-200-distilled-600M
+
 
 parser = argparse.ArgumentParser(description='Machine Translation via NLLB')
 parser.add_argument('--input_lang', type=str, help='input language code')
 parser.add_argument('--input_file', type=str, help='input file')
 parser.add_argument('--output_lang', type=str, help='output language code')
 parser.add_argument('--output_file', type=str, help='output file')
+parser.add_argument('--authorid', type=str, help='author on huggingface', default='facebook')
+parser.add_argument('--modelid', type=str, help='model on huggingface', default='nllb-200-distilled-600M')
 
 args = parser.parse_args()
+
 
 """ Check whether directory already exists and create if not """
 def dir_maker(path):
@@ -32,8 +44,8 @@ def get_model(hugging_model="facebook/nllb-200-distilled-600M", local_cache_dir=
     model = AutoModelForSeq2SeqLM.from_pretrained(hugging_model, cache_dir=local_cache_dir).cuda()
     return model
 
-tokenizer = get_tokenizer()
-model = get_model()
+tokenizer = get_tokenizer(hugging_tokenizer=f'{args.authorid}/{args.modelid}')
+model = get_model(hugging_model=f'{args.authorid}/{args.modelid}')
 model.device
 
 """ Create a translator for language pair"""

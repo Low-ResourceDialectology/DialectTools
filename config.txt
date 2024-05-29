@@ -1,0 +1,5 @@
+{
+    "data_root_dir": "/media/AllBlue/LanguageData",
+    "log_file": "info.json"
+}
+  

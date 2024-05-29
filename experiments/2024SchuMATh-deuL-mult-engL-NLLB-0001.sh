@@ -38,5 +38,3 @@ bash /media/CrazyProjects/LowResDialectology/DialectTools/launch/TranslateShell.
 bash /media/CrazyProjects/LowResDialectology/DialectTools/launch/SacreBLEU.sh "/media/AllBlue/LanguageData/CLEAN/English/2022NLLBNLLB_devtest.engL" "${OUTDIR}"
 
 
-
-

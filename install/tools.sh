@@ -1,7 +1,6 @@
 #!/bin/bash
 # Install a (by name) specified list of tools into target directory
-# Use: cd ./install
-#         bash tools.sh "/media/AllBlue/LanguageData/TOOLS/" "spaCy Morfessor OpusTools" 
+# bash /install/tools.sh "/media/AllBlue/LanguageData/TOOLS/" "spaCy Morfessor OpusTools" 
 
 CURRENT="$PWD"
 
@@ -251,6 +250,7 @@ if [[ "${TOOL}" == *"TextCleaning"* ]]; then
 	pip install numpy
 	pip install scikit-learn
 	pip install nltk
+	pip install langid
 fi
 
 # TranslateLocally → https://github.com/XapaJIaMnu/translateLocally

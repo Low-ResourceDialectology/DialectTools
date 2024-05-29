@@ -1,0 +1,148 @@
+# More/Other Sources to check out in (more) detail
+https://opus.nlpl.eu/
+
+
+# Raw
+---
+
+## GitHub
+---
+
+### Audio
+---
+AsoSoft-Speech-Corpus → Veisi 2022 → Jira: a Central Kurdish speech recognition system, designing and building speech corpus and pronunciation lexicon
+https://github.com/AsoSoft/AsoSoft-Speech-Corpus
+
+AsoSoft-Speech-Testset → Veisi 2022 → Jira: a Central +Kurdish speech recognition system, designing and building speech corpus and pronunciation lexicon
+https://github.com/AsoSoft/AsoSoft-Speech-Testset
+
+KurdishMusicGenreRecognition → Kamala and Hassani 2022 → Kurdish Music Genre Recognition Using a CNN and DNN
+https://github.com/KurdishBLARK/KurdishMusicGenreRecognition
+
+Kurdish-Dialect-Recognition → Amani et al. 2021 → Kurdish spoken dialect recognition using x-vector speaker embeddings
+https://github.com/ArashAmani/Kurdish-Dialect-Recognition
+
+
+
+### Text
+---
+dialect_mt → Alam et al. 2023 → CODET: A Benchmark for Contrastive Dialectal Evaluation of Machine Translation
+https://github.com/mahfuzibnalam/dialect_mt
+
+AsoSoft-Text-Corpus → Veisi 2019 → Toward Kurdish language processing: Experiments in collecting and processing the AsoSoft text corpus
+https://github.com/AsoSoft/AsoSoft-Text-Corpus
+
+KurdishNamedEntities-main → Salar 2023 → A Dataset of Kurdish (Sorani) Named Entities
+https://github.com/KurdishBLARK/KurdishNamedEntities
+
+Kurdish-Machine-Translation-Project-KMTP- → Amini 2021 → CENTRAL KURDISH MACHINE TRANSLATION: FIRST LARGE SCALE PARALLEL CORPUS AND EXPERIMENTS
+https://github.com/mihemmed/Kurdish-Machine-Translation-Project-KMTP-
+
+kurdnet → Aliabadi 2014 → KurdNet - the Kurdish WordNet
+https://github.com/sinaahmadi/kurdnet
+
+KTC → Abdulrahman 2019 → Developing a Fine-grained Corpus for a Less-resourced Language: the case of Kurdish
+https://github.com/KurdishBLARK/KTC
+( Kurdish Textbooks Corpus (KTC) https://sinaahmadi.github.io/resources/ktc.html )
+
+InterdialectCorpus → Ahmadi 2022 → Leveraging Multilingual News Websites for Building a Kurdish Parallel Corpus
+https://github.com/KurdishBLARK/InterdialectCorpus
+
+ZazaGoraniCorpus → Ahmadi 2020 → A Corpus for the Zazaki and Gorani languages
+https://github.com/sinaahmadi/ZazaGoraniCorpus
+
+KurdishLID → Ahmadi 2023 → Approaches to Corpus Creation for Low-Resource Language Technology: the Case of Southern Kurdish and Laki
+https://github.com/sinaahmadi/KurdishLID
+
+
+
+### Video
+---
+
+
+
+
+## Download
+---
+TheLakiVarietyOfHarsin → Belelli 2021 → The Laki variety of Harsin: Corpus and sound files.
+multicast.aspra.uni-bamberg.de/resources/kurdish/#laki
+
+Kurdish News Dataset Headlines → Badawi 2023 → Kurdish News Dataset Headlines (KNDH) through multiclass classification
+https://data.mendeley.com/datasets/kb7vvkg2th/2
+
+Tanzilv1FromOPUS-ku-en → Tiedemann 2012 → This is a collection of Quran translations compiled by the Tanzil project
+https://opus.nlpl.eu/Tanzil-v1.php
+
+CCAlignedv1FromOPUS-ku-en → Ahmed at al. 2020 → This corpus was created from 68 Commoncrawl Snapshots (up until March 2020).
+https://opus.nlpl.eu/CCAligned-v1.php
+
+FakeKurdNews → Azad 2021 → Fake News Detection in low-resourced languages “Kurdish language” using Machine learning algorithms
+https://www.kaggle.com/datasets/raniaazad/kurdish-fake-news-dataset-2021?resource=download
+
+
+
+## Manual
+---
+KobaniCollection → Raman 2023 → Ramans Kobani Study 
+
+
+
+
+# Models
+---
+
+BADX → Parović 2022 → BAD-X: Bilingual Adapters Improve Zero-Shot Cross-Lingual Transfer
+https://github.com/parovicm/BADX
+
+composable-sft → Ansell 2023 → Composable Sparse Fine-Tuning for Cross-Lingual Transfer
+https://github.com/cambridgeltl/composable-sft
+
+MachineTranslationUsingTransformers → Badawi 2023 → A Transformer-based Neural Network Machine Translation Model for the Kurdish Sorani Dialect
+https://github.com/mbrow309/MachineTranslationUsingTransformers
+
+TacotronPre-trainedEnglishModel → Veisi 2022 → End-to-End Kurdish Speech Synthesis Based on Transfer Learning →→→
+By (a) converting Central Kurdish words into English characters, we used transfer learning from English. (b) completely training the attention mechanism utilizing the pre-trained English model[1] with the learned English characters integration. The audio training samples were down-sampled to 22050-Hz in order to use the similar audio parameter as an open-source implementation[2] (trained on the LJS-speech dataset), such as hop length and filter length.
+And later in the paper, there is even a [3]... May god be with you!
+[1] https://drive.google.com/file/d/1bwL6Bz8Yohs_iCjWCk0JRPruBZUVsXH4/view?usp=sharing
+[2] https://github.com/NVIDIA/tacotron2
+[3] https://colab.research.google.com/drive/1PZ4andZVFc8YALmhBbBB3AJghLN0 r8zb#scrollTo=JEBBzewjaGWI
+
+
+
+# Tools
+---
+ASAB → Yimam 2020 → Exploring Amharic Sentiment Analysis from Social Media Texts: Building Annotation Tools and Classification Models
+https://github.com/uhh-lt/ASAB
+
+Kurdish-POST → Hassani 2022 → Part of Speech Tagging (POST) of a Low-resource Language using another Language
+https://github.com/KurdishBLARK/Kurdish-POST
+
+Kurdish-BLARK-Basic → Hassani 2022 and older → Kurdish-BLARK
+https://github.com/KurdishBLARK/Kurdish-BLARK-Basic
+
+
+
+# Scripts
+---
+## For the Jupyter-Notebooks: 
+  source venv/bin/activate
+  jupyter-notebook
+  KUR-Data/scripts/datatransformation.ipynb
+TODO: Jupyter-Notebook "Instances" with separate Python-Packages (environment-specific)
+
+dataCollection.ipynb → Schuler 2023 → Automate the collection process (or steps of it)?
+
+dataTransformation.ipynb → Schuler 2023 → Attempting to condense Kurdish Text Data and save in new Format
+
+klpt.ipynb → Schuler 2023 → Playing around with pre-processing Kurdish text data
+
+tmtoolkit.py → Schuler 2023 → Pre-processing for tmx-files and such
+
+
+
+
+# Aggregated
+---
+
+
+

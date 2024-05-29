@@ -1,14 +1,15 @@
 #!/bin/bash
-# Downloading Kurmanji data from various sources via OpusTools
+# Downloading Bavarian data from various sources via OpusTools
+
+#SOURCE="bar"
+#TARGET="de"
+    #TARGET="en" # TODO
+
 
 ###############################################################################
 # Language Pairs via Script: Bavarian-German and Bavarian-English
-for SOURCE in ku kmr ku-Latn ku-Arab; do
-    for TARGET in de en; do
-        bash /media/CrazyProjects/LowResDialectology/DialectData/download/opustools.sh /media/AllBlue/LanguageData "${SOURCE}" "${TARGET}"
-        bash /media/CrazyProjects/LowResDialectology/DialectData/download/opustools.sh /media/AllBlue/LanguageData "${SOURCE}" "${TARGET}"
-    done
-done
+#bash /media/CrazyProjects/LowResDialectology/DialectData/download/opustools.sh /media/AllBlue/LanguageData bar de
+#bash /media/CrazyProjects/LowResDialectology/DialectData/download/opustools.sh /media/AllBlue/LanguageData bar en
 # Corpora → Tatoeba, WikiMatrix, wikimedia, XLEnt
 
 #source /media/AllBlue/LanguageData/TOOLS/vOpusTools/bin/activate
@@ -16,13 +17,11 @@ done
 ###############################################################################
 # Also get the alignments between German and English for the above corpora
 
-# for SOURCE in ku kmr ku-Latn ku-Arab; do
-#     for TARGET in de en; do
-#         for CORPUS in Tatoeba WikiMatrix wikimedia XLEnt; do
-#             echo "Downloading from ${CORPUS} for ${SOURCE}-${TARGET}."
-#             opus_get --directory "${CORPUS}" --source "${SOURCE}" --target "${TARGET}" --download_dir "/media/AllBlue/LanguageData/DOWNLOAD/opustools" --suppress_prompts
-#         done
-#     done
+# SOURCE="de"
+# TARGET="en"
+# for CORPUS in Tatoeba WikiMatrix wikimedia XLEnt; do
+#     echo "Downloading from ${CORPUS} for ${SOURCE}-${TARGET}."
+#     opus_get --directory "${CORPUS}" --source "${SOURCE}" --target "${TARGET}" --download_dir "/media/AllBlue/LanguageData/DOWNLOAD/opustools" --suppress_prompts
 # done
 
 ###############################################################################
@@ -70,7 +69,9 @@ done
 #python3 /media/CrazyProjects/LowResDialectology/DialectTools/clean/development-latin-parallel-corpus-split-removeDialectBLI.py
 
 
-#####################################################
-# End of data preprocessing, cleaning and splitting #
-# Start of training and evaluation parts            #
-#####################################################
+
+
+
+
+
+

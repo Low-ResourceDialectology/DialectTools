@@ -1,0 +1,321 @@
+{
+	"correspondence": {
+	
+	},
+	"datasets": {
+        "2022NLLBNLLB":{
+			"URL":"https://github.com/openlanguagedata/flores/releases/download/v2.0-rc.3/floresp-v2.0-rc.3.zip",
+			"Authors":"Team, NLLB and Costa-jussà, Marta R. and Cross, James and Çelebi, Onur and Elbayad, Maha and Heafield, Kenneth and Heffernan, Kevin and Kalbassi, Elahe and Lam, Janice and Licht, Daniel and Maillard, Jean and Sun, Anna and Wang, Skyler and Wenzek, Guillaume and Youngblood, Al and Akula, Bapi and Barrault, Loic and Mejia-Gonzalez, Gabriel and Hansanti, Prangthip and Hoffman, John and Jarrett, Semarley and Sadagopan, Kaushik Ram and Rowe, Dirk and Spruit, Shannon and Tran, Chau and Andrews, Pierre and Ayan, Necip Fazil and Bhosale, Shruti and Edunov, Sergey and Fan, Angela and Gao, Cynthia and Goswami, Vedanuj and Guzmán, Francisco and Koehn, Philipp and Mourachko, Alexandre and Ropers, Christophe and Saleem, Safiyyah and Schwenk, Holger and Wang, Jeff",
+			"Publications":{
+				"No Language Left Behind: Scaling Human-Centered Machine Translation":"https://arxiv.org/abs/2207.04672"
+			},
+			"Languages":["eng","more"],
+            "Links":{
+                "Github Repository":"https://github.com/openlanguagedata/flores"
+            },
+            "Info":"Zip archive password: multilingual machine translation"
+		}
+        
+
+		"2001HaigKurd":
+        {
+            "Notes":"Old text encoding (latin-1) intead of (UTF-8)",
+            "Languages":["kmr"],
+            "Access":"Manual-download from https://multicast.aspra.uni-bamberg.de/resources/kurdish/data/ccknt/ccknt.txt",
+            "Platform":"URL",
+            "Platform ID":[""],
+            "Name":"The Corpus of Contemporary Kurdish Newspaper Texts (CCKNT) ",
+            "Description":"The **CCKNT** comprises written Northern Kurdish (Kurmanjî) journalistic texts, compiled from online newspaper texts in 1999.",
+            "Year":2001,
+            "URL":"https://multicast.aspra.uni-bamberg.de/resources/kurdish/"
+        },
+	},
+	"sort_me_please": {
+        "2015JiaFlickr30k":
+        {
+            "Status":"todo",
+            "Notes":"TODO: Get access to entire corpus",
+            "Languages":["eng"],
+            "Access":"https://www.kaggle.com/datasets/hsankesara/flickr-image-dataset?resource=download",
+            "Platform":"website",
+            "Platform ID":[""],
+            "Name":"Flickr Image dataset",
+            "Description":"The Flickr30k dataset has become a standard benchmark for sentence-based image description. This paper presents Flickr30k Entities, which augments the 158k captions from Flickr30k with 244k coreference chains, linking mentions of the same entities across different captions for the same image, and associating them with 276k manually annotated bounding boxes. Such annotations are essential for continued progress in automatic image description and grounded language understanding. They enable us to define a new benchmark for localization of textual entity mentions in an image. We present a strong baseline for this task that combines an image-text embedding, detectors for common objects, a color classifier, and a bias towards selecting larger objects. While our baseline rivals in accuracy more complex state-of-the-art models, we show that its gains cannot be easily parlayed into improvements on such tasks as image-sentence retrieval, thus underlining the limitations of current methods and the need for further research.",
+            "Year":2015,
+            "URL":"https://datasets.activeloop.ai/docs/ml/datasets/flickr30k-dataset/",
+            "Publications":
+            {
+                "jia2015GuidingLongShortTerm":
+                {
+                    "Title":"Guiding Long-Short Term Memory for Image Caption Generation",
+                    "Year":2015,
+                    "URL":"https://arxiv.org/abs/1509.04942",
+                    "DOI":"DOI_of_publication",
+                    "Authors":["Xu Jia","Efstratios Gavves","Basura Fernando","Tinne Tuytelaars"]
+                }
+            }
+        },
+        "2016MatrasKurdishDialectDatabase":
+        {
+            "Status":"todo",
+            "Notes":"notes",
+            "Languages":["kmr"],
+            "Access":"http://kratylos.org/~raphael/kurdish/database/",
+            "Platform":"",
+            "Platform ID":[""],
+            "Name":"Database of Kurdish Dialects",
+            "Description":"The Dialects of Kurdish",
+            "Year":2016,
+            "URL":"http://kratylos.org/~raphael/kurdish/database-of-kurdish-dialects/index.html"
+        },
+        "2018GraveFasttextWordVectors":
+        {
+        	"Status":"todo",
+            "Notes":"VERY LARGE FILES! Word vectors",
+            "Languages":["kmr"],
+            "Access":
+            [
+                "https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.ku.300.vec.gz",
+                "https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.ku.300.bin.gz"
+            ],
+            "Platform":"",
+            "Platform ID":"",
+            "Name":"Word vectors for 157 languages",
+            "Description":"We distribute pre-trained word vectors for 157 languages, trained on Common Crawl and Wikipedia using fastText. ",
+            "Year":2018,
+            "URL":"https://fasttext.cc/docs/en/crawl-vectors.html"
+        },
+      
+        "2021DoanPhoMT":
+        {
+            "Status":"ready",
+            "Notes":"to not distribute the dataset or part of the dataset in any original or modified form.",
+            "Languages":["vie","eng"],
+            "Access":"Prior to download, this form has to be filled out: https://docs.google.com/forms/d/e/1FAIpQLSfShfLzQ3w9ErBc6sId55s83o9tOv2qz6zMd_6lNCD7n791NQ/viewform including agreement to (1) to use PhoMT for research or educational purposes only, (2) to not distribute PhoMT or part of PhoMT in any original or modified form, (3) and to cite the EMNLP 2021 paper (PhoMT: A High-Quality and Large-Scale Benchmark Dataset for Vietnamese-English Machine Translation) whenever PhoMT is employed to help produce published results. Then extract PhoMT into the raw-data-directory called 2021DoanPhoMT",
+            "Platform":"URL",
+            "Platform ID":"",
+            "Name":"PhoMT: A High-Quality and Large-Scale Benchmark Dataset for Vietnamese-English Machine Translation",
+            "Description":"PhoMT is a high-quality and large-scale Vietnamese-English parallel dataset of 3.02M sentence pairs.",
+            "Year":2021,
+            "Authors":["Long Doan","Linh The Nguyen","Nguyen Luong Tran","Thai Hoang","Dat Quoc Nguyen"],
+            "URL":"URL",
+            "Data":
+            {
+                "URL":"https://github.com/VinAIResearch/PhoMT#phomt-a-high-quality-and-large-scale-benchmark-dataset-for-vietnamese-english-machine-translation",
+                "License":"license",
+                "Size MB":"1400",
+                "Size Documents":"size_in_documents",
+                "Size Sentences":"size_in_sentences",
+                "Size Words":"size_in_words",
+                "Size Tokens":"size_in_tokens",
+                "File Format":"file_format"                
+            },
+            "Publications":
+            {
+                "publication_name":
+                {
+                    "Title":"title",
+                    "Year":2000,
+                    "URL":"url",
+                    "DOI":"",
+                    "Authors":["author1", "author2"]
+                }
+            },
+            "Language Relations":
+            {
+                "Vietnamese":
+                {
+                    "Name":"Vietnamese",
+                    "Details":"detail_about_language",
+                    "ISO 693-3":"vie",
+                    "Source":"Literature|Web scraped|Data set|Original work",
+                    "Quality":"Raw|Cleaned|Tagged|Annotated|Gold Standard",
+                    "Relations":
+                    {
+                        "Vietnamese-English":
+                        {
+                            "Relation":"document aligned|sentence aligned|word aligned|machine translated|human translated",
+                            "Size":"3020000 pairs"
+                        }
+                    }
+                }
+            }
+        },
+        
+        "2022DabreMorisienMT":
+        {
+            "Status":"ready",
+            "Notes":"notes",
+            "Languages":["mfe","eng","fra"],
+            "Access":"access",
+            "Platform":"huggingface",
+            "Platform ID":"prajdabre/KreolMorisienMT",
+            "Name":"KreolMorisienMT",
+            "Description":"A Dataset for Mauritian Creole Machine Translation & MorisienMT",
+            "Year":2022,
+            "Authors":["Raj Dabre","Aneerav Sukhoo"],
+            "URL":"https://github.com/prajdabre/KreolMorisienNLG",
+            "Data":
+            {
+                "URL":"https://huggingface.co/datasets/prajdabre/KreolMorisienMT",
+                "License":"license",
+                "Size MB":"size_in_mb",
+                "Size Documents":"size_in_documents",
+                "Size Sentences":"size_in_sentences",
+                "Size Words":"size_in_words",
+                "Size Tokens":"size_in_tokens",
+                "File Format":"file_format"                
+            },
+            "Publications":
+            {
+                "dabreMorisienMTDatasetMauritian2022":
+                {
+                    "Title":"MorisienMT: A Dataset for Mauritian Creole Machine Translation",
+                    "Year":2022,
+                    "URL":"http://arxiv.org/abs/2206.02421",
+                    "DOI":"10.48550/arXiv.2206.02421",
+                    "Authors":["Raj Dabre","Aneerav Sukhoo"]
+                },
+                "dabreKreolMorisienMTDatasetMauritian2022":
+                {
+                    "Title":"KreolMorisienMT: A Dataset for Mauritian Creole Machine Translation",
+                    "Year":2022,
+                    "URL":"https://aclanthology.org/2022.findings-aacl.3",
+                    "DOI":"",
+                    "Authors":["Raj Dabre","Aneerav Sukhoo"]
+                }
+            },
+            "Language Relations":
+            {
+                "Morisien":
+                {
+                    "Name":"Morisien",
+                    "Details":"detail_about_language",
+                    "ISO 693-3":"mfe",
+                    "Source":"Literature|Web scraped|Data set|Original work",
+                    "Quality":"Raw|Cleaned|Tagged|Annotated|Gold Standard",
+                    "Relations":
+                    {
+                        "Morisien-English":
+                        {
+                            "Relation":"document aligned|sentence aligned|word aligned|machine translated|human translated",
+                            "Size":" pairs"
+                        },
+                        "Morisien-French":
+                        {
+                            "Relation":"document aligned|sentence aligned|word aligned|machine translated|human translated",
+                            "Size":" pairs"
+                        },
+                        "Morisien":
+                        {
+                            "Relation":"document aligned|sentence aligned|word aligned|machine translated|human translated",
+                            "Size":" pairs"
+                        }
+                    }
+                }
+            }
+        },
+        
+        
+        "2023SaichyshynaMulti30k":
+        {
+            "Status":"ready",
+            "Notes":"notes",
+            "Languages":["ukr","eng"],
+            "Access":"access",
+            "Platform":"huggingface",
+            "Platform ID":"turuta/Multi30k-uk",
+            "Name":"Dataset Multi30k: English-Ukrainian variation",
+            "Description":"Multi30K dataset is designed to develop multilingual multimodal researches. Initially this dataset extends the Flickr30K dataset by adding German translations. The descriptions were collected from a crowdsourcing platform, while the translations were collected from professionally contracted translators. We present a variation of this dataset manually translated for Ukrainian language.",
+            "Year":2023,
+            "Authors":["Nataliia Saichyshyna", "Daniil Maksymenko", "Oleksii Turuta", "Andriy Yerokhin", "Olena Turuta", "Andrii Babii"],
+            "URL":"https://huggingface.co/datasets/turuta/Multi30k-uk",
+            "Data":
+            {
+                "URL":"https://huggingface.co/datasets/turuta/Multi30k-uk/tree/main",
+                "License":"license",
+                "Size MB":"size_in_mb",
+                "Size Documents":"size_in_documents",
+                "Size Sentences":"size_in_sentences",
+                "Size Words":"size_in_words",
+                "Size Tokens":"size_in_tokens",
+                "File Format":"file_format"                
+            },
+            "Publications":
+            {
+                "saichyshynaExtensionMulti30KMultimodal2023":
+                {
+                    "Title":"Extension Multi30K: Multimodal Dataset for Integrated Vision and Language Research in Ukrainian",
+                    "Year":2023,
+                    "URL":"https://aclanthology.org/2023.unlp-1.7",
+                    "DOI":"10.18653/v1/2023.unlp-1.7",
+                    "Authors":["Nataliia Saichyshyna", "Daniil Maksymenko", "Oleksii Turuta", "Andriy Yerokhin", "Olena Turuta", "Andrii Babii"]
+                },
+                "Zotero_citation_key_B":
+                {
+                    "Title":"Title_of_publication_2",
+                    "Year":1234,
+                    "URL":"URL_to_publication",
+                    "DOI":"DOI_of_publication",
+                    "Authors":["Author_A_Name","Author_C_Name"]
+                }
+            },
+            "Language Relations":
+            {
+                "Language_name_according_to_dataset":
+                {
+                    "Name":"Language_Name",
+                    "Details":"detail_about_language",
+                    "ISO 693-3":"iso",
+                    "Platform":"Literature|Web scraped|Data set|Original work",
+                    "Quality":"Raw|Cleaned|Tagged|Annotated|Gold Standard",
+                    "Relations":
+                    {
+                        "Language_A-Language_B":
+                        {
+                            "Relation":"document aligned|sentence aligned|word aligned|machine translated|human translated",
+                            "Size":" pairs"
+                        },
+                        "Language_A-Language_C":
+                        {
+                            "Relation":"document aligned|sentence aligned|word aligned|machine translated|human translated",
+                            "Size":" pairs"
+                        },
+                        "Language_A-Language_D":
+                        {
+                            "Relation":"document aligned|sentence aligned|word aligned|machine translated|human translated",
+                            "Size":" pairs"
+                        }
+                    }
+                }
+            }
+        }
+	},
+	"handmade": {
+	
+	},
+	"huggingface": {
+	
+	},
+	"learningmaterial": {
+	
+	},
+	"mtdata": {
+	
+	},
+	"opustools": {
+	
+	},
+	"other": {
+	
+	},
+	"projects": {
+	
+	},
+	"webpages": {
+	
+	},
+	"wikidumps": {
+	
+	}
+}

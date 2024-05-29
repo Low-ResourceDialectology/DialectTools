@@ -214,14 +214,18 @@ print(f'Length Dataframe (dropped duplicate (source same as target sentence)): {
 # df_ratio = df[(check_sent_length_reasonable(df[src_l], df[trg_l]))]
 #df_ratio = df[(len(df[src_l]) > 3*len(df[trg_l])) | (len(df[src_l])*3 < len(df[trg_l]))]
 # Create a boolean mask where the condition is met
-mask = (df[src_l].str.len() > 3 * df[trg_l].str.len()) | (df[src_l].str.len() * 3 < df[trg_l].str.len())
+mask = (df[src_l].str.len() > 2 * df[trg_l].str.len()) | (df[src_l].str.len() * 2 < df[trg_l].str.len())
+
+# TODO: Introduce a minimum length criteria to keep alignments where i.e. 1 word fits 2 words
+# df[trg_l].str.len() > 5 & ....
+
 # Apply the mask to the DataFrame to get the rows where the condition is true
 df_ratio = df[mask]
 
 #df = df[(not check_sent_length_reasonable(df[src_l], df[trg_l]))]
 #df = df[not (len(df[src_l]) > 3*len(df[trg_l])) | (len(df[src_l])*3 < len(df[trg_l]))]
 # Create a boolean mask where the condition is met
-mask = (df[src_l].str.len() < 3 * df[trg_l].str.len()) & (df[src_l].str.len() * 3 > df[trg_l].str.len())
+mask = (df[src_l].str.len() < 2 * df[trg_l].str.len()) & (df[src_l].str.len() * 2 > df[trg_l].str.len())
 # Apply the mask to the DataFrame to get the rows where the condition is true
 df = df[mask]
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Automatical creation of virtual Python environments
+# Automatic creation of virtual Python environments
 # Use: bash create_venv.sh "myToolName" "myToolDirectory"
 
 CURRENT="$PWD"
@@ -9,7 +9,6 @@ TOOLDIRECTORY="$2"
 
 # Function to create Python venv
 create_venv() {
-
     VENVNAME="$1"
     DIRNAME="$2"
     mkdir -p "${DIRNAME}"

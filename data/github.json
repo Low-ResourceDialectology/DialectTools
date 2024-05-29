@@ -1,0 +1,239 @@
+{
+	"githubrepos": {
+		"2023ArteDial":{
+			"URL":"https://github.com/mainlp/dialect-BLI",
+			"Authors":"Artemova, Ekaterina and Plank, Barbara",
+			"Publications":{
+				"Low-resource Bilingual Dialect Lexicon Induction with Large Language Models":""
+			},
+			"Languages":["als","bar","deu"]
+		},
+		"2013EsmaPewa":{
+			"URL":"https://github.com/klpp/pewan",
+			"Authors":"",
+			"Publications":{
+				"TITLE":"URL_or_DOI"
+			},
+			"Languages":["kmr"]
+		},
+		"2016ElliMult":{
+			"URL":"https://github.com/lium-lst/wmt17-mmt",
+			"Authors":"Elliott, Desmond and Frank, Stella and Sima'an, Khalil and Specia, Lucia",
+			"Publications":{
+				"Multi30K: Multilingual English-German Image Descriptions":"https://arxiv.org/abs/1605.00459"
+			},
+			"Languages":[""]
+		},
+		"2016UniMNKur":{
+			"URL":"https://github.com/unimorph/kmr",
+			"Authors":"",
+			"Publications":{
+				"TITLE":"URL_or_DOI"
+			},
+			"Languages":["kmr"]
+		},
+		"2017LuonVina":{
+			"URL":"https://github.com/VinAIResearch/VinAI_Translate",
+			"Authors":"Thien Hai Nguyen and Tuan-Duy H. Nguyen and Duy Phung and Duy Tran-Cong Nguyen and Hieu Minh Tran and Manh Luong and Tin Duy Vo and Hung Hai Bui and Dinh Phung and Dat Quoc Nguyen",
+			"Publications":{
+				"A Vietnamese-English Neural Machine Translation System":"URL_or_DOI"
+			},
+			"Languages":["vie","eng"]
+		},
+		"2018CravAper":{
+			"URL":"https://github.com/apertium/apertium-kmr-eng",
+			"Authors":"",
+			"Publications":{
+				"TITLE":"https://aclanthology.org/L18-1550/"
+			},
+			"Languages":["kmr","eng"]
+		},
+		"2020AhmaKurd":{
+			"URL":"https://github.com/sinaahmadi/KurdishTokenization",
+			"Authors":"",
+			"Publications":{
+				"TITLE":"URL_or_DOI"
+			},
+			"Languages":[""]
+		},
+		"2020FatiKurd":{
+			"URL":"https://github.com/ftkurt/kurdish-twitter-data",
+			"Authors":"",
+			"Publications":{
+				"TITLE":"URL_or_DOI"
+			},
+			"Languages":["kmr"]
+		},
+		"2020BfsuMace":{
+			"URL":"https://github.com/bfsujason/mac",
+			"Authors":"",
+			"Publications":{
+				"TITLE":"URL_or_DOI"
+			},
+			"Languages":["zho","eng"]
+		},
+		"2022AhmaInte":{
+			"URL":"https://github.com/KurdishBLARK/InterdialectCorpus",
+			"Authors":"Sina Ahmadi and Hossein Hassani and Daban Q. Jaff",
+			"Publications":{
+				"Leveraging Multilingual News Websites for Building a Kurdish Parallel Corpus":"URL_or_DOI"
+			},
+			"Languages":["ckb","kmr","eng"]
+		},
+		"2022Ngo_Synt":{
+			"URL":"https://github.com/ngovinhtn/Low-resource-Machine-Translation",
+			"Authors":"Thi-Vinh Ngo and Phuong-Thai Nguyen and Thanh-Le Ha and Khac-Quy Dinh and Le-Minh Nguyen",
+			"Publications":{
+				"TITLE":"URL_or_DOI"
+			},
+			"Languages":["vie","eng","fra","zho","jap"]
+		},
+		"2023AhmaSout":{
+			"URL":"https://github.com/sinaahmadi/KurdishLID",
+			"Authors":"",
+			"Publications":{
+				"Approaches to Corpus Creation for Low-Resource Language Technology: the Case of Southern Kurdish and Laki":"URL_or_DOI"
+			},
+			"Languages":["kmr","ckb","sdh","hac","zza","ar","fa","tr"]
+		},
+		"2023LentCreo":{
+			"URL":"https://github.com/hclent/CreoleVal",
+			"Authors":"Heather Lent and Kushal Tatariya and Raj Dabre and Yiyi Chen and Marcell Fekete and Esther Ploeger and Li Zhou and Ruth-Ann Armstrong and Abee Eijansantos and Catriona Malau and Hans Erik Heje and Ernests Lavrinovics and Diptesh Kanojia and Paul Belony and Marcel Bollmann and Loïc Grobol and Miryam de Lhoneux and Daniel Hershcovich and Michel DeGraff and Anders Søgaard and Johannes Bjerva",
+			"Publications":{
+				"CreoleVal: Multilingual Multitask Benchmarks for Creoles":"https://arxiv.org/abs/2310.19567"
+			},
+			"Languages":[""]
+		},
+		"2020AhmaZaza":{
+			"URL":"https://github.com/sinaahmadi/ZazaGoraniCorpus",
+			"Authors":"Sina Ahmadi",
+			"Publications":{
+				"Building a Corpus for the Zaza–Gorani Language Family":"https://sinaahmadi.github.io/docs/articles/ahmadi2020zazagorani.pdf"
+			},
+			"Languages":["Zazaki","Gorani","Feyli"]
+		},
+		"2014AliaKurd":{
+			"URL":"https://github.com/sinaahmadi/kurdnet",
+			"Authors":"Aliabadi, Purya and Ahmadi, Sina and Salavati, Shahin and Esmaili, Kyumars Sheykh",
+			"Publications":{
+				"Towards Building KurdNet, the Kurdish WordNet":"https://www.aclweb.org/anthology/W14-0101"
+			},
+			"Languages":["ckb","eng"]
+		},
+		"2023SalaKurd":{
+			"URL":"https://github.com/KurdishBLARK/KurdishNamedEntities",
+			"Authors":"Sazan Salar and Hossein Hassani",
+			"Publications":{
+				"A Dataset of Kurdish (Sorani) Named Entities-An Amendment to Kurdish-BLARK Named Entities.":"https://arxiv.org/pdf/2301.04962.pdf"
+			},
+			"Languages":[""]
+		},
+		"2021MiheKurd":{
+			"URL":"https://github.com/mihemmed/Kurdish-Machine-Translation-Project-KMTP-",
+			"Authors":"",
+			"Publications":{
+				"TITLE":"URL_or_DOI"
+			},
+			"Languages":["en","ku"]
+		},
+		"2020AhmaFolk":{
+			"URL":"https://github.com/KurdishBLARK/KurdishLyricsCorpus",
+			"Authors":"Ahmadi, Sina and Hassani, Hossein and Abedi, Kamaladdin",
+			"Publications":{
+				"A Corpus of the Sorani Kurdish Folkloric Lyrics":"https://sinaahmadi.github.io/docs/articles/ahmadi2020folklyrics.pdf"
+			},
+			"Languages":[""]
+		},
+		"2021AmanKurd":{
+			"URL":"https://github.com/ArashAmani/Kurdish-Dialect-Recognition",
+			"Authors":"Arash Amani and Mohammad Mohammadamini and Hadi Veisi",
+			"Publications":{
+				"Kurdish Spoken Dialect Recognition Using X-Vector Speaker Embedding":"https://link.springer.com/chapter/10.1007/978-3-030-87802-3_5"
+			},
+			"Languages":["Northern Kurdish","Central Kurdish","Southern Kurdish","Hawrami","Zazaki"]
+		},
+		"2019AbduKTCo":{
+			"URL":"https://github.com/KurdishBLARK/KTC",
+			"Authors":"Abdulrahman, Roshna and Hassani, Hossein and Ahmadi, Sina",
+			"Publications":{
+				"Developing a Fine-Grained Corpus for a Less-resourced Language:the case of Kurdish":"https://arxiv.org/pdf/1909.11467.pdf"
+			},
+			"Languages":[""]
+		},
+		"2023AlamDial":{
+			"URL":"https://github.com/mahfuzibnalam/dialect_mt",
+			"Authors":"",
+			"Publications":{
+				"TITLE":"URL_or_DOI"
+			},
+			"Languages":[""]
+		},
+		"2020VeisAsoS":{
+			"URL":"https://github.com/AsoSoft/AsoSoft-Text-Corpus",
+			"Authors":"Veisi, Hadi and MohammadAmini, Mohammad and Hosseini, Hawre",
+			"Publications":{
+				"Toward Kurdish language processing: Experiments in collecting and processing the AsoSoft text corpus":"https://doi.org/10.1093/llc/fqy074"
+			},
+			"Languages":[""]
+		},
+		"2024AhmaCORD":{
+			"URL":"https://github.com/sinaahmadi/CORDI",
+			"Authors":"Ahmadi, Sina and Q. Jaff, Daban and Ibn Alam, Md Mahfuz and Anastasopoulos, Antonios",
+			"Publications":{
+				"Language and Speech Technology for {Central Kurdish} Varieties":"URL_or_DOI"
+			},
+			"Languages":["ckb"]
+		},
+		"2023MailNLLB":{
+			"URL":"https://github.com/openlanguagedata/seed",
+			"Authors":"Maillard, Jean and Gao, Cynthia and Kalbassi, Elahe and Sadagopan, Kaushik Ram and Goswami, Vedanuj and Koehn, Philipp and Fan, Angela and Guzmán, Francisco",
+			"Publications":{
+				"Small Data, Big Impact: Leveraging Minimal Data for Effective Machine Translation":"https://aclanthology.org/2023.acl-long.154"
+			},
+			"Languages":["eng","more"]
+		},
+		"2020SiewLSDC":{
+			"URL":"https://github.com/Helsinki-NLP/LSDC",
+			"Authors":"Siewert, Janine and Scherrer, Yves and Wieling, Martijn and Tiedemann, Jörg",
+			"Publications":{
+				"LSDC - A comprehensive dataset for Low {S}axon Dialect Classification":"https://www.aclweb.org/anthology/2020.vardial-1.3"
+			},
+			"Languages":["nds"]
+		},
+		"2021SiewLSDC":{
+			"URL":"https://github.com/Helsinki-NLP/LSDC-morph",
+			"Authors":"Siewert, Janine and Scherrer, Yves and Tiedemann, Jörg",
+			"Publications":{
+				"Towards a balanced annotated Low {S}axon dataset for diachronic investigation of dialectal variation":"https://aclanthology.org/2021.konvens-1.25"
+			},
+			"Languages":["nds"]
+		}
+	},
+	"work_in_progress":{
+		"________Unim":{
+			"URL":"https://github.com/unimorph/unimorph",
+			"Authors":"",
+			"Publications":{
+				"TITLE":"URL_or_DOI"
+			},
+			"Languages":[""]
+		},
+		"20DDAAAANNNN":{
+			"URL":"",
+			"Authors":"",
+			"Publications":{
+				"Kurdish Music Genre Recognition Using CNN and DNN":"https://sciforum.net/paper/view/13803",
+				"Comparing the Accuracy of Deep Neural Networks (DNN) and Convolutional Neural Network (CNN) in Music Genre Recognition (MGR): Experiments on Kurdish Music":"https://arxiv.org/abs/2111.11063"
+			},
+			"Languages":[""]
+		},
+		"DDDDAAAANNNN":{
+			"URL":"",
+			"Authors":"",
+			"Publications":{
+				"TITLE":"URL_or_DOI"
+			},
+			"Languages":[""]
+		}
+	}
+}
