@@ -1,0 +1,140 @@
+{
+    "Short_Name":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"ArgosTranslate":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"fairseq":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"fast_align":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"GlotLID":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"KLPT":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"Morfessor":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"NLLB":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"OpusTools":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"SacreBLEU":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"Sockeye":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"spaCy":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"Stanza":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"TextCleaning":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"TranslateLocally":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"Whisper":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"wikiextractor":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"MarianMT":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"OpusMT":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"SentenceBERT":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"whisper":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"BARK":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    },
+	"eSpeak":{
+        "Name": "Tool_Name",
+        "URL": "URL",
+        "Authors": "Author_Names",
+        "Function": "Functionalities_of_the_tool"
+    }
+}

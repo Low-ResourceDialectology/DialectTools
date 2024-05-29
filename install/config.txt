@@ -1,0 +1,6 @@
+# Paths
+data_root_dir=/media/AllBlue/LanguageData
+log_dir=/media/AllBlue/LanguageData/LOGS
+
+# Default Tools
+tool_list="OpusTools TextCleaning Stanza"

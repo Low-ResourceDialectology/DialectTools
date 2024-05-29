@@ -4,21 +4,11 @@
 
 CURRENT="$PWD"
 
-# First input argument
+# Target directory for the tool to be installed to
 TOOLDIR="$1"
 
-# NOTE: Does not work...
-# TOOLDIRIN="${2:-$(echo "jq .data_root_dir ./../config.json")}"
-# Check if the input path already points towards the "sub-directory" called /TOOLS
-# if [[ "/TOOLS" != *"$TOOLDIRIN"* ]]; then
-# 	TOOLDIR="${TOOLDIRIN}/TOOLS/"
-# fi
-
-# Second input argument
+# List of tools to be installed
 TOOL="$2"
-
-# TODO: VENV as argument
-#VENV="$2"
 
 # Apertium → https://github.com/apertium
 # Apertium Install → https://wiki.apertium.org/wiki/Installation

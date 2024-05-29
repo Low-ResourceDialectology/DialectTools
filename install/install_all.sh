@@ -1,51 +1,62 @@
 #!/bin/bash
-# Install all tools
-# Use: cd ./install
-# bash install_all.sh
+# Install all selected tools into target directory
+# bash ./install/install_all.sh 
+# bash ./install/install_all.sh -d /media/AllBlue/LanguageData
+# bash ./install/install_all.sh -t OpusTools Stanza
+# bash ./install/install_all.sh -d /media/AllBlue/LanguageData -t ArgosTranslate fairseq fast_align GlotLID KLPT Morfessor NLLB OpusTools SacreBLEU Sockeye spaCy Stanza TextCleaning TranslateLocally Whisper
 
-CURRENT="$PWD"
+# TODO: Function that tests if already installed- Then only update?
 
-TOOLDIRIN="${1:-$(jq .data_root_dir ./../config.json)}"
-TOOLDIRCLEAN="${TOOLDIRIN//\"/$''}"
-TOOLDIR="${TOOLDIRCLEAN}/TOOLS/"
+# TODO: Replace the manual installations → How safe is it to try "sudo installs" via a bash script?
 
-#TOOLDIR="$1"
-# TODO: Input argument a list of strings (toolnames)
-#TOOL="$2"
+# Function to read config file
+read_config() {
+    local script_dir="$(dirname "$0")"
+    local config_file="$script_dir/config.txt"
+    source "$config_file"
+}
 
-# TODO: Function that tests if already installed- Then update?
+# Function to perform installations
+perform_installations() {
+    local script_dir="$(dirname "$0")"
+    local target_dir="$1"
+    shift
+    local tools=("$@")
 
+    # Your operations here
+    echo "Performing installations in $target_dir/TOOLS for list of tools:"
+    for tool_name in "${tools[@]}"; do
+        echo "#### ${tool_name} ####"
+        bash "${script_dir}"/tools.sh "${target_dir}/TOOLS" "${tool_name}"
+    done
+}
 
-# Functional
-#bash tools.sh "${TOOLDIR}" "ArgosTranslate fairseq fast_align GlotLID KLPT Morfessor NLLB OpusTools SacreBLEU Sockeye spaCy Stanza TextCleaning TranslateLocally Whisper"
+# Main function
+main() {
+    local target_dir=""
+    local tools=()
+    read_config
 
-#bash tools.sh "${TOOLDIR}" "ArgosTranslate"
-#bash tools.sh "${TOOLDIR}" "fairseq" 
-#bash tools.sh "${TOOLDIR}" "fast_align"
-#bash tools.sh "${TOOLDIR}" "GlotLID"
-#bash tools.sh "${TOOLDIR}" "KLPT"
-#bash tools.sh "${TOOLDIR}" "Morfessor"
-#bash tools.sh "${TOOLDIR}" "NLLB"
-#bash tools.sh "${TOOLDIR}" "OpusTools"
-#bash tools.sh "${TOOLDIR}" "SacreBLEU"
-#bash tools.sh "${TOOLDIR}" "Sockeye"
-#bash tools.sh "${TOOLDIR}" "spaCy"
-#bash tools.sh "${TOOLDIR}" "Stanza"
-#bash tools.sh "${TOOLDIR}" "TextCleaning"
-#bash tools.sh "${TOOLDIR}" "TranslateLocally"
-#bash tools.sh "${TOOLDIR}" "Whisper"
+    # Parse command line arguments
+    while getopts ":d:t:" opt; do
+        case $opt in
+            d) target_dir="$OPTARG" ;;
+            t) tools+=("$OPTARG") ;;
+            \?) echo "Invalid option: -$OPTARG" >&2 ;;
+        esac
+    done
+    shift $((OPTIND - 1))
 
-#bash tools.sh "${TOOLDIR}" ""
+    # If no target directory or string list provided, read from config
+    if [ -z "$target_dir" ] || [ ${#tools[@]} -eq 0 ]; then
+        target_dir="$data_root_dir"
+        tools=($tool_list)
+    fi
 
+    # Installing tools
+    perform_installations "$target_dir" "${tools[@]}"
+}
 
-# TODO
-#bash tools.sh "wikiextractor" "${TOOLDIR}"
-#bash tools.sh "${TOOLDIR}" "MarianMT"
-#bash tools.sh "${TOOLDIR}" "OpusMT" 
-#bash tools.sh "${TOOLDIR}" "SentenceBERT" 
-#bash tools.sh "${TOOLDIR}" "whisper" 
-#bash tools.sh  "${TOOLDIR}""BARK" 
-#bash tools.sh "${TOOLDIR}" "eSpeak" 
+# Call main function
+main "$@"
 
-
-cd "$CURRENT"
