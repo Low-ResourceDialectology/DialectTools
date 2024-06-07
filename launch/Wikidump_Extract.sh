@@ -10,11 +10,20 @@ current_dir="$(dirname "$0")"
 script_file="$current_dir/../clean/wikidumps2extract.py" # This should be the name!
 INDIR=/media/AllBlue/LanguageData/DOWNLOAD/wikidumps
 
-echo "Currently work with hard-coded date as part of filenames."
+echo "MIGHT CRASH FOR BIG DUMPS. Also: Currently work with hard-coded date as part of filenames."
 
-for CODE in als bar; do
+for CODE in als bar ku ckb ; do #de # NOTE: Uses up around 50GB of memory
+    echo "Extracting ${CODE}"
     CURINDIR="${INDIR}/${CODE}"
-    INFILE="${CODE}"wiki-20240520-pages-meta-current.xml.bz2
+    # "Default" Approach
+    INFILE="${CODE}"wiki-20240501-pages-meta-current.xml.bz2
+
+    # Using files from preprocessor tool
+    #CURINDIR="${INDIR}/${CODE}/${CODE}-20240501"
+    #INFILE="${CODE}"wiki-20240501-pages-articles.xml.bz2
+
+    # NOTE: Turned out the (als) multistream file had less dialect-tags than the one above
+    #INFILE="${CODE}"wiki-20240501-pages-articles-multistream.xml.bz2
     OUTDIR=/media/AllBlue/LanguageData/CLEAN/wikidumps/naive/"${CODE}"
     mkdir -p "${OUTDIR}"
 

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "TODO: Make the script process a list of codes and not just a single one."
-
 # Function to read config file
 read_config() {
     local script_dir="$(dirname "$0")"
@@ -15,14 +13,22 @@ perform_downloads() {
     local target_dir="$1/DOWNLOAD/wikidumps"
     shift
     local codes=("$@")
-    dump_date="20240520"
+    dump_date="20240501"
     # Actual operations here
-    echo "Check if newer dumps are available and change the date inside the script: download/wikipedia_dumps.sh"
-    echo "Performing downloads to $target_dir/DOWNLOAD/wikidumps for list of language codes:"
     for CODE in "${codes[@]}"; do
+        echo "Performing downloads to ${target_dir}/${CODE} for language code: ${CODE}"
         mkdir -p "${target_dir}/${CODE}"
         url="https://dumps.wikimedia.org/${CODE}wiki/${dump_date}/${CODE}wiki-${dump_date}-pages-meta-current.xml.bz2"
         wget -N "${url}" -P "${target_dir}/${CODE}"
+
+        # NOTE: Turned out the (als) multistream file had less dialect-tags than the one above
+        # # Multistream File
+        # url=https://dumps.wikimedia.org/${CODE}wiki/${dump_date}/${CODE}wiki-${dump_date}-pages-articles-multistream.xml.bz2
+        # wget -N "${url}" -P "${target_dir}/${CODE}"
+        
+        # # Index File        
+        # url=https://dumps.wikimedia.org/${CODE}wiki/${dump_date}/${CODE}wiki-${dump_date}-pages-articles-multistream-index.txt.bz2
+        # wget -N "${url}" -P "${target_dir}/${CODE}"
     done
 }
 # All wiki dumps for language Dzongkha with code dz → https://dumps.wikimedia.org/dzwiki/20240520/
@@ -35,10 +41,11 @@ main() {
     read_config
 
     # Parse command line arguments
-    while getopts ":d:l:" opt; do
+    while getopts ":t:l:d:" opt; do
         case $opt in
-            d) target_dir="$OPTARG" ;;
+            t) target_dir="$OPTARG" ;;
             l) codes+=("$OPTARG") ;;
+            d) date="$OPTARG" ;;
             \?) echo "Invalid option: -$OPTARG" >&2 ;;
         esac
     done

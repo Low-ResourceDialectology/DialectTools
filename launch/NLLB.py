@@ -1,8 +1,15 @@
+# Author: Christian "Doofnase" Schuler
+#######################################
+# Project: Any
+# Translates a file of sentences (per line) and translates them from source into target language.
+#   Input: 
+#   Output: 
 
 import argparse
 import os
 import csv 
 import pathlib
+import sys
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 
 # source /media/AllBlue/LanguageData/TOOLS/vNLLB/bin/activate
@@ -16,18 +23,19 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 # https://huggingface.co/facebook/nllb-200-distilled-1.3B
 # https://huggingface.co/facebook/nllb-200-distilled-600M
 
-
 parser = argparse.ArgumentParser(description='Machine Translation via NLLB')
-parser.add_argument('--input_lang', type=str, help='input language code')
+parser.add_argument('--input_code', type=str, help='input language code')
 parser.add_argument('--input_file', type=str, help='input file')
-parser.add_argument('--output_lang', type=str, help='output language code')
+parser.add_argument('--output_code', type=str, help='output language code')
 parser.add_argument('--output_file', type=str, help='output file')
 parser.add_argument('--authorid', type=str, help='author on huggingface', default='facebook')
 parser.add_argument('--modelid', type=str, help='model on huggingface', default='nllb-200-distilled-600M')
+parser.add_argument("--chunk_size", type=int, default=100, help="Number of sentences to process at a time")
 
 args = parser.parse_args()
 
-
+#print(f'Args: {args}') # Debugginng
+#sys.exit() # Debugginng
 """ Check whether directory already exists and create if not """
 def dir_maker(path):
     pathlib.Path(path).mkdir(parents=True, exist_ok=True)
@@ -65,10 +73,9 @@ def get_translator(model, tokenizer, source_lang, target_lang, max_len=400, numb
 #language_list = ["Northern Kurdish", "Kobani", "German", "Alemannic", "Bavarian", "Central Kurdish"]
 #language_list = ["deu", "als", "bar"]
 
-source_lang = args.input_lang #"deu_Latn"
-target_lang = args.output_lang #"eng_Latn"
-
-translator_src2trg = get_translator(model, tokenizer, source_lang, target_lang)
+#source_lang = args.input_code #"deu_Latn"
+#target_lang = args.output_code #"eng_Latn"
+translator_src2trg = get_translator(model, tokenizer, args.input_code, args.output_code)
 
 """ Function to translate a single file from source to target language """
 def translate_file():
@@ -83,18 +90,50 @@ def translate_file():
                     text = f.read().splitlines()
 
                     # Print length of input file
-                    print(f'Input ({source_lang}) length: {len(text)}')
+                    print(f'Input ({args.input_code}) length: {len(text)}')
 
                     trans_text = translator_src2trg(text)
                     translated_text = [i["translation_text"] for i in trans_text]
 
                     # Print length of translation
-                    print(f'Output ({target_lang}) length: {len(translated_text)}')
+                    print(f'Output ({args.output_code}) length: {len(translated_text)}')
 
                     # Save the translation to file
                     with open(args.output_file, "w") as f:
                         f.write("\n".join(translated_text))
-translate_file()
 
+
+""" Function to translate a single file from source to target language chunk-wise to not lose progress when CUDA runs out of memory"""
+def translate_in_chunks(input_file, output_file, source_lang, target_lang, chunk_size=100):
+    with open(input_file, "r") as f:
+        text = f.read().splitlines()
+
+    # Print length of input file
+    print(f'Input ({source_lang}) length: {len(text)}')
+
+    with open(output_file, "w") as f:
+        #for i in range(0, len(text), chunk_size):
+        #for i in range(8300, len(text), chunk_size):
+        for i in range(8200, 8250, chunk_size):
+            chunk = text[i:i + chunk_size]
+            trans_text = translator_src2trg(chunk, src_lang=source_lang, tgt_lang=target_lang)
+            translated_text = [i["translation_text"] for i in trans_text]
+
+            # Print progress
+            print(f'Translated {min(i + chunk_size, len(text))} of {len(text)} sentences')
+
+            # Save the translation to file
+            f.write("\n".join(translated_text) + "\n")
+
+    # Print length of translation
+    print(f'Output ({target_lang}) length: {len(text)}')
+
+
+
+""" Clunky Version that loses it' shit, once it crashes! """
+#translate_file()
+
+""" Deluxe Version that regularly thinks about backups! """
+translate_in_chunks(args.input_file, args.output_file, args.input_code, args.output_code, args.chunk_size)
 
 # Fine-Tune?

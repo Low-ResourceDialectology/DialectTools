@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf8 -*-
 
 # Cleaning the text of the split-up dialect subsets from the Wikipedia dump file
