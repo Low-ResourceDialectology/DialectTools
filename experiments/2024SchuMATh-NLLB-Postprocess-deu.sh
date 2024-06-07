@@ -25,7 +25,7 @@ output_path="/media/AllBlue/LanguageData/EXPERIMENT/${data_quality}/${experiment
 author_id="facebook"
 model_id="nllb-200-3.3B"
 model_name="3.3B"
-chunk_size="100"
+chunk_size="120"
 
 echo "Translating ${input_file} via ${model_id} from ${src_lang} to ${trg_lang}"; 
 bash "${script_file}" \
@@ -41,5 +41,5 @@ bash "${script_file}" \
     -j ${author_id} \
     -k ${model_id} \
     -l ${model_name} \
-    -l ${chunk_size}
+    -m ${chunk_size}
 

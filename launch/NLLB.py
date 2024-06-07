@@ -12,6 +12,9 @@ import pathlib
 import sys
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 
+# TODO: Modify input sentences to not exceed the length limit 
+#   → TODO: Automatic way to detect the limit that current CPU/Model can handle?
+
 # source /media/AllBlue/LanguageData/TOOLS/vNLLB/bin/activate
 # python3 NLLB.py --input_lang eng_Latn --input_file /media/AllBlue/LanguageData/CLEAN/English/2022NLLBNLLB_devtest.engL --output_lang deu_Latn --output_file /media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh-engL-mult-deuL-NLLB-0001/2022NLLBNLLB-NLLB.deuL
 # Newly added: --authorid 
@@ -110,12 +113,21 @@ def translate_in_chunks(input_file, output_file, source_lang, target_lang, chunk
 
     # Print length of input file
     print(f'Input ({source_lang}) length: {len(text)}')
-
+    print(f'Chunk size: {chunk_size}')
     with open(output_file, "w") as f:
-        #for i in range(0, len(text), chunk_size):
+        # NOTE: The entry with an input_length exceeding the maximum that my GPU can handle 
+        #       (what sentence has a length of 7456 anyways?!), is encountered regardless of the
+        #       different intersections chosen below and even changing the chunk_size to 1 does 
+        #       not prevent this crash from happening (instantly, before even once translation was written to output)
+        #       → Now we will remove the very long sentence (which we should have done in the first place)
+        # Remove sentences longer than 400 characters
+        filtered_sentences = [sentence for sentence in text if len(sentence) <= 2000]
+        for i in range(0, len(text), chunk_size):
         #for i in range(8300, len(text), chunk_size):
-        for i in range(8200, 8250, chunk_size):
-            chunk = text[i:i + chunk_size]
+        #for i in range(8250, 8300, chunk_size): # Contains the 7456 length entry
+        #for i in range(8200, 8250, chunk_size): # Contains the 7456 length entry
+        #for i in range(8190, 8310, chunk_size): # With chunk_size = 1 to find faulty entry
+            chunk = filtered_sentences[i:i + chunk_size]
             trans_text = translator_src2trg(chunk, src_lang=source_lang, tgt_lang=target_lang)
             translated_text = [i["translation_text"] for i in trans_text]
 
