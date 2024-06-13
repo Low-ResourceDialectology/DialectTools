@@ -112,7 +112,7 @@ if __name__ == "__main__":
                     trg_word_without_match = trg_word[len(match):]
                     
                     bidict[key]["no-prefix"] = f'{src_word_without_match}-{trg_word_without_match}'
-                bidict[key]["prefix"] = prefixes
+                    bidict[key]["prefix"] = prefixes
 
             # If word ends with one of its matches, consider it to be a suffix
             suffixes = ""
@@ -126,18 +126,23 @@ if __name__ == "__main__":
                     trg_word_without_match = trg_word[:-len(match)]
                     
                     bidict[key]["no-suffix"] = f'{src_word_without_match}-{trg_word_without_match}'
-                bidict[key]["suffix"] = suffixes
+                    bidict[key]["suffix"] = suffixes
 
-            # Whenever the word-pair has not matching characters in front of suffix, but also a prefix, this has to be removed
+            # NOTE: Why though? # Whenever the word-pair has not matching characters in front of suffix, but also a prefix, this has to be removed
+            # if ("no-suffix" in bidict[key]) and (len(bidict[key]["prefix"]) > 0):
+            #     src_word_without_match = bidict[key]["no-suffix"].split('-')[0].replace(bidict[key]["prefix"],'')
+            #     trg_word_without_match = bidict[key]["no-suffix"].split('-')[1].replace(bidict[key]["prefix"],'')
+            #     bidict[key]["no-suffix"] = f'{src_word_without_match}-{trg_word_without_match}'
+            # # Whenever the word-pair has not matching characters in front of suffix, but also a prefix, this has to be removed
+            # if ("no-prefix" in bidict[key]) and (len(bidict[key]["suffix"]) > 0):
+            #     src_word_without_match = bidict[key]["no-prefix"].split('-')[0].replace(bidict[key]["suffix"],'')
+            #     trg_word_without_match = bidict[key]["no-prefix"].split('-')[1].replace(bidict[key]["suffix"],'')
+            #     bidict[key]["no-prefix"] = f'{src_word_without_match}-{trg_word_without_match}'
+
             if ("no-suffix" in bidict[key]) and (len(bidict[key]["prefix"]) > 0):
-                src_word_without_match = bidict[key]["no-suffix"].split('-')[0].replace(bidict[key]["prefix"],'')
-                trg_word_without_match = bidict[key]["no-suffix"].split('-')[1].replace(bidict[key]["prefix"],'')
-                bidict[key]["no-suffix"] = f'{src_word_without_match}-{trg_word_without_match}'
-            # Whenever the word-pair has not matching characters in front of suffix, but also a prefix, this has to be removed
-            if ("no-prefix" in bidict[key]) and (len(bidict[key]["suffix"]) > 0):
-                src_word_without_match = bidict[key]["no-prefix"].split('-')[0].replace(bidict[key]["suffix"],'')
-                trg_word_without_match = bidict[key]["no-prefix"].split('-')[1].replace(bidict[key]["suffix"],'')
-                bidict[key]["no-prefix"] = f'{src_word_without_match}-{trg_word_without_match}'
+                 src_word_without_match = bidict[key]["no-suffix"].split('-')[0].replace(bidict[key]["prefix"],'')
+                 trg_word_without_match = bidict[key]["no-suffix"].split('-')[1].replace(bidict[key]["prefix"],'')
+                 bidict[key]["no-fix"] = f'{src_word_without_match}-{trg_word_without_match}'
 
         # TODO: Access infixes in the middle of the word too!
         # NOTE: The code below would result in infixes which do NOT match between words-
