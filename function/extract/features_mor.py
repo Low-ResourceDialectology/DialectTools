@@ -84,6 +84,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     dir_maker(args.output_dir)
+    dir_maker(f'{args.output_dir}/frequencies')
 
     dict_files = glob.glob(f'{args.input_dir}/*', recursive = False)
     for dict_file in dict_files:
@@ -103,30 +104,39 @@ if __name__ == "__main__":
             for match in current_matches:
                 if (src_word.startswith(match)) and (trg_word.startswith(match)):
                     prefixes = match
+                    bidict[key]["prefix"] = prefixes
                     # Additionally add the word without the matching prefix
                     # NOTE: This also removes the match from other positions in the word!
                     #src_word_without_match = src_word.replace(match,'')
                     #trg_word_without_match = trg_word.replace(match,'')
                     # NOTE: This only removes the match at the desired position!
+                    
                     src_word_without_match = src_word[len(match):]
                     trg_word_without_match = trg_word[len(match):]
-                    
                     bidict[key]["no-prefix"] = f'{src_word_without_match}-{trg_word_without_match}'
-                    bidict[key]["prefix"] = prefixes
+                    
+                    limiting_length = len(match)-1
+                    src_word_without_match = src_word[limiting_length:]
+                    trg_word_without_match = trg_word[limiting_length:]
+                    bidict[key]["no-prefix+1"] = f'{src_word_without_match}-{trg_word_without_match}'
 
             # If word ends with one of its matches, consider it to be a suffix
             suffixes = ""
             for match in current_matches:
                 if (src_word.endswith(match)) and (trg_word.endswith(match)):
                     suffixes = match
+                    bidict[key]["suffix"] = suffixes
                     # Additionally add the word without the matching suffix
                     #src_word_without_match = src_word.replace(match,'')
                     #trg_word_without_match = trg_word.replace(match,'')
                     src_word_without_match = src_word[:-len(match)]
                     trg_word_without_match = trg_word[:-len(match)]
-                    
                     bidict[key]["no-suffix"] = f'{src_word_without_match}-{trg_word_without_match}'
-                    bidict[key]["suffix"] = suffixes
+                    
+                    limiting_length = len(match)-1
+                    src_word_without_match = src_word[:-limiting_length]
+                    trg_word_without_match = trg_word[:-limiting_length]
+                    bidict[key]["no-suffix+1"] = f'{src_word_without_match}-{trg_word_without_match}'
 
             # NOTE: Why though? # Whenever the word-pair has not matching characters in front of suffix, but also a prefix, this has to be removed
             # if ("no-suffix" in bidict[key]) and (len(bidict[key]["prefix"]) > 0):
@@ -139,10 +149,14 @@ if __name__ == "__main__":
             #     trg_word_without_match = bidict[key]["no-prefix"].split('-')[1].replace(bidict[key]["suffix"],'')
             #     bidict[key]["no-prefix"] = f'{src_word_without_match}-{trg_word_without_match}'
 
-            if ("no-suffix" in bidict[key]) and (len(bidict[key]["prefix"]) > 0):
-                 src_word_without_match = bidict[key]["no-suffix"].split('-')[0].replace(bidict[key]["prefix"],'')
-                 trg_word_without_match = bidict[key]["no-suffix"].split('-')[1].replace(bidict[key]["prefix"],'')
-                 bidict[key]["no-fix"] = f'{src_word_without_match}-{trg_word_without_match}'
+            if ("no-suffix" in bidict[key]) and ("prefix" in bidict[key]):
+                # Same issue with repeating matches messing up the replacement as above
+                #src_word_without_match = bidict[key]["no-suffix"].split('-')[0].replace(bidict[key]["prefix"],'')
+                #trg_word_without_match = bidict[key]["no-suffix"].split('-')[1].replace(bidict[key]["prefix"],'')
+                limiting_length = len(bidict[key]["prefix"])
+                src_word_without_match = bidict[key]["no-suffix"].split('-')[0][limiting_length:]
+                trg_word_without_match = bidict[key]["no-suffix"].split('-')[1][limiting_length:]
+                bidict[key]["no-fix"] = f'{src_word_without_match}-{trg_word_without_match}'
 
         # TODO: Access infixes in the middle of the word too!
         # NOTE: The code below would result in infixes which do NOT match between words-
@@ -160,8 +174,106 @@ if __name__ == "__main__":
         #         trg_word_without_match = bidict[key]["no-prefix"].split('-')[1].replace(bidict[key]["suffix"],'')
         #         bidict[key]["no-prefix"] = f'{src_word_without_match}-{trg_word_without_match}'
 
-
         output_filename = os.path.basename(dict_file).split('.')[0]
         write_to_json(args.output_dir, output_filename, bidict)
+
+
+
+        # Count frequencies for the string matches
+        #prefix_freq = {}
+        #suffix_freq = {}
+        #match_freq = {}
+        no_fix_freq = {}
+        no_prefix_freq = {}
+        no_suffix_freq = {}
+        no_prefix_freq_1 = {}
+        no_suffix_freq_1 = {}
+        for key in bidict.keys():
+            if ("no-fix" in bidict[key]): 
+                pair = bidict[key]["no-fix"]
+                if pair in no_fix_freq:
+                    no_fix_freq[pair] = no_fix_freq[pair] + 1
+                else:
+                    no_fix_freq[pair] = 1
+            
+            if ("no-prefix" in bidict[key]): 
+                pair = bidict[key]["no-prefix"]
+                if pair in no_prefix_freq:
+                    no_prefix_freq[pair] = no_prefix_freq[pair] + 1
+                else:
+                    no_prefix_freq[pair] = 1
+            
+            if ("no-suffix" in bidict[key]): 
+                pair = bidict[key]["no-suffix"]
+                if pair in no_suffix_freq:
+                    no_suffix_freq[pair] = no_suffix_freq[pair] + 1
+                else:
+                    no_suffix_freq[pair] = 1
+            
+            if ("no-prefix+1" in bidict[key]): 
+                pair = bidict[key]["no-prefix+1"]
+                if pair in no_prefix_freq_1:
+                    no_prefix_freq_1[pair] = no_prefix_freq_1[pair] + 1
+                else:
+                    no_prefix_freq_1[pair] = 1
+
+            if ("no-suffix+1" in bidict[key]): 
+                pair = bidict[key]["no-suffix+1"]
+                if pair in no_suffix_freq_1:
+                    no_suffix_freq_1[pair] = no_suffix_freq_1[pair] + 1
+                else:
+                    no_suffix_freq_1[pair] = 1
+
+            # if (len(bidict[key]["matches"]) > 0):
+            #     for match in bidict[key]["matches"]:
+            #         if match in match_freq:
+            #             match_freq[match] = match_freq[match] + 1
+            #         else:
+            #             match_freq[match] = 1
+            
+        # Sort frequency dictionaries in descending order
+        sorted_no_fix_freq = sorted(no_fix_freq.items(), key=lambda x:x[1], reverse=True)
+        fix_freq_dict = dict(sorted_no_fix_freq)
+
+        sorted_no_prefix_freq = sorted(no_prefix_freq.items(), key=lambda x:x[1], reverse=True)
+        prefix_freq_dict = dict(sorted_no_prefix_freq)
+        sorted_no_suffix_freq = sorted(no_suffix_freq.items(), key=lambda x:x[1], reverse=True)
+        suffix_freq_dict = dict(sorted_no_suffix_freq)
+
+        sorted_no_prefix_freq_1 = sorted(no_prefix_freq_1.items(), key=lambda x:x[1], reverse=True)
+        prefix_freq_dict_1 = dict(sorted_no_prefix_freq_1)
+        sorted_no_suffix_freq_1 = sorted(no_suffix_freq_1.items(), key=lambda x:x[1], reverse=True)
+        suffix_freq_dict_1 = dict(sorted_no_suffix_freq_1)
+        
+        # sorted_match_freq = sorted(match_freq.items(), key=lambda x:x[1], reverse=True)
+        # match_freq_dict = dict(sorted_match_freq)
+        # sorted_no_prefix_freq = sorted(no_prefix_freq.items(), key=lambda x:x[1], reverse=True)
+        # no_prefix_freq_dict = dict(sorted_no_prefix_freq)
+        # sorted_no_suffix_freq = sorted(no_suffix_freq.items(), key=lambda x:x[1], reverse=True)
+        # no_suffix_freq_dict = dict(sorted_no_suffix_freq)
+
+        # Serializing json and write to file
+        json_object = json.dumps(fix_freq_dict, indent=4, ensure_ascii=False)
+        with open(f'{args.output_dir}/frequencies/{output_filename}-fixes.json', "w") as outfile:
+            outfile.write(json_object)
+            
+        json_object = json.dumps(prefix_freq_dict, indent=4, ensure_ascii=False)
+        with open(f'{args.output_dir}/frequencies/{output_filename}-prefixes.json', "w") as outfile:
+            outfile.write(json_object)
+        json_object = json.dumps(suffix_freq_dict, indent=4, ensure_ascii=False)
+        with open(f'{args.output_dir}/frequencies/{output_filename}-suffixes.json', "w") as outfile:
+            outfile.write(json_object)
+
+        json_object = json.dumps(prefix_freq_dict_1, indent=4, ensure_ascii=False)
+        with open(f'{args.output_dir}/frequencies/{output_filename}-prefixes_1.json', "w") as outfile:
+            outfile.write(json_object)
+        json_object = json.dumps(suffix_freq_dict_1, indent=4, ensure_ascii=False)
+        with open(f'{args.output_dir}/frequencies/{output_filename}-suffixes_1.json', "w") as outfile:
+            outfile.write(json_object)
+        
+        # json_object = json.dumps(match_freq_dict, indent=4, ensure_ascii=False)
+        # with open(f'{args.output_dir}/frequencies/{output_filename}-matches.json', "w") as outfile:
+        #     outfile.write(json_object)
+        
 
     print(f'Morphological features have successfully been extracted and written to: {args.output_dir}.')
