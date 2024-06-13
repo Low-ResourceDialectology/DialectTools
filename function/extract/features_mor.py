@@ -104,8 +104,13 @@ if __name__ == "__main__":
                 if (src_word.startswith(match)) and (trg_word.startswith(match)):
                     prefixes = match
                     # Additionally add the word without the matching prefix
-                    src_word_without_match = src_word.replace(match,'')
-                    trg_word_without_match = trg_word.replace(match,'')
+                    # NOTE: This also removes the match from other positions in the word!
+                    #src_word_without_match = src_word.replace(match,'')
+                    #trg_word_without_match = trg_word.replace(match,'')
+                    # NOTE: This only removes the match at the desired position!
+                    src_word_without_match = src_word[len(match):]
+                    trg_word_without_match = trg_word[len(match):]
+                    
                     bidict[key]["no-prefix"] = f'{src_word_without_match}-{trg_word_without_match}'
                 bidict[key]["prefix"] = prefixes
 
@@ -115,8 +120,11 @@ if __name__ == "__main__":
                 if (src_word.endswith(match)) and (trg_word.endswith(match)):
                     suffixes = match
                     # Additionally add the word without the matching suffix
-                    src_word_without_match = src_word.replace(match,'')
-                    trg_word_without_match = trg_word.replace(match,'')
+                    #src_word_without_match = src_word.replace(match,'')
+                    #trg_word_without_match = trg_word.replace(match,'')
+                    src_word_without_match = src_word[:-len(match)]
+                    trg_word_without_match = trg_word[:-len(match)]
+                    
                     bidict[key]["no-suffix"] = f'{src_word_without_match}-{trg_word_without_match}'
                 bidict[key]["suffix"] = suffixes
 

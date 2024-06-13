@@ -5,6 +5,10 @@
 # bash ./install/install_all.sh -t OpusTools Stanza
 # bash ./install/install_all.sh -d /media/AllBlue/LanguageData -t ArgosTranslate fairseq fast_align GlotLID KLPT Morfessor NLLB OpusTools SacreBLEU Sockeye spaCy Stanza TextCleaning TranslateLocally Whisper
 
+# On Laptop:
+# bash ./install/install_all.sh -d /media/AIBOX/doofnase/LanguageData -t ArgosTranslate fairseq fast_align GlotLID Morfessor NLLB OpusTools SacreBLEU Sockeye spaCy Stanza TextCleaning
+
+
 # TODO: Function that tests if already installed- Then only update?
 
 # TODO: Replace the manual installations → How safe is it to try "sudo installs" via a bash script?

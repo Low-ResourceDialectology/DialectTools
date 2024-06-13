@@ -1,5 +1,7 @@
 {
-    "data_root_dir": "/media/AllBlue/LanguageData",
+    "data_root_dir": "/media/AIBOX/doofnase/LanguageData",
+    "data_root_dir_laptop": "/media/AIBOX/doofnase/LanguageData",
+    "data_root_dir_pc": "/media/AllBlue/LanguageData",
     "log_file": "info.json"
 }
   

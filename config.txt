@@ -1,6 +1,8 @@
 # Paths
-data_root_dir=/media/AllBlue/LanguageData
+data_root_dir=/media/AIBOX/doofnase/LanguageData
+data_root_dir_laptop=/media/AIBOX/doofnase/LanguageData
+data_root_dir_pc=/media/AllBlue/LanguageData
 log_dir=/media/AllBlue/LanguageData/LOGS
 
 # Default Tools
-tool_list="OpusTools TextCleaning Stanza"
+tool_list="TextCleaning"
