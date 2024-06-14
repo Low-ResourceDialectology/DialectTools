@@ -27,12 +27,22 @@ def dir_maker(path):
     pathlib.Path(path).mkdir(parents=True, exist_ok=True)
 
 
+def keep_highest_frequency(json_data):
+    result = {}
+    for key, sub_dict in json_data.items():
+        # Find the sub-key with the highest frequency
+        max_key = max(sub_dict, key=sub_dict.get)
+        result[key] = max_key
+    return result
+
+
 def read_perturbation_rules(file_dir):
-    """ Read bidicts from multiple files and combine into one """
-    with open('path_to_file/person.json', 'r') as f:
+    with open(f'{file_dir}', 'r') as f:
         data = json.load(f)
         print(f'Rulebook entries: {len(data.keys())}')
-        return data
+        # NOTE: For the time being we exclude all possible replacements that do not have the highest frequency
+        json_data = keep_highest_frequency(data)
+        return json_data
 
 
 # def read_perturbation_rules(handmade_file, dict_files, direction):
@@ -146,19 +156,19 @@ def multireplace(string, replacements, ignore_case=False, word_boundary="NONE"):
     return pattern.sub(lambda match: replacements[normalize_old(normalize_text(match.group(0)))], string)
 
 
-def perturb(input_text, rulebook):
-    output_text = []
-    for text_line in input_text:
-        #print(text_line)
-        new_line = multireplace(text_line, rulebook, ignore_case=True)#, word_boundary=' ')
-        output_text.append(new_line)
-    return output_text
+# def perturb(input_text, rulebook):
+#     output_text = []
+#     for text_line in input_text:
+#         #print(text_line)
+#         new_line = multireplace(text_line, rulebook, ignore_case=True)#, word_boundary=' ')
+#         output_text.append(new_line)
+#     return output_text
 
 
-def write_output(content, out_file):
-    with open(out_file, 'w') as out:
-        for line in content:
-            out.write(line+'\n')
+# def write_output(content, out_file):
+#     with open(out_file, 'w') as out:
+#         for line in content:
+#             out.write(line+'\n')
 
 
 if __name__ == "__main__":
@@ -198,9 +208,9 @@ if __name__ == "__main__":
                     # Read line-by-line
                     input_line = in_file.readline()
 
-                    # Replace units in text line
-                    perturbed_line = []
-
+                    # Replace text units in text line
+                    perturbed_line = multireplace(input_line, rulebook, ignore_case=True)#, word_boundary=' ')
+                    
                     # Write text line to out file
                     out_file.write(f'{perturbed_line}\n')
 
