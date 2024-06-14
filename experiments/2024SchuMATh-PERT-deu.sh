@@ -6,7 +6,8 @@
 
 # Initialize variables and default values
 input_path="/media/AllBlue/LanguageData/PERTURBS"
-output_path="/media/AllBlue/LanguageData/PREP"
+data_path="/media/AllBlue/LanguageData/PREP/opustools/bar-de" # TODO: Split up and make modular for data-sources and language pairs "/media/AllBlue/LanguageData/PREP/opustools/bar-de/naive"
+output_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh"
 src_lang="als"
 src_name="Alemannic"
 trg_lang="deu"
@@ -17,12 +18,13 @@ current_dir="$(dirname "$0")"
 script_file="../launch/Perturbation_Application.sh"
 script_path="${current_dir}/${script_file}"
 
-echo "Processing: ${src_name} and ${trg_name}"
+echo "Perturbing: ${src_name} into ${trg_name}"
 
 mode="lex"
 bash "${script_path}" \
-    -i "${input_path}" \
-    -o "${output_path}" \
+    -i "${input_path}/${src_name}/${trg_name}" \
+    -d "${data_path}/${mode2}" \
+    -o "${output_path}/${src_name}/${mode2}/${trg_name}" \
     -s "${src_lang}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
@@ -32,8 +34,9 @@ bash "${script_path}" \
 
 mode="mor"
 bash "${script_path}" \
-    -i "${input_path}" \
-    -o "${output_path}" \
+    -i "${input_path}/${src_name}/${trg_name}" \
+    -d "${data_path}" \
+    -o "${output_path}/${src_name}/${mode2}/${trg_name}" \
     -s "${src_lang}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
@@ -43,4 +46,3 @@ bash "${script_path}" \
 
 # TODO
 #mode="syn"
-

@@ -15,20 +15,6 @@ import os
 import unicodedata
 import pathlib
 
-""" Input files look like
-{
-    "0": {
-        "pair": "übertragung-iberdragig"
-    },
-    "1": {
-        "pair": "übertragungen-iberdragige"
-    },
-    "2": {
-        "pair": "richtete-gege"
-    }, ...
-
-"""
-
 
 """
 Helper Functions
@@ -45,24 +31,6 @@ def normalize_text(text):
     return unicodedata.normalize('NFKD', text)
 
 
-# Read perturbation rules
-def read_bidict(dict_file):
-    """ Read bidict from single file and keep alternative pairs for each entry (key) """
-    bidict = {}
-    word_counter = 0
-    # Introduce an index in order to keep words with more than one possible alignments
-    with open(dict_file, 'r', encoding='utf-8') as csv_file:
-        csv_reader = csv.reader(csv_file)
-        next(csv_reader, None)  # skip the headers
-        for row in csv_reader:
-            bidict[str(word_counter)] = {}
-            bidict[str(word_counter)]["pair"] = f'{normalize_text(row[1].strip())}-{normalize_text(row[0].strip())}'
-            word_counter = word_counter + 1
-
-    print(f'Bidict entries: {len(bidict.keys())}')
-    return bidict
-
-
 # Write output json file
 def write_to_json(out_path, out_file, output_dictionary):
     # Serializing json and write to file
@@ -76,7 +44,8 @@ def write_to_json(out_path, out_file, output_dictionary):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Split sentences from CSV files into subsets.")
-    parser.add_argument("-i","--input_dir", type=str, help="Directory containing files with text content.")
+    parser.add_argument("-i","--input_dir", type=str, help="Directory containing files with replacement rules.")
+    parser.add_argument("-d","--data_dir", type=str, help="Directory containing files with text content.")
     parser.add_argument("-o","--output_dir", type=str, help="Directory to save the output files.")
     parser.add_argument("-s","--src_lang", type=str, help="Language code of source language, part of file naming.")
     parser.add_argument("-a","--src_name", type=str, help="Language name of source language, part of file naming.")
@@ -87,16 +56,23 @@ if __name__ == "__main__":
     args = parser.parse_args()
     dir_maker(args.output_dir)
 
+    replacement_rules = {}
+    """
+        { 
+            "richtete": [
+                "gege",
+                "hett",
+                "richtet"
+            ], ...
+        }
+    """
+
     dict_files = glob.glob(f'{args.input_dir}/*-lex.json', recursive = False)
     for dict_file in dict_files:
         #bidict = read_bidict(dict_file)
         with open(f'{dict_file}', 'r') as f:
-            data = json.load(f)
-        replacements = {}
-        # {
-        # "0": {"pair": "übertragung-iberdragig"},
-        # "1": {"pair": "übertragungen-iberdragige"}, ...
-
+            replacement_rules = json.load(f)
+        
         #for index in bidict.keys():  # "a-u"
         for src, trg in data.items():
             # if (len(src) < 1):  # Do not replace empty strings with new content!
