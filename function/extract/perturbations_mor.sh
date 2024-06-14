@@ -60,7 +60,7 @@ script_path="${current_dir}/${script_file}"
 #echo "Morphological features for ${src_name} and ${trg_name}"
 python3 "${script_path}" \
     --input_dir "${input_path}" \
-    --output_dir "${output_path}/${src_name}/${trg_name}" \
+    --output_dir "${output_path}" \
     --src_lang "${src_lang}" \
     --src_name "${src_name}" \
     --trg_lang "${trg_lang}" \

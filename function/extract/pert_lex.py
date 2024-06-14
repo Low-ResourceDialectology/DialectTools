@@ -68,7 +68,7 @@ def write_to_json(out_path, out_file, output_dictionary):
     # Serializing json and write to file
     json_object = json.dumps(output_dictionary, indent=4, ensure_ascii=False)
     try:
-        with open(f'{out_path}/{out_file}-lex.json', "w") as json_file:
+        with open(f'{out_path}/{out_file}.json', "w") as json_file:
             json_file.write(json_object)
     except Exception as e:
         logging.error(f"Error writing data to {out_path}/{out_file}.json: {e}")
@@ -96,10 +96,12 @@ if __name__ == "__main__":
         # "0": {"pair": "übertragung-iberdragig"},
         # "1": {"pair": "übertragungen-iberdragige"}, ...
 
-        #for index in bidict.keys():  # "a-u"
-        for src, trg in data.items():
-            # if (len(src) < 1):  # Do not replace empty strings with new content!
-            #     continue
+        for index in data.keys():  # "0"
+            #for src, trg in data.items():
+            entry = data[index]
+            src, trg = entry["pair"].split('-')
+                # if (len(src) < 1):  # Do not replace empty strings with new content!
+                #     continue
             if replacements.get(src,False): 
                 replacements[src].append(trg)
             else:

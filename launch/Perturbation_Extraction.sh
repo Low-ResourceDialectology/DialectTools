@@ -5,7 +5,7 @@
 # Extract linguistic features (lexicograpic | morphological | syntactical) from bidictionaries
 
 # Initialize variables and default values
-input_path="/media/AllBlue/LanguageData/DICT"
+input_path="/media/AllBlue/LanguageData/FEATURES"
 output_path="/media/AllBlue/LanguageData/PERTURBS"
 src_lang="als"
 src_name="Alemannic"
@@ -63,7 +63,7 @@ if [ $mode = "lex" ]; then
     echo "Lexicographic replacements for: ${src_name} and ${trg_name}"
     bash "${script_path}" \
     -i "${input_path}/${src_name}" \
-    -o "${output_path}/${src_name}" \
+    -o "${output_path}/${src_name}/${trg_name}" \
     -s "${src_lang}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
@@ -75,8 +75,8 @@ if [ $mode = "mor" ]; then
     script_path="${current_dir}/${script_file}"
     echo "Morphological replacements for: ${src_name} and ${trg_name}"
     bash "${script_path}" \
-    -i "${input_path}/${src_name}" \
-    -o "${output_path}/${src_name}" \
+    -i "${input_path}/${src_name}/frequencies" \
+    -o "${output_path}/${src_name}/${trg_name}" \
     -s "${src_lang}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
@@ -89,7 +89,7 @@ fi
 #     echo "Syntactical replacements for: ${src_name} and ${trg_name}"
 #     bash "${script_path}" \
 #     -i "${input_path}/${src_name}" \
-#     -o "${output_path}/${src_name}" \
+#     -o "${output_path}/${src_name}/${trg_name}" \
 #     -s "${src_lang}" \
 #     -a "${src_name}" \
 #     -t "${trg_lang}" \
