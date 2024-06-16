@@ -52,7 +52,7 @@ script_path="${current_dir}/${script_file}"
 
 
 # +++++++++++++++++++++++++++++++++++++++++++++++
-# Alemannic - GERMAN 
+# Bavarian - GERMAN 
 src_lang="bar"
 src_name="Bavarian"
 trg_lang="deu"
@@ -82,6 +82,18 @@ bash "${script_path}" \
     -b "${trg_name}" \
     -m "${mode}" \
     -n "${mode2}"
+
+# mode="mor" # Again morphological, but on the results from the lexicographic perturbation process 
+# bash "${script_path}" \
+#     -i "${output_path}/${src_name}/${mode2}/${trg_name}/lex" \
+#     -d "${data_path}/${mode2}" \
+#     -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+#     -s "${src_lang}" \
+#     -a "${src_name}" \
+#     -t "${trg_lang}" \
+#     -b "${trg_name}" \
+#     -m "${mode}" \
+#     -n "${mode2}"
 
 # TODO
 #mode="syn"

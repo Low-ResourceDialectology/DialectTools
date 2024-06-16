@@ -5,12 +5,12 @@
 # Extract linguistic features (lexicograpic | morphological | syntactical) from bidictionaries
 
 # Initialize variables and default values
-input_path="/media/AllBlue/LanguageData/DICT"
-output_path="/media/AllBlue/LanguageData/FEATURES"
-src_lang="als"
-src_name="Alemannic"
-trg_lang="deu"
-trg_name="German"
+input_path="" # "/media/AllBlue/LanguageData/DICT"
+output_path="" # "/media/AllBlue/LanguageData/FEATURES"
+src_lang="" # "als"
+src_name="" # "Alemannic"
+trg_lang="" # "deu"
+trg_name="" # "German"
 mode="" # lex | mor | syn
 current_dir="$(dirname "$0")"
 script_file="../function/extract/features_lex.sh"

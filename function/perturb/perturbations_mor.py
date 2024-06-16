@@ -206,13 +206,15 @@ if __name__ == "__main__":
                 # Open the input file with text lines
                 with open(text_file, 'r') as in_file:
 
+                    # Iterate over each line in the input file
+                    for input_line in in_file:
                     # Read line-by-line
-                    input_line = in_file.readline()
-                    #print(f'Input line: {input_line}')
-                    # Replace text units in text line
-                    perturbed_line = multireplace(input_line, rulebook, ignore_case=True)#, word_boundary=' ')
-                    #print(f'Perturbed: {perturbed_line}')
-                    # Write text line to out file
-                    out_file.write(f'{perturbed_line}\n')
+                    #input_line = in_file.readline()
+                    
+                        # Replace text units in text line
+                        perturbed_line = multireplace(input_line, rulebook, ignore_case=True).replace('\n','') #, word_boundary=' ')
+                        #print(f'Perturbed: {perturbed_line}')
+                        # Write text line to out file
+                        out_file.write(f'{perturbed_line}\n')
 
     print(f'Morphological perturbations have successfully been applied and written to: {args.output_dir}.')

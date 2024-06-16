@@ -42,7 +42,7 @@ def read_bidict(dict_file):
         next(csv_reader, None)  # skip the headers
         for row in csv_reader:
             bidict[str(word_counter)] = {}
-            bidict[str(word_counter)]["pair"] = f'{normalize_text(row[1].strip())}-{normalize_text(row[0].strip())}'
+            bidict[str(word_counter)]["pair"] = f'{normalize_text(row[0].strip())}-{normalize_text(row[1].strip())}'
             word_counter = word_counter + 1
 
     print(f'Bidict entries: {len(bidict.keys())}')

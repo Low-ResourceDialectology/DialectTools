@@ -166,7 +166,7 @@ if __name__ == "__main__":
                     #input_line = in_file.readline()
 
                         # Replace text units in text line
-                        perturbed_line = multireplace(input_line, rulebook, ignore_case=True)#, word_boundary=' ')
+                        perturbed_line = multireplace(input_line, rulebook, ignore_case=True).replace('\n','') #, word_boundary=' ')
                     
                         # Write text line to out file
                         out_file.write(f'{perturbed_line}\n')
