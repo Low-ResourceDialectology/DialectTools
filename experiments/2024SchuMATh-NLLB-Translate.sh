@@ -31,9 +31,8 @@ output_code="eng_Latn"
 input_path="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
 output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_lang}-${trg_lang}/${data_quality}/reference/${src_name}/${translate_name}/NLLB"
 
-echo "Translating ${input_file} via ${model_id} from ${src_lang} to ${trg_lang}"; 
-#bash "${script_file}" \
-echo "${script_file}" \
+echo "Translating ${input_file} via ${model_id} from ${src_lang} to ${translate_lang}"; 
+bash "${script_file}" \
     -a ${input_path} \
     -b ${input_file} \
     -c ${src_lang} \
@@ -63,9 +62,8 @@ output_code="eng_Latn"
 input_path="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
 output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_lang}-${trg_lang}/${data_quality}/reference/${trg_name}/${translate_name}/NLLB"
 
-echo "Translating ${input_file} via ${model_id} from ${src_lang} to ${trg_lang}"; 
-#bash "${script_file}" \
-echo "${script_file}" \
+echo "Translating ${input_file} via ${model_id} from ${src_lang} to ${translate_lang}"; 
+bash "${script_file}" \
     -a ${input_path} \
     -b ${input_file} \
     -c ${trg_lang} \
