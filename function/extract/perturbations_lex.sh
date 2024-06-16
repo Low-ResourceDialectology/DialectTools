@@ -5,23 +5,24 @@
 # Extract replacement rules from linguistic features (lexicograpic)
 
 # Initialize variables and default values
-input_path="" #"/media/AllBlue/LanguageData/FEATURES"
-output_path="" #"/media/AllBlue/LanguageData/PERTURBS"
-src_lang="" #"als"
-src_name="" #"Alemannic"
-trg_lang="" #"deu"
-trg_name="" #"German"
+input_path="" # "/media/AllBlue/LanguageData/FEATURES"
+output_path="" # "/media/AllBlue/LanguageData/PERTURBS"
+src_lang="" # "als"
+src_name="" # "Alemannic"
+trg_lang="" # "deu"
+trg_name="" # "German"
+mode="" # "RightToLeft" | "LeftToRight"
 current_dir="$(dirname "$0")"
 script_file="pert_lex.py"
 
 # Function to print usage
 usage() {
-echo "Usage: $0 -i input_path -o output_path -s src_lang -a srg_name -b trg_name -t trg_lang -c script_file"
+echo "Usage: $0 -i input_path -o output_path -s src_lang -a srg_name -b trg_name -t trg_lang -c script_file -m mode"
 exit 1
 }
 
 # Parse command-line options
-while getopts ":i:o:s:a:t:b:c:" opt; do
+while getopts ":i:o:s:a:t:b:c:m:" opt; do
     case $opt in
         i)
             input_path=$OPTARG
@@ -44,6 +45,9 @@ while getopts ":i:o:s:a:t:b:c:" opt; do
 		c)
 	        script_file=$OPTARG
 	        ;;
+        m)
+	        mode=$OPTARG
+	        ;;
         *)
             usage
             ;;
@@ -51,7 +55,7 @@ while getopts ":i:o:s:a:t:b:c:" opt; do
 done
 
 # Check if all required arguments are provided
-if [ -z "$input_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ] || [ -z "$script_file" ]; then
+if [ -z "$input_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ] || [ -z "$script_file" ] || [ -z "$mode" ] ; then
     usage
 fi
 
@@ -64,4 +68,5 @@ python3 "${script_path}" \
     --src_lang "${src_lang}" \
     --src_name "${src_name}" \
     --trg_lang "${trg_lang}" \
-    --trg_name "${trg_name}"
+    --trg_name "${trg_name}" \
+    --mode "${mode}"

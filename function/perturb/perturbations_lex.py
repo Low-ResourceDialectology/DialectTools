@@ -153,7 +153,7 @@ if __name__ == "__main__":
         for text_file in text_files:
             out_text_file_name = os.path.basename(text_file)
             out_text_file = f'{args.output_dir}/{out_text_file_name}'
-            
+            print(f'Processing file: {text_file}')
             # Open the output file to write text lines to
             with open(out_text_file, 'w') as out_file:
             

@@ -12,17 +12,18 @@ src_name="Alemannic"
 trg_lang="deu"
 trg_name="German"
 mode="" # lex | mor | syn
+mode2="" # "RightToLeft" | "LeftToRight"
 current_dir="$(dirname "$0")"
 script_file="../function/extract/perturbations_lex.sh"
 
 # Function to print usage
 usage() {
-echo "Usage: $0 -i input_path -o output_path -s src_lang -a src_name -b trg_name -t trg_lang -m mode"
+echo "Usage: $0 -i input_path -o output_path -s src_lang -a src_name -b trg_name -t trg_lang -m mode -n mode2"
 exit 1
 }
 
 # Parse command-line options
-while getopts ":i:o:s:a:b:t:m:" opt; do
+while getopts ":i:o:s:a:b:t:m:n:" opt; do
     case $opt in
         i)
             input_path=$OPTARG
@@ -45,6 +46,9 @@ while getopts ":i:o:s:a:b:t:m:" opt; do
 		m)
             mode=$OPTARG
             ;;
+        n)
+            mode2=$OPTARG
+            ;;
         *)
             usage
             ;;
@@ -52,35 +56,66 @@ while getopts ":i:o:s:a:b:t:m:" opt; do
 done
 
 # Check if all required arguments are provided
-if [ -z "$input_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ]  || [ -z "$mode" ] ; then
+if [ -z "$input_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ] || [ -z "$mode" ] || [ -z "$mode2" ] ; then
     usage
 fi
 
-
-if [ $mode = "lex" ]; then
-    script_file="../function/extract/perturbations_lex.sh"
-    script_path="${current_dir}/${script_file}"
-    echo "Lexicographic replacements for: ${src_name} and ${trg_name}"
-    bash "${script_path}" \
-    -i "${input_path}/${src_name}" \
-    -o "${output_path}/${src_name}/${trg_name}" \
-    -s "${src_lang}" \
-    -a "${src_name}" \
-    -t "${trg_lang}" \
-    -b "${trg_name}"
+if [ $mode2 = "LeftToRight" ]; then
+    if [ $mode = "lex" ]; then
+        script_file="../function/extract/perturbations_lex.sh"
+        script_path="${current_dir}/${script_file}"
+        echo "Lexicographic replacements for: ${src_name} and ${trg_name}"
+        bash "${script_path}" \
+        -i "${input_path}/${src_name}" \
+        -o "${output_path}/${src_name}/${trg_name}" \
+        -s "${src_lang}" \
+        -a "${src_name}" \
+        -t "${trg_lang}" \
+        -b "${trg_name}" \
+        -m "${mode2}"
+    fi
+    if [ $mode = "mor" ]; then
+        script_file="../function/extract/perturbations_mor.sh"
+        script_path="${current_dir}/${script_file}"
+        echo "Morphological replacements for: ${src_name} and ${trg_name}"
+        bash "${script_path}" \
+        -i "${input_path}/${src_name}/frequencies" \
+        -o "${output_path}/${src_name}/${trg_name}" \
+        -s "${src_lang}" \
+        -a "${src_name}" \
+        -t "${trg_lang}" \
+        -b "${trg_name}" \
+        -m "${mode2}"
+    fi
 fi
 
-if [ $mode = "mor" ]; then
-    script_file="../function/extract/perturbations_mor.sh"
-    script_path="${current_dir}/${script_file}"
-    echo "Morphological replacements for: ${src_name} and ${trg_name}"
-    bash "${script_path}" \
-    -i "${input_path}/${src_name}/frequencies" \
-    -o "${output_path}/${src_name}/${trg_name}" \
-    -s "${src_lang}" \
-    -a "${src_name}" \
-    -t "${trg_lang}" \
-    -b "${trg_name}"
+ if [ $mode2 = "LeftToRight" ]; then
+    if [ $mode = "lex" ]; then
+        script_file="../function/extract/perturbations_lex.sh"
+        script_path="${current_dir}/${script_file}"
+        echo "Lexicographic replacements for: ${src_name} and ${trg_name}"
+        bash "${script_path}" \
+        -i "${input_path}/${trg_name}" \
+        -o "${output_path}/${src_name}/${trg_name}" \
+        -s "${src_lang}" \
+        -a "${src_name}" \
+        -t "${trg_lang}" \
+        -b "${trg_name}" \
+        -m "${mode2}"
+        fi
+    if [ $mode = "mor" ]; then
+        script_file="../function/extract/perturbations_mor.sh"
+        script_path="${current_dir}/${script_file}"
+        echo "Morphological replacements for: ${src_name} and ${trg_name}"
+        bash "${script_path}" \
+        -i "${input_path}/${trg_name}/frequencies" \
+        -o "${output_path}/${src_name}/${trg_name}" \
+        -s "${src_lang}" \
+        -a "${src_name}" \
+        -t "${trg_lang}" \
+        -b "${trg_name}" \
+        -m "${mode2}"
+    fi
 fi
 
 # if [ $mode = "syn" ]; then
@@ -93,5 +128,6 @@ fi
 #     -s "${src_lang}" \
 #     -a "${src_name}" \
 #     -t "${trg_lang}" \
-#     -b "${trg_name}"
+#     -b "${trg_name}" \
+#     -m "${mode2}"
 # fi
