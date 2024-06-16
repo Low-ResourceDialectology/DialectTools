@@ -185,7 +185,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     dir_maker(args.output_dir)
 
-    print(args)
+    #print(args)
     dict_files = glob.glob(f'{args.input_dir}/*-mor.json', recursive = False)
     for dict_file in dict_files:
 
@@ -208,10 +208,10 @@ if __name__ == "__main__":
 
                     # Read line-by-line
                     input_line = in_file.readline()
-                    print(f'Input line: {input_line}')
+                    #print(f'Input line: {input_line}')
                     # Replace text units in text line
                     perturbed_line = multireplace(input_line, rulebook, ignore_case=True)#, word_boundary=' ')
-                    print(f'Perturbed: {perturbed_line}')
+                    #print(f'Perturbed: {perturbed_line}')
                     # Write text line to out file
                     out_file.write(f'{perturbed_line}\n')
 

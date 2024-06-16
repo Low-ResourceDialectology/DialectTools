@@ -13,6 +13,7 @@ import json
 import logging
 import os
 import pathlib
+import random
 import re # Regular expressions for replacing strings in files
 import unicodedata
 import shutil
@@ -100,7 +101,16 @@ def multireplace(string, replacements, ignore_case=False, word_boundary="NONE"):
         pattern = re.compile(r" (" + "|".join(rep_escaped) + r") ", re_mode)
     
     # For each match, look up the new string in the replacements, being the key the normalized old string
-    return pattern.sub(lambda match: replacements[normalize_old(normalize_text(match.group(0)))], string)
+    def replace_func(match):
+        key = normalize_old(normalize_text(match.group(0)))
+        possible_replacements = replacements[key]
+        return random.choice(possible_replacements)
+    
+    return pattern.sub(replace_func, string)
+
+    # NOTE: Previous version which could only handle unambiguous rules with a single option for replacement.
+    # For each match, look up the new string in the replacements, being the key the normalized old string
+    #return pattern.sub(lambda match: replacements[normalize_old(normalize_text(match.group(0)))], string)
 
 
 # Write output json file
@@ -149,15 +159,17 @@ if __name__ == "__main__":
             
                 # Open the input file with text lines
                 with open(text_file, 'r') as in_file:
-
-                    # Read line-by-line
-                    input_line = in_file.readline()
-
-                    # Replace text units in text line
-                    perturbed_line = multireplace(input_line, rulebook, ignore_case=True)#, word_boundary=' ')
                     
-                    # Write text line to out file
-                    out_file.write(f'{perturbed_line}\n')
+                    # Iterate over each line in the input file
+                    for input_line in in_file:
+                    # Read line-by-line
+                    #input_line = in_file.readline()
+
+                        # Replace text units in text line
+                        perturbed_line = multireplace(input_line, rulebook, ignore_case=True)#, word_boundary=' ')
+                    
+                        # Write text line to out file
+                        out_file.write(f'{perturbed_line}\n')
 
 
     # dict_files = glob.glob(f'{args.input_dir}/*-lex.json', recursive = False)

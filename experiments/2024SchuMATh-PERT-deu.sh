@@ -8,23 +8,25 @@
 input_path="/media/AllBlue/LanguageData/PERTURBS"
 data_path="/media/AllBlue/LanguageData/PREP/opustools/bar-de" # TODO: Split up and make modular for data-sources and language pairs "/media/AllBlue/LanguageData/PREP/opustools/bar-de/naive"
 output_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh"
-src_lang="als"
-src_name="Alemannic"
-trg_lang="deu"
-trg_name="German"
 mode="lex" # lex | mor | syn
 mode2="naive" # naive | clean | informed
 current_dir="$(dirname "$0")"
 script_file="../launch/Perturbation_Application.sh"
 script_path="${current_dir}/${script_file}"
 
-echo "Perturbing: ${src_name} into ${trg_name}"
+# +++++++++++++++++++++++++++++++++++++++++++++++
+# Alemannic - GERMAN 
+# src_lang="als"
+# src_name="Alemannic"
+# trg_lang="deu"
+# trg_name="German"
+# echo "Perturbing: ${src_name} into ${trg_name}"
 
 # mode="lex"
 # bash "${script_path}" \
 #     -i "${input_path}/${src_name}/${trg_name}" \
 #     -d "${data_path}/${mode2}" \
-#     -o "${output_path}/${src_name}/${mode2}/${trg_name}" \
+#     -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
 #     -s "${src_lang}" \
 #     -a "${src_name}" \
 #     -t "${trg_lang}" \
@@ -32,11 +34,48 @@ echo "Perturbing: ${src_name} into ${trg_name}"
 #     -m "${mode}" \
 #     -n "${mode2}"
 
+# mode="mor"
+# bash "${script_path}" \
+#     -i "${input_path}/${src_name}/${trg_name}" \
+#     -d "${data_path}/${mode2}" \
+#     -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+#     -s "${src_lang}" \
+#     -a "${src_name}" \
+#     -t "${trg_lang}" \
+#     -b "${trg_name}" \
+#     -m "${mode}" \
+#     -n "${mode2}"
+
+# TODO
+#mode="syn"
+
+
+
+# +++++++++++++++++++++++++++++++++++++++++++++++
+# Alemannic - GERMAN 
+src_lang="bar"
+src_name="Bavarian"
+trg_lang="deu"
+trg_name="German"
+echo "Perturbing: ${src_name} into ${trg_name}"
+
+mode="lex"
+bash "${script_path}" \
+    -i "${input_path}/${src_name}/${trg_name}" \
+    -d "${data_path}/${mode2}" \
+    -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+    -s "${src_lang}" \
+    -a "${src_name}" \
+    -t "${trg_lang}" \
+    -b "${trg_name}" \
+    -m "${mode}" \
+    -n "${mode2}"
+
 mode="mor"
 bash "${script_path}" \
     -i "${input_path}/${src_name}/${trg_name}" \
     -d "${data_path}/${mode2}" \
-    -o "${output_path}/${src_name}/${mode2}/${trg_name}" \
+    -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
     -s "${src_lang}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
