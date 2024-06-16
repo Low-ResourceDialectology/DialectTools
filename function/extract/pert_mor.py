@@ -137,7 +137,7 @@ if __name__ == "__main__":
                             global_replacements[src][trg] = freq
                         else:
                             global_replacements[src][trg] = global_replacements[src][trg] + freq
-                            print(f'INFO: Duplicate rule {src} - {trg} adding the value {freq} to {global_replacements[src][trg]}')
+                            #print(f'INFO: Duplicate rule {src} - {trg} adding the value {freq} to {global_replacements[src][trg]}')
         
         elif args.mode == "RightToLeft":
             for pair, freq in data.items():
@@ -166,7 +166,7 @@ if __name__ == "__main__":
                             global_replacements[src][trg] = freq
                         else:
                             global_replacements[src][trg] = global_replacements[src][trg] + freq
-                            print(f'INFO: Duplicate rule {src} - {trg} adding the value {freq} to {global_replacements[src][trg]}')
+                            #print(f'INFO: Duplicate rule {src} - {trg} adding the value {freq} to {global_replacements[src][trg]}')
         
 
         output_filename = os.path.basename(dict_file).split('.')[0]

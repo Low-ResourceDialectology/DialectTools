@@ -52,7 +52,7 @@ script_path="${current_dir}/${script_file}"
 
 
 # +++++++++++++++++++++++++++++++++++++++++++++++
-# Bavarian - GERMAN 
+# Bavarian - German 
 src_lang="bar"
 src_name="Bavarian"
 trg_lang="deu"
@@ -83,10 +83,59 @@ bash "${script_path}" \
     -m "${mode}" \
     -n "${mode2}"
 
-# mode="mor" # Again morphological, but on the results from the lexicographic perturbation process 
+mode="all" # Again morphological, but on the results from the lexicographic perturbation process 
+bash "${script_path}" \
+    -i "${input_path}/${src_name}/${trg_name}" \
+    -d "${output_path}/${src_name}/${mode2}/${trg_name}/lex" \
+    -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+    -s "${src_lang}" \
+    -a "${src_name}" \
+    -t "${trg_lang}" \
+    -b "${trg_name}" \
+    -m "${mode}" \
+    -n "${mode2}"
+
+# TODO
+#mode="syn"
+
+
+
+# +++++++++++++++++++++++++++++++++++++++++++++++
+# German - Bavarian 
+# src_lang="deu"
+# src_name="German"
+# trg_lang="bar"
+# trg_name="Bavarian"
+# echo "Perturbing: ${src_name} into ${trg_name}"
+
+# mode="lex"
 # bash "${script_path}" \
-#     -i "${output_path}/${src_name}/${mode2}/${trg_name}/lex" \
+#     -i "${input_path}/${src_name}/${trg_name}" \
 #     -d "${data_path}/${mode2}" \
+#     -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+#     -s "${src_lang}" \
+#     -a "${src_name}" \
+#     -t "${trg_lang}" \
+#     -b "${trg_name}" \
+#     -m "${mode}" \
+#     -n "${mode2}"
+
+# mode="mor"
+# bash "${script_path}" \
+#     -i "${input_path}/${src_name}/${trg_name}" \
+#     -d "${data_path}/${mode2}" \
+#     -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+#     -s "${src_lang}" \
+#     -a "${src_name}" \
+#     -t "${trg_lang}" \
+#     -b "${trg_name}" \
+#     -m "${mode}" \
+#     -n "${mode2}"
+
+# mode="all" # Again morphological, but on the results from the lexicographic perturbation process 
+# bash "${script_path}" \
+#     -i "${input_path}/${src_name}/${trg_name}" \
+#     -d "${output_path}/${src_name}/${mode2}/${trg_name}/lex" \
 #     -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
 #     -s "${src_lang}" \
 #     -a "${src_name}" \

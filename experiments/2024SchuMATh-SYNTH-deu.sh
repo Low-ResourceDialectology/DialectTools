@@ -110,6 +110,7 @@ trg_lang="bar"
 trg_name="Bavarian"
 echo "Processing: ${src_name} and ${trg_name}"
 
+mode="lex"
 mode2="RightToLeft"
 bash "${script_path}" \
     -i "${input_path}" \
@@ -120,7 +121,7 @@ bash "${script_path}" \
     -b "${trg_name}" \
     -m "${mode}" \
     -n "${mode2}"
-
+mode="mor"
 mode2="RightToLeft"
 bash "${script_path}" \
     -i "${input_path}" \
@@ -131,8 +132,6 @@ bash "${script_path}" \
     -b "${trg_name}" \
     -m "${mode}" \
     -n "${mode2}"
-
-
 
 # TODO
 #mode="syn"

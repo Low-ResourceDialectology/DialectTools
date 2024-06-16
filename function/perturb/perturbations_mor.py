@@ -181,9 +181,15 @@ if __name__ == "__main__":
     parser.add_argument("-t","--trg_lang", type=str, help="Language code of target language, part of file naming.") # TODO: Make optional
     parser.add_argument("-b","--trg_name", type=str, help="Language name of target language, part of file naming.") # TODO: Make optional
     parser.add_argument("-m","--data_quality", type=str, help="Level of data quality for experiment: naive, clean, informed.")
+    parser.add_argument("-n","--multi_perturb", type=str, default="", help="Level of data quality for experiment: naive, clean, informed.") # Optional flag for perturbing lexicographically perturbed data again, but this time morphologically
 
     args = parser.parse_args()
     dir_maker(args.output_dir)
+
+    if args.src_lang == "deu":
+        source_language_code = "de"
+    else:
+        source_language_code = args.src_lang
 
     #print(args)
     dict_files = glob.glob(f'{args.input_dir}/*-mor.json', recursive = False)
@@ -193,7 +199,7 @@ if __name__ == "__main__":
         rulebook = read_perturbation_rules(dict_file)
 
         # Select correct text files to perturb
-        text_files = glob.glob(f'{args.data_dir}/*.{args.src_lang}', recursive = False)
+        text_files = glob.glob(f'{args.data_dir}/*.{source_language_code}', recursive = False)
 
         # Read input text and perturb line by line
         for text_file in text_files:

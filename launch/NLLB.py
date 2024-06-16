@@ -81,6 +81,7 @@ def get_translator(model, tokenizer, source_lang, target_lang, max_len=400, numb
 translator_src2trg = get_translator(model, tokenizer, args.input_code, args.output_code)
 
 """ Function to translate a single file from source to target language """
+# NOTE: Only use for smaller files
 def translate_file():
     # Check if it is a file
         if os.path.isfile(args.input_file):

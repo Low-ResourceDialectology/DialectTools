@@ -95,6 +95,22 @@ if [ $mode = "mor" ]; then
     -m "${data_quality}"
 fi
 
+if [ $mode = "all" ]; then
+    script_file="../function/perturb/perturbations_mor.py"
+    script_path="${current_dir}/${script_file}"
+    echo "Lexicographical and Morphological perturbation for: ${src_name} and ${trg_name}"
+    python3 "${script_path}" \
+    -i "${input_path}" \
+    -d "${data_path}" \
+    -o "${output_path}" \
+    -s "${src_lang}" \
+    -a "${src_name}" \
+    -t "${trg_lang}" \
+    -b "${trg_name}" \
+    -m "${data_quality}" \
+    -n "${mode}"
+fi
+
 # if [ $mode = "syn" ]; then
 #     script_file="../function/perturb/perturbations_syn.py"
 #     script_path="${current_dir}/${script_file}"

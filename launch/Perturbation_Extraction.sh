@@ -89,7 +89,7 @@ if [ $mode2 = "LeftToRight" ]; then
     fi
 fi
 
- if [ $mode2 = "LeftToRight" ]; then
+ if [ $mode2 = "RightToLeft" ]; then
     if [ $mode = "lex" ]; then
         script_file="../function/extract/perturbations_lex.sh"
         script_path="${current_dir}/${script_file}"

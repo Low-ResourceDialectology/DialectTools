@@ -138,6 +138,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
     dir_maker(args.output_dir)
 
+    if args.src_lang == "deu":
+        source_language_code = "de"
+    else:
+        source_language_code = args.src_lang
+
     replacement_rules = {}
 
     dict_files = glob.glob(f'{args.input_dir}/*-lex.json', recursive = False)
@@ -147,7 +152,7 @@ if __name__ == "__main__":
         rulebook = read_perturbation_rules(dict_file)
 
         # Select correct text files to perturb
-        text_files = glob.glob(f'{args.data_dir}/*.{args.src_lang}', recursive = False)
+        text_files = glob.glob(f'{args.data_dir}/*.{source_language_code}', recursive = False)
 
         # Read input text and perturb line by line
         for text_file in text_files:
@@ -170,7 +175,7 @@ if __name__ == "__main__":
                     
                         # Write text line to out file
                         out_file.write(f'{perturbed_line}\n')
-
+    print(f'Lexicographic replacements have successfully been extracted and written to: {args.output_dir}.')
 
     # dict_files = glob.glob(f'{args.input_dir}/*-lex.json', recursive = False)
     # for dict_file in dict_files:
@@ -190,4 +195,4 @@ if __name__ == "__main__":
     #     output_filename = os.path.basename(dict_file).split('.')[0]
     #     write_to_json(args.output_dir, output_filename, replacements)
 
-    # print(f'Lexicographic replacements have successfully been extracted and written to: {args.output_dir}.')
+    
