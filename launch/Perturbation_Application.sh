@@ -19,12 +19,12 @@ script_file="../function/perturb/perturbations_lex.py"
 
 # Function to print usage
 usage() {
-echo "Usage: $0 -i input_path -d data_path -o output_path -s src_lang -a src_name -b trg_name -t trg_lang -m mode -n mode2"
+echo "Usage: $0 -i input_path -d data_path -o output_path -s src_lang -a src_name -t trg_lang -b trg_name -m mode -n mode2"
 exit 1
 }
 
 # Parse command-line options
-while getopts ":i:d:o:s:a:b:t:m:" opt; do
+while getopts ":i:d:o:s:a:t:b:m:n:" opt; do
     case $opt in
         i)
             input_path=$OPTARG
@@ -69,7 +69,7 @@ if [ $mode = "lex" ]; then
     script_file="../function/perturb/perturbations_lex.py"
     script_path="${current_dir}/${script_file}"
     echo "Lexicographic perturbation for: ${src_name} and ${trg_name}"
-    bash "${script_path}" \
+    python3 "${script_path}" \
     -i "${input_path}" \
     -d "${data_path}" \
     -o "${output_path}" \
@@ -84,7 +84,7 @@ if [ $mode = "mor" ]; then
     script_file="../function/perturb/perturbations_mor.py"
     script_path="${current_dir}/${script_file}"
     echo "Morphological perturbation for: ${src_name} and ${trg_name}"
-    bash "${script_path}" \
+    python3 "${script_path}" \
     -i "${input_path}" \
     -d "${data_path}" \
     -o "${output_path}" \
@@ -99,7 +99,7 @@ fi
 #     script_file="../function/perturb/perturbations_syn.py"
 #     script_path="${current_dir}/${script_file}"
 #     echo "Syntactical perturbation for: ${src_name} and ${trg_name}"
-#     bash "${script_path}" \
+#     python3 "${script_path}" \
 #     -i "${input_path}" \
 #     -d "${data_path}" \
 #     -o "${output_path}" \

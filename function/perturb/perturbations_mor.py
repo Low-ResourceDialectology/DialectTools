@@ -39,9 +39,9 @@ def keep_highest_frequency(json_data):
 def read_perturbation_rules(file_dir):
     with open(f'{file_dir}', 'r') as f:
         data = json.load(f)
-        print(f'Rulebook entries: {len(data.keys())}')
         # NOTE: For the time being we exclude all possible replacements that do not have the highest frequency
         json_data = keep_highest_frequency(data)
+        print(f'Rulebook entries: {len(json_data.keys())}')
         return json_data
 
 
@@ -185,6 +185,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     dir_maker(args.output_dir)
 
+    print(args)
     dict_files = glob.glob(f'{args.input_dir}/*-mor.json', recursive = False)
     for dict_file in dict_files:
 
@@ -198,7 +199,7 @@ if __name__ == "__main__":
         for text_file in text_files:
             out_text_file_name = os.path.basename(text_file)
             out_text_file = f'{args.output_dir}/{out_text_file_name}'
-            
+            print(f'Processing file: {text_file}')
             # Open the output file to write text lines to
             with open(out_text_file, 'w') as out_file:
             
@@ -207,10 +208,10 @@ if __name__ == "__main__":
 
                     # Read line-by-line
                     input_line = in_file.readline()
-
+                    print(f'Input line: {input_line}')
                     # Replace text units in text line
                     perturbed_line = multireplace(input_line, rulebook, ignore_case=True)#, word_boundary=' ')
-                    
+                    print(f'Perturbed: {perturbed_line}')
                     # Write text line to out file
                     out_file.write(f'{perturbed_line}\n')
 

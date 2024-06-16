@@ -20,22 +20,22 @@ script_path="${current_dir}/${script_file}"
 
 echo "Perturbing: ${src_name} into ${trg_name}"
 
-mode="lex"
-bash "${script_path}" \
-    -i "${input_path}/${src_name}/${trg_name}" \
-    -d "${data_path}/${mode2}" \
-    -o "${output_path}/${src_name}/${mode2}/${trg_name}" \
-    -s "${src_lang}" \
-    -a "${src_name}" \
-    -t "${trg_lang}" \
-    -b "${trg_name}" \
-    -m "${mode}" \
-    -n "${mode2}"
+# mode="lex"
+# bash "${script_path}" \
+#     -i "${input_path}/${src_name}/${trg_name}" \
+#     -d "${data_path}/${mode2}" \
+#     -o "${output_path}/${src_name}/${mode2}/${trg_name}" \
+#     -s "${src_lang}" \
+#     -a "${src_name}" \
+#     -t "${trg_lang}" \
+#     -b "${trg_name}" \
+#     -m "${mode}" \
+#     -n "${mode2}"
 
 mode="mor"
 bash "${script_path}" \
     -i "${input_path}/${src_name}/${trg_name}" \
-    -d "${data_path}" \
+    -d "${data_path}/${mode2}" \
     -o "${output_path}/${src_name}/${mode2}/${trg_name}" \
     -s "${src_lang}" \
     -a "${src_name}" \
