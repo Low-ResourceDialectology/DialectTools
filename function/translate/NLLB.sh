@@ -20,7 +20,7 @@ experiment="" # 2024SchuMATh-NLLB-Baseline-deu
 author_id="facebook"
 model_id="nllb-200-3.3B"
 model_name="3.3B" # 3.3B || 1.3B || distilled-1.3B || 600M
-chunk_size="100"
+chunk_size="1000"
 current_dir="$(dirname "$0")"
 script_file="$current_dir/../../launch/NLLB.py"
 

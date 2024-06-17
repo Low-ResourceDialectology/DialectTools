@@ -15,13 +15,12 @@ input_file_inf=""
 output_path=""
 output_file=""
 
-experiment=""
 metrics="bleu chrf ter"
 precision="4"
 options=""
 # Function to print usage
 usage() {
-echo "Usage: $0 -a input_path_ref -b input_file_ref -c input_path_inf -d input_file_inf -e output_path -f output_file -g experiment -h metrics -i precision -j options"
+echo "Usage: $0 -a input_path_ref -b input_file_ref -c input_path_inf -d input_file_inf -e output_path -f output_file -h metrics -i precision -j options"
 exit 1
 }
 
@@ -34,7 +33,6 @@ while getopts ":a:b:c:d:e:f:g:h:i:j:" opt; do
         d)  input_file_inf=$OPTARG;;
         e)  output_path=$OPTARG;;
         f)  output_file=$OPTARG;;
-        g)  experiment=$OPTARG;;
         h)  metrics=$OPTARG;;
         i)  precision=$OPTARG;;
         j)  options=$OPTARG;;
@@ -51,7 +49,6 @@ if [ -z "$input_path_ref" ] || \
     [ -z "$input_file_inf" ] || \
     [ -z "$output_path" ] || \
     [ -z "$output_file" ] || \
-    [ -z "$experiment" ] || \
     [ -z "$metrics" ] || \
     [ -z "$precision" ]; then
     usage

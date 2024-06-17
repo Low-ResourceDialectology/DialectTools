@@ -108,7 +108,7 @@ def translate_file():
 
 
 """ Function to translate a single file from source to target language chunk-wise to not lose progress when CUDA runs out of memory"""
-def translate_in_chunks(input_file, output_file, source_lang, target_lang, chunk_size=100):
+def translate_in_chunks(input_file, output_file, source_lang, target_lang, chunk_size=1000):
     with open(input_file, "r") as f:
         text = f.read().splitlines()
 
