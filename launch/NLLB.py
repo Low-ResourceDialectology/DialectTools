@@ -121,7 +121,7 @@ def translate_in_chunks(input_file, output_file, source_lang, target_lang, chunk
         #       different intersections chosen below and even changing the chunk_size to 1 does 
         #       not prevent this crash from happening (instantly, before even once translation was written to output)
         #       → Now we will remove the very long sentence (which we should have done in the first place)
-        # Remove sentences longer than 400 characters
+        # Remove sentences longer than 2000 characters
         filtered_sentences = [sentence for sentence in text if len(sentence) <= 2000]
         for i in range(0, len(text), chunk_size):
         #for i in range(8300, len(text), chunk_size):

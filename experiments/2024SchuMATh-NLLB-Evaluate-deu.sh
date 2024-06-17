@@ -31,79 +31,10 @@ metrics="bleu chrf ter"
 precision="4"
 options=""
 
-# ++++++++++++++++++++++++++++++++++++++++++++
-# Evaluate Perturbations (How close do we get to the other language variety?)
-input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/naive" 
-input_file_ref="test.de"
-src_name="Bavarian"
-src_lang="bar"
-trg_name="German"
-trg_lang="de"
-echo "Evaluating perturbations via sacreBLEU for: ${src_name} to ${trg_name}";
+# # ++++++++++++++++++++++++++++++++++++++++++++
+# # Evaluate Perturbations (How close do we get to the other language variety?)
 
-for data_quality in naive; # naive clean informed
-do
-    for feature_validity in guess; # guess reason authentic
-    do
-        for perturbation_type in all lex mor;
-        do
-            input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}"
-            input_file_inf="test.${src_lang}"
-            output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
-            output_file="PERT.txt"
-            bash "${script_file}" \
-                -a "${input_path_ref}" \
-                -b "${input_file_ref}" \
-                -c "${input_path_inf}" \
-                -d "${input_file_inf}" \
-                -e "${output_path}" \
-                -f "${output_file}" \
-                -h "${metrics}" \
-                -i "${precision}" \
-                -j "${options}" 
-        done
-    done
-done
-
-input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/naive" 
-input_file_ref="test.de"
-src_name="German"
-src_lang="de"
-trg_name="Bavarian"
-trg_lang="bar"
-echo "Evaluating perturbations via sacreBLEU for: ${src_name} to ${trg_name}";
-
-
-for data_quality in naive; # naive clean informed
-do
-    for feature_validity in guess; # guess reason authentic
-    do
-        for perturbation_type in all lex mor;
-        do
-            input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}"
-            input_file_inf="test.${src_lang}"
-            output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
-            output_file="PERT.txt"
-            bash "${script_file}" \
-                -a "${input_path_ref}" \
-                -b "${input_file_ref}" \
-                -c "${input_path_inf}" \
-                -d "${input_file_inf}" \
-                -e "${output_path}" \
-                -f "${output_file}" \
-                -h "${metrics}" \
-                -i "${precision}" \
-                -j "${options}" 
-        done
-    done
-done
-
-
-
-
-# ++++++++++++++++++++++++++++++++++++++++++++
-# Evaluate Translations
-# NOTE: Same reference file for all translations below
+# Basic differences between original Bavarian text compared to the aligned German text
 input_path_ref="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/German/English/NLLB" 
 input_file_ref="test.en"
 
@@ -116,62 +47,192 @@ translate_name="English"
 translate_lang="en"
 
 echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
-for data_quality in naive; # naive clean informed
-do
-    for feature_validity in guess; # guess reason authentic
-    do
-        for perturbation_type in all lex mor;
-        do
-            input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}/${translate_name}/NLLB"
-            input_file_inf="test.de"
-            output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
-            output_file="NLLB.txt"
-            bash "${script_file}" \
-                -a "${input_path_ref}" \
-                -b "${input_file_ref}" \
-                -c "${input_path_inf}" \
-                -d "${input_file_inf}" \
-                -e "${output_path}" \
-                -f "${output_file}" \
-                -h "${metrics}" \
-                -i "${precision}" \
-                -j "${options}" 
-        done
-    done
-done
+input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/Bavarian/English/NLLB"
+input_file_inf="test.en"
+output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/naive"
+output_file="NLLB.txt"
+bash "${script_file}" \
+    -a "${input_path_ref}" \
+    -b "${input_file_ref}" \
+    -c "${input_path_inf}" \
+    -d "${input_file_inf}" \
+    -e "${output_path}" \
+    -f "${output_file}" \
+    -h "${metrics}" \
+    -i "${precision}" \
+    -j "${options}" 
 
-# Evaluate the translation of German (dialectized) into English
-src_name="German"
-src_lang="de"
-trg_name="Bavarian"
-trg_lang="bar"
+
+
+
+# input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/naive" 
+# input_file_ref="test.de"
+# src_name="Bavarian"
+# src_lang="bar"
+# trg_name="German"
+# trg_lang="de"
+# echo "Evaluating perturbations via sacreBLEU for: ${src_name} to ${trg_name}";
+
+# for data_quality in naive; # naive clean informed
+# do
+#     for feature_validity in guess; # guess reason authentic
+#     do
+#         for perturbation_type in all lex mor;
+#         do
+#             input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}"
+#             input_file_inf="test.${src_lang}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_file="PERT.txt"
+#             bash "${script_file}" \
+#                 -a "${input_path_ref}" \
+#                 -b "${input_file_ref}" \
+#                 -c "${input_path_inf}" \
+#                 -d "${input_file_inf}" \
+#                 -e "${output_path}" \
+#                 -f "${output_file}" \
+#                 -h "${metrics}" \
+#                 -i "${precision}" \
+#                 -j "${options}" 
+#         done
+#     done
+# done
+
+# input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/naive" 
+# input_file_ref="test.de"
+# src_name="German"
+# src_lang="de"
+# trg_name="Bavarian"
+# trg_lang="bar"
+# echo "Evaluating perturbations via sacreBLEU for: ${src_name} to ${trg_name}";
+
+
+# for data_quality in naive; # naive clean informed
+# do
+#     for feature_validity in guess; # guess reason authentic
+#     do
+#         for perturbation_type in all lex mor;
+#         do
+#             input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}"
+#             input_file_inf="test.${src_lang}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_file="PERT.txt"
+#             bash "${script_file}" \
+#                 -a "${input_path_ref}" \
+#                 -b "${input_file_ref}" \
+#                 -c "${input_path_inf}" \
+#                 -d "${input_file_inf}" \
+#                 -e "${output_path}" \
+#                 -f "${output_file}" \
+#                 -h "${metrics}" \
+#                 -i "${precision}" \
+#                 -j "${options}" 
+#         done
+#     done
+# done
+
+
+
+# ++++++++++++++++++++++++++++++++++++++++++++
+# Evaluate Translation of the original Bavarian text compared to the aligned German text
+input_path_ref="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/German/English/NLLB" 
+input_file_ref="test.en"
+
+# Evaluate the translation of Bavarian (standardized) into English
+src_name="Bavarian"
+src_lang="bar"
+trg_name="German"
+trg_lang="de"
 translate_name="English"
 translate_lang="en"
 
 echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
-for data_quality in naive; # naive clean informed
-do
-    for feature_validity in guess; # guess reason authentic
-    do
-        for perturbation_type in all lex mor;
-        do
-            input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}/${translate_name}/NLLB"
-            input_file_inf="test.de"
-            output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
-            output_file="NLLB.txt"
-            bash "${script_file}" \
-                -a "${input_path_ref}" \
-                -b "${input_file_ref}" \
-                -c "${input_path_inf}" \
-                -d "${input_file_inf}" \
-                -e "${output_path}" \
-                -f "${output_file}" \
-                -h "${metrics}" \
-                -i "${precision}" \
-                -j "${options}" 
-        done
-    done
-done
+input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/Bavarian/English/NLLB"
+input_file_inf="test.en"
+output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/naive/none/none"
+output_file="NLLB.txt"
+bash "${script_file}" \
+    -a "${input_path_ref}" \
+    -b "${input_file_ref}" \
+    -c "${input_path_inf}" \
+    -d "${input_file_inf}" \
+    -e "${output_path}" \
+    -f "${output_file}" \
+    -h "${metrics}" \
+    -i "${precision}" \
+    -j "${options}" 
+
+
+# # ++++++++++++++++++++++++++++++++++++++++++++
+# # Evaluate Translations
+# # NOTE: Same reference file for all translations below
+# input_path_ref="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/German/English/NLLB" 
+# input_file_ref="test.en"
+
+# # Evaluate the translation of Bavarian (standardized) into English
+# src_name="Bavarian"
+# src_lang="bar"
+# trg_name="German"
+# trg_lang="de"
+# translate_name="English"
+# translate_lang="en"
+
+# echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
+# for data_quality in naive; # naive clean informed
+# do
+#     for feature_validity in guess; # guess reason authentic
+#     do
+#         for perturbation_type in all lex mor;
+#         do
+#             input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}/${translate_name}/NLLB"
+#             input_file_inf="test.en"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_file="NLLB.txt"
+#             bash "${script_file}" \
+#                 -a "${input_path_ref}" \
+#                 -b "${input_file_ref}" \
+#                 -c "${input_path_inf}" \
+#                 -d "${input_file_inf}" \
+#                 -e "${output_path}" \
+#                 -f "${output_file}" \
+#                 -h "${metrics}" \
+#                 -i "${precision}" \
+#                 -j "${options}" 
+#         done
+#     done
+# done
+
+# # Evaluate the translation of German (dialectized) into English
+# src_name="German"
+# src_lang="de"
+# trg_name="Bavarian"
+# trg_lang="bar"
+# translate_name="English"
+# translate_lang="en"
+
+# echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
+# for data_quality in naive; # naive clean informed
+# do
+#     for feature_validity in guess; # guess reason authentic
+#     do
+#         for perturbation_type in all lex mor;
+#         do
+#             input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}/${translate_name}/NLLB"
+#             input_file_inf="test.en"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_file="NLLB.txt"
+#             bash "${script_file}" \
+#                 -a "${input_path_ref}" \
+#                 -b "${input_file_ref}" \
+#                 -c "${input_path_inf}" \
+#                 -d "${input_file_inf}" \
+#                 -e "${output_path}" \
+#                 -f "${output_file}" \
+#                 -h "${metrics}" \
+#                 -i "${precision}" \
+#                 -j "${options}" 
+#         done
+#     done
+# done
 
 
 
