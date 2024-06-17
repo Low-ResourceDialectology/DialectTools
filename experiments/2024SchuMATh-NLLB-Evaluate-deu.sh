@@ -31,26 +31,22 @@ metrics="bleu chrf ter"
 precision="4"
 options=""
 
-# # ++++++++++++++++++++++++++++++++++++++++++++
-# # Evaluate Perturbations (How close do we get to the other language variety?)
-
-# Basic differences between original Bavarian text compared to the aligned German text
-input_path_ref="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/German/English/NLLB" 
-input_file_ref="test.en"
+# ++++++++++++++++++++++++++++++++++++++++++++
+# Evaluate basic differences between original Bavarian text compared to the aligned German text
+input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/naive" 
+input_file_ref="test.de"
 
 # Evaluate the translation of Bavarian (standardized) into English
 src_name="Bavarian"
 src_lang="bar"
 trg_name="German"
 trg_lang="de"
-translate_name="English"
-translate_lang="en"
 
-echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
-input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/Bavarian/English/NLLB"
-input_file_inf="test.en"
-output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/naive"
-output_file="NLLB.txt"
+echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
+input_path_inf="/media/AllBlue/LanguageData/PREP/opustools/bar-de/naive"
+input_file_inf="test.bar"
+output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/naive/none/none"
+output_file="PERT.txt"
 bash "${script_file}" \
     -a "${input_path_ref}" \
     -b "${input_file_ref}" \
@@ -63,7 +59,8 @@ bash "${script_file}" \
     -j "${options}" 
 
 
-
+# # ++++++++++++++++++++++++++++++++++++++++++++
+# # Evaluate Perturbations (How close do we get to the other language variety?)
 
 # input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/naive" 
 # input_file_ref="test.de"
@@ -134,32 +131,32 @@ bash "${script_file}" \
 
 # ++++++++++++++++++++++++++++++++++++++++++++
 # Evaluate Translation of the original Bavarian text compared to the aligned German text
-input_path_ref="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/German/English/NLLB" 
-input_file_ref="test.en"
+# input_path_ref="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/German/English/NLLB" 
+# input_file_ref="test.en"
 
-# Evaluate the translation of Bavarian (standardized) into English
-src_name="Bavarian"
-src_lang="bar"
-trg_name="German"
-trg_lang="de"
-translate_name="English"
-translate_lang="en"
+# # Evaluate the translation of Bavarian (standardized) into English
+# src_name="Bavarian"
+# src_lang="bar"
+# trg_name="German"
+# trg_lang="de"
+# translate_name="English"
+# translate_lang="en"
 
-echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
-input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/Bavarian/English/NLLB"
-input_file_inf="test.en"
-output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/naive/none/none"
-output_file="NLLB.txt"
-bash "${script_file}" \
-    -a "${input_path_ref}" \
-    -b "${input_file_ref}" \
-    -c "${input_path_inf}" \
-    -d "${input_file_inf}" \
-    -e "${output_path}" \
-    -f "${output_file}" \
-    -h "${metrics}" \
-    -i "${precision}" \
-    -j "${options}" 
+# echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
+# input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/Bavarian/English/NLLB"
+# input_file_inf="test.en"
+# output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/naive/none/none"
+# output_file="NLLB.txt"
+# bash "${script_file}" \
+#     -a "${input_path_ref}" \
+#     -b "${input_file_ref}" \
+#     -c "${input_path_inf}" \
+#     -d "${input_file_inf}" \
+#     -e "${output_path}" \
+#     -f "${output_file}" \
+#     -h "${metrics}" \
+#     -i "${precision}" \
+#     -j "${options}" 
 
 
 # # ++++++++++++++++++++++++++++++++++++++++++++
