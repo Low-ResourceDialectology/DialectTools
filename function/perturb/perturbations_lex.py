@@ -134,25 +134,36 @@ if __name__ == "__main__":
     parser.add_argument("-t","--trg_lang", type=str, help="Language code of target language, part of file naming.") # TODO: Make optional
     parser.add_argument("-b","--trg_name", type=str, help="Language name of target language, part of file naming.") # TODO: Make optional
     parser.add_argument("-m","--data_quality", type=str, help="Level of data quality for experiment: naive, clean, informed.")
+    parser.add_argument("-e","--data_file_extension", type=str, default="noname", help="Optional file extension for more flexibility during script call.")
 
     args = parser.parse_args()
     dir_maker(args.output_dir)
 
-    if args.src_lang == "deu":
+    print(args)
+
+    if not args.data_file_extension == "noname":
+        source_language_code = args.data_file_extension 
+    elif args.src_lang == "deu":
         source_language_code = "de"
+    elif args.src_lang == "eng":
+        source_language_code = "en"
     else:
         source_language_code = args.src_lang
 
+    print(f'Source Language Code: {source_language_code}')
     replacement_rules = {}
 
     dict_files = glob.glob(f'{args.input_dir}/*-lex.json', recursive = False)
+    print(f'Dict Files: \n {dict_files}')
     for dict_file in dict_files:
+        # TODO: Change to only use one of the dictionary-files and print warning if more than 1 exists
 
         # Read perturbation rules
         rulebook = read_perturbation_rules(dict_file)
 
         # Select correct text files to perturb
         text_files = glob.glob(f'{args.data_dir}/*.{source_language_code}', recursive = False)
+        print(f'Text Files: \n {text_files}')
 
         # Read input text and perturb line by line
         for text_file in text_files:
@@ -175,7 +186,8 @@ if __name__ == "__main__":
                     
                         # Write text line to out file
                         out_file.write(f'{perturbed_line}\n')
-    print(f'Lexicographic replacements have successfully been extracted and written to: {args.output_dir}.')
+            print(f'Applied lexicographic replacements, writing to: \n{args.output_dir}/{out_text_file_name}')
+    print(f'End of script for lexicographic replacement application.')
 
     # dict_files = glob.glob(f'{args.input_dir}/*-lex.json', recursive = False)
     # for dict_file in dict_files:

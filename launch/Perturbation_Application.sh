@@ -14,17 +14,18 @@ trg_lang="" # "deu"
 trg_name="" # "German"
 mode="" # lex | mor | syn
 mode2="" # naive | clean | informed
+data_file_extension="" # "en" (due to using data previously translated into English via NLLB)
 current_dir="$(dirname "$0")"
 script_file="../function/perturb/perturbations_lex.py"
 
 # Function to print usage
 usage() {
-echo "Usage: $0 -i input_path -d data_path -o output_path -s src_lang -a src_name -t trg_lang -b trg_name -m mode -n mode2"
+echo "Usage: $0 -i input_path -d data_path -o output_path -s src_lang -a src_name -t trg_lang -b trg_name -m mode -n mode2 -e data_file_extension"
 exit 1
 }
 
 # Parse command-line options
-while getopts ":i:d:o:s:a:t:b:m:n:" opt; do
+while getopts ":i:d:o:s:a:t:b:m:n:e:" opt; do
     case $opt in
         i)
             input_path=$OPTARG
@@ -53,6 +54,9 @@ while getopts ":i:d:o:s:a:t:b:m:n:" opt; do
 		n)
             mode2=$OPTARG
             ;;
+        e)
+            data_file_extension=$OPTARG
+            ;;
         *)
             usage
             ;;
@@ -77,7 +81,8 @@ if [ $mode = "lex" ]; then
     -a "${src_name}" \
     -t "${trg_lang}" \
     -b "${trg_name}" \
-    -m "${data_quality}"
+    -m "${data_quality}" \
+    -e "${data_file_extension}"
 fi
 
 if [ $mode = "mor" ]; then
@@ -92,7 +97,8 @@ if [ $mode = "mor" ]; then
     -a "${src_name}" \
     -t "${trg_lang}" \
     -b "${trg_name}" \
-    -m "${data_quality}"
+    -m "${data_quality}" \
+    -e "${data_file_extension}"
 fi
 
 if [ $mode = "all" ]; then
@@ -108,7 +114,8 @@ if [ $mode = "all" ]; then
     -t "${trg_lang}" \
     -b "${trg_name}" \
     -m "${data_quality}" \
-    -n "${mode}"
+    -n "${mode}" \
+    -e "${data_file_extension}"
 fi
 
 # if [ $mode = "syn" ]; then
@@ -123,5 +130,7 @@ fi
 #     -a "${src_name}" \
 #     -t "${trg_lang}" \
 #     -b "${trg_name}" \
-#     -m "${data_quality}"
+#     -m "${data_quality}" \
+#     -n "${mode}" \
+#     -e "${data_file_extension}"
 # fi

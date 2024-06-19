@@ -182,18 +182,24 @@ if __name__ == "__main__":
     parser.add_argument("-b","--trg_name", type=str, help="Language name of target language, part of file naming.") # TODO: Make optional
     parser.add_argument("-m","--data_quality", type=str, help="Level of data quality for experiment: naive, clean, informed.")
     parser.add_argument("-n","--multi_perturb", type=str, default="", help="Level of data quality for experiment: naive, clean, informed.") # Optional flag for perturbing lexicographically perturbed data again, but this time morphologically
+    parser.add_argument("-e","--data_file_extension", type=str, default="noname", help="Optional file extension for more flexibility during script call.")
 
     args = parser.parse_args()
     dir_maker(args.output_dir)
 
-    if args.src_lang == "deu":
+    if not args.data_file_extension == "noname":
+        source_language_code = args.data_file_extension 
+    elif args.src_lang == "deu":
         source_language_code = "de"
+    elif args.src_lang == "eng":
+        source_language_code = "en"
     else:
         source_language_code = args.src_lang
 
     #print(args)
     dict_files = glob.glob(f'{args.input_dir}/*-mor.json', recursive = False)
     for dict_file in dict_files:
+        # TODO: Change to only use one of the dictionary-files and print warning if more than 1 exists
 
         # Read perturbation rules
         rulebook = read_perturbation_rules(dict_file)
@@ -222,5 +228,6 @@ if __name__ == "__main__":
                         #print(f'Perturbed: {perturbed_line}')
                         # Write text line to out file
                         out_file.write(f'{perturbed_line}\n')
-
-    print(f'Morphological perturbations have successfully been applied and written to: {args.output_dir}.')
+            print(f'Applied morphological replacements, writing to: \n{args.output_dir}/{out_text_file_name}')
+    print(f'End of script for morphological replacement application.')
+    #print(f'Morphological perturbations have successfully been applied and written to: {args.output_dir}.')

@@ -31,7 +31,7 @@ def main():
     input_dir = args.input_dir
     thresholds = list(map(int, args.thresholds.split(',')))
 
-    text_files = glob.glob(os.path.join(input_dir, f'{args.filename_part}*'))
+    text_files = glob.glob(os.path.join(input_dir, f'*{args.filename_part}*'))
     
     for text_file in text_files:
         num_lines, avg_length, threshold_counts = analyze_file(text_file, thresholds)
