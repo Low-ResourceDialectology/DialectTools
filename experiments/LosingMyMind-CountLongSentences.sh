@@ -2,10 +2,17 @@
 # Project: Any
 # Get information of text inside the files of a directory
 
+filename_part="bar-de"
+thresholds=100,200,300,400,500,1000
+
+input_path="/media/AllBlue/LanguageData/CLEAN/opustools/bar-de/naive/"
+python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
+
+
 # NOTE: Translating test-set-files of previously perturbed text data left me clueless as to why they all have differing number of lines now...
 
-filename_part="test"
-thresholds=1800
+# filename_part="test"
+# thresholds=2000
 
 
 # Second phase on English-Bavarian noisy data
@@ -20,8 +27,8 @@ thresholds=1800
 #   /media/AllBlue/LanguageData/CLEAN/opustools/bar-en/naive/wikimedia-bar-en-test.en
 
 # → Looking for a reasonable cut-off threshold to fix this tiny issue
-input_path="/media/AllBlue/LanguageData/PREP/opustools/bar-en/naive/"
-python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
+# input_path="/media/AllBlue/LanguageData/PREP/opustools/bar-en/naive/"
+# python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
 
 
 

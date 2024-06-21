@@ -1,7 +1,7 @@
 # Author: Christian "Doofnase" Schuler
 #######################################
 # Project: Any
-# Takes text content from files and splits it into subsets for training.
+# Takes text content from files and splits it into subsets for training (for each input file).
 #   Input: Two files with the same name, but different extension i.e. "Tatoeba-de-en.de" and "Tatoeba-de-en.en"
 #   Output: Depending on chosen "proportions", n-many output files named either according to splits or train/dev/test
 #   Idea: Optionally process only a single file with the same outcome for monolingual training approaches?

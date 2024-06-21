@@ -5,7 +5,7 @@
 # Extract text data into raw text format via OpusTools for German varieties
 
 current_dir="$(dirname "$0")"
-script_file="$current_dir/../extract/opustools.sh" 
+script_file="$current_dir/../function/extract/opustools.sh" 
 
 # Kurdish (any) - English
 input_path="/media/AllBlue/LanguageData/DOWNLOAD/opustools"

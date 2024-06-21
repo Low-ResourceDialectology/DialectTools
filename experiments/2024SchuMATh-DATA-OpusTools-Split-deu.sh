@@ -7,7 +7,7 @@
 source /media/AllBlue/LanguageData/TOOLS/vTextCleaning/bin/activate
 
 current_dir="$(dirname "$0")"
-script_file="$current_dir/../extract/split_text.py" 
+script_file="$current_dir/../function/extract/split_text.py" 
 
 # Bavarian - German
 input_path="/media/AllBlue/LanguageData/CLEAN/opustools"
@@ -15,11 +15,11 @@ output_path="/media/AllBlue/LanguageData/CLEAN/opustools"
 src_lang="bar"
 trg_lang="de"
 mode="default" # "default" = train,dev,test | "cv" = more than 3 output files named according to split-proportions
-experiment="naive" # | "clean" | "informed"
+data_quality="naive" # "naive" | "clean" | "informed"
 proportions="0.8,0.1,0.1"
 python3 "${script_file}" \
     -i "${input_path}/${src_lang}-${trg_lang}" \
-    -o "${output_path}/${src_lang}-${trg_lang}/${experiment}" \
+    -o "${output_path}/${src_lang}-${trg_lang}/${data_quality}" \
     -e "${output_extension}" \
     -s "${src_lang}" \
     -t "${trg_lang}" \
@@ -33,11 +33,11 @@ output_path="/media/AllBlue/LanguageData/CLEAN/opustools"
 src_lang="bar"
 trg_lang="en"
 mode="default" # "default" = train,dev,test | "cv" = more than 3 output files named according to split-proportions
-experiment="naive" # | "clean" | "informed"
+data_quality="naive" # | "clean" | "informed"
 proportions="0.8,0.1,0.1"
 python3 "${script_file}" \
     -i "${input_path}/${src_lang}-${trg_lang}" \
-    -o "${output_path}/${src_lang}-${trg_lang}/${experiment}" \
+    -o "${output_path}/${src_lang}-${trg_lang}/${data_quality}" \
     -e "${output_extension}" \
     -s "${src_lang}" \
     -t "${trg_lang}" \
@@ -52,11 +52,11 @@ echo "Processing the small (Bavarian-related) files already pushes the memory us
 # src_lang="de"
 # trg_lang="en"
 # mode="default" # "default" = train,dev,test | "cv" = more than 3 output files named according to split-proportions
-# experiment="naive" # | "clean" | "informed"
+# data_quality="naive" # | "clean" | "informed"
 # proportions="0.8,0.1,0.1"
 # python3 "${script_file}" \
 #     -i "${input_path}/${src_lang}-${trg_lang}" \
-#     -o "${output_path}/${src_lang}-${trg_lang}/${experiment}" \
+#     -o "${output_path}/${src_lang}-${trg_lang}/${data_quality}" \
 #     -e "${output_extension}" \
 #     -s "${src_lang}" \
 #     -t "${trg_lang}" \
