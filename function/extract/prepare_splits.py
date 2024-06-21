@@ -1,3 +1,11 @@
+# Author: Christian "Doofnase" Schuler
+#######################################
+# Project: Any
+# Takes various splits (train,dev,test) from separate files (sorted by data source (i.e. Tatoeba)) and combines them into final sets for training.
+#   Input: Two (or more) files with the same name, but different extension i.e. "Tatoeba-de-en-dev.de" and "Tatoeba-de-en-dev.en"
+#   Output: One file per split: train/dev/test
+#   Idea: Optionally process more than two aligned languages at once?
+
 import os
 import argparse
 from collections import defaultdict
@@ -85,7 +93,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(f'INFO: Provided substrings for file grouping: {args.substrings}')
     substrings = [str(item) for item in args.substrings.split(',')]
-    print(f'INFO: Prased substrings for file grouping: {substrings}')
+    print(f'INFO: Parsed substrings for file grouping: {substrings}')
     try:
         os.makedirs(args.output_dir)
     except FileExistsError:

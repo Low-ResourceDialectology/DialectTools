@@ -8,47 +8,11 @@
 input_path="/media/AllBlue/LanguageData/PERTURBS"
 data_path="/media/AllBlue/LanguageData/PREP/opustools/bar-de" # TODO: Split up and make modular for data-sources and language pairs "/media/AllBlue/LanguageData/PREP/opustools/bar-de/naive"
 output_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh"
-mode="lex" # lex | mor | syn
-mode2="naive" # naive | clean | informed
+perturbation_type="lex" # lex | mor | syn
+data_quality="clean" # naive | clean | informed
 current_dir="$(dirname "$0")"
 script_file="../launch/Perturbation_Application.sh"
 script_path="${current_dir}/${script_file}"
-
-# +++++++++++++++++++++++++++++++++++++++++++++++
-# Alemannic - GERMAN 
-# src_lang="als"
-# src_name="Alemannic"
-# trg_lang="deu"
-# trg_name="German"
-# echo "Perturbing: ${src_name} into ${trg_name}"
-
-# mode="lex"
-# bash "${script_path}" \
-#     -i "${input_path}/${src_name}/${trg_name}" \
-#     -d "${data_path}/${mode2}" \
-#     -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
-#     -s "${src_lang}" \
-#     -a "${src_name}" \
-#     -t "${trg_lang}" \
-#     -b "${trg_name}" \
-#     -m "${mode}" \
-#     -n "${mode2}"
-
-# mode="mor"
-# bash "${script_path}" \
-#     -i "${input_path}/${src_name}/${trg_name}" \
-#     -d "${data_path}/${mode2}" \
-#     -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
-#     -s "${src_lang}" \
-#     -a "${src_name}" \
-#     -t "${trg_lang}" \
-#     -b "${trg_name}" \
-#     -m "${mode}" \
-#     -n "${mode2}"
-
-# TODO
-#mode="syn"
-
 
 
 # +++++++++++++++++++++++++++++++++++++++++++++++
@@ -57,46 +21,50 @@ src_lang="bar"
 src_name="Bavarian"
 trg_lang="deu"
 trg_name="German"
+data_file_extension="noname"
 echo "Perturbing: ${src_name} into ${trg_name}"
 
-mode="lex"
+perturbation_type="lex"
 bash "${script_path}" \
     -i "${input_path}/${src_name}/${trg_name}" \
-    -d "${data_path}/${mode2}" \
-    -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+    -d "${data_path}/${data_quality}" \
+    -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${perturbation_type}" \
     -s "${src_lang}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
     -b "${trg_name}" \
-    -m "${mode}" \
-    -n "${mode2}"
+    -m "${perturbation_type}" \
+    -n "${data_quality}" \
+    -e "${data_file_extension}"
 
-mode="mor"
+perturbation_type="mor"
 bash "${script_path}" \
     -i "${input_path}/${src_name}/${trg_name}" \
-    -d "${data_path}/${mode2}" \
-    -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+    -d "${data_path}/${data_quality}" \
+    -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${perturbation_type}" \
     -s "${src_lang}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
     -b "${trg_name}" \
-    -m "${mode}" \
-    -n "${mode2}"
+    -m "${perturbation_type}" \
+    -n "${data_quality}" \
+    -e "${data_file_extension}"
 
-mode="all" # Again morphological, but on the results from the lexicographic perturbation process 
+perturbation_type="all" # Again morphological, but on the results from the lexicographic perturbation process 
 bash "${script_path}" \
     -i "${input_path}/${src_name}/${trg_name}" \
-    -d "${output_path}/${src_name}/${mode2}/${trg_name}/lex" \
-    -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+    -d "${output_path}/${src_name}/${data_quality}/${trg_name}/lex" \
+    -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${perturbation_type}" \
     -s "${src_lang}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
     -b "${trg_name}" \
-    -m "${mode}" \
-    -n "${mode2}"
+    -m "${perturbation_type}" \
+    -n "${data_quality}" \
+    -e "${data_file_extension}"
 
 # TODO
-#mode="syn"
+#perturbation_type="syn"
 
 
 
@@ -108,41 +76,84 @@ bash "${script_path}" \
 # trg_name="Bavarian"
 # echo "Perturbing: ${src_name} into ${trg_name}"
 
-# mode="lex"
+# perturbation_type="lex"
 # bash "${script_path}" \
 #     -i "${input_path}/${src_name}/${trg_name}" \
-#     -d "${data_path}/${mode2}" \
-#     -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+#     -d "${data_path}/${data_quality}" \
+#     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${perturbation_type}" \
 #     -s "${src_lang}" \
 #     -a "${src_name}" \
 #     -t "${trg_lang}" \
 #     -b "${trg_name}" \
-#     -m "${mode}" \
-#     -n "${mode2}"
+#     -m "${perturbation_type}" \
+#     -n "${data_quality}" \
+#     -e "${data_file_extension}"
 
-# mode="mor"
+# perturbation_type="mor"
 # bash "${script_path}" \
 #     -i "${input_path}/${src_name}/${trg_name}" \
-#     -d "${data_path}/${mode2}" \
-#     -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+#     -d "${data_path}/${data_quality}" \
+#     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${perturbation_type}" \
 #     -s "${src_lang}" \
 #     -a "${src_name}" \
 #     -t "${trg_lang}" \
 #     -b "${trg_name}" \
-#     -m "${mode}" \
-#     -n "${mode2}"
+#     -m "${perturbation_type}" \
+#     -n "${data_quality}" \
+#     -e "${data_file_extension}"
 
-# mode="all" # Again morphological, but on the results from the lexicographic perturbation process 
+# perturbation_type="all" # Again morphological, but on the results from the lexicographic perturbation process 
 # bash "${script_path}" \
 #     -i "${input_path}/${src_name}/${trg_name}" \
-#     -d "${output_path}/${src_name}/${mode2}/${trg_name}/lex" \
-#     -o "${output_path}/${src_name}/${mode2}/${trg_name}/${mode}" \
+#     -d "${output_path}/${src_name}/${data_quality}/${trg_name}/lex" \
+#     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${perturbation_type}" \
 #     -s "${src_lang}" \
 #     -a "${src_name}" \
 #     -t "${trg_lang}" \
 #     -b "${trg_name}" \
-#     -m "${mode}" \
-#     -n "${mode2}"
+#     -m "${perturbation_type}" \
+#     -n "${data_quality}" \
+#     -e "${data_file_extension}"
 
 # TODO
-#mode="syn"
+#perturbation_type="syn"
+
+
+
+
+
+# TODO
+# +++++++++++++++++++++++++++++++++++++++++++++++
+# Alemannic - GERMAN 
+# src_lang="als"
+# src_name="Alemannic"
+# trg_lang="deu"
+# trg_name="German"
+# echo "Perturbing: ${src_name} into ${trg_name}"
+
+# perturbation_type="lex"
+# bash "${script_path}" \
+#     -i "${input_path}/${src_name}/${trg_name}" \
+#     -d "${data_path}/${data_quality}" \
+#     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${perturbation_type}" \
+#     -s "${src_lang}" \
+#     -a "${src_name}" \
+#     -t "${trg_lang}" \
+#     -b "${trg_name}" \
+#     -m "${perturbation_type}" \
+#     -n "${data_quality}"
+
+# perturbation_type="mor"
+# bash "${script_path}" \
+#     -i "${input_path}/${src_name}/${trg_name}" \
+#     -d "${data_path}/${data_quality}" \
+#     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${perturbation_type}" \
+#     -s "${src_lang}" \
+#     -a "${src_name}" \
+#     -t "${trg_lang}" \
+#     -b "${trg_name}" \
+#     -m "${perturbation_type}" \
+#     -n "${data_quality}"
+
+# TODO
+#perturbation_type="syn"

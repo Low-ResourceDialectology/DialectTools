@@ -2,12 +2,31 @@
 # Project: Any
 # Get information of text inside the files of a directory
 
-filename_part="bar-de"
-thresholds=100,200,300,400,500,1000
 
-input_path="/media/AllBlue/LanguageData/CLEAN/opustools/bar-de/naive/"
+
+# ---
+
+filename_part="bar"
+thresholds=100,200,300,400
+
+input_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/all"
 python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
 
+
+
+# ---
+
+# NOTE: Reasoning for the right threshold to truncate sentences on → Result: 200
+# filename_part="bar-de"
+# thresholds=100,200,300,400,500,1000
+
+# input_path="/media/AllBlue/LanguageData/CLEAN/opustools/bar-de/naive/"
+# python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
+
+
+
+
+# ---
 
 # NOTE: Translating test-set-files of previously perturbed text data left me clueless as to why they all have differing number of lines now...
 
@@ -30,7 +49,7 @@ python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part
 # input_path="/media/AllBlue/LanguageData/PREP/opustools/bar-en/naive/"
 # python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
 
-
+# ---
 
 # Very first Phase using German-Bavarian noisy data
 # echo "ORIGINAL FILES (opustools)"
