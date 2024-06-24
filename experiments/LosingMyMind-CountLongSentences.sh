@@ -5,12 +5,23 @@
 
 
 # ---
+# Checking data quantities
+filename_part="bar-de"
+thresholds=100,200,300,400,500,1000
 
-filename_part="bar"
-thresholds=100,200,300,400
-
-input_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/all"
+input_path="/media/AllBlue/LanguageData/CLEAN/opustools/bar-de/clean"
 python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
+
+
+
+
+# ---
+
+# filename_part="bar"
+# thresholds=100,200,300,400
+
+# input_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/all"
+# python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
 
 
 
