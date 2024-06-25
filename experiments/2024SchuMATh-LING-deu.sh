@@ -7,11 +7,12 @@
 # Initialize variables and default values
 input_path="/media/AllBlue/LanguageData/DICT"
 output_path="/media/AllBlue/LanguageData/FEATURES"
-mode="lex" # lex | mor | syn
+perturbation_type="lex" # lex | mor | syn
+extraction_method="direct" # direct | ?? something heuristic based ??
+context_length="1" # 1 | 2 | 3 # NOTE: Currently only used in mor not in lex
 current_dir="$(dirname "$0")"
 script_file="../launch/Linguistic_Features.sh"
 script_path="${current_dir}/${script_file}"
-
 
 # +++++++++++++++++++++++++++++++++++++++++++++++
 # Alemannic - GERMAN 
@@ -21,7 +22,7 @@ script_path="${current_dir}/${script_file}"
 # trg_name="German"
 # echo "Processing: ${src_name} and ${trg_name}"
 
-# mode="lex"
+# perturbation_type="lex"
 # bash "${script_path}" \
 #     -i "${input_path}" \
 #     -o "${output_path}" \
@@ -29,9 +30,11 @@ script_path="${current_dir}/${script_file}"
 #     -a "${src_name}" \
 #     -t "${trg_lang}" \
 #     -b "${trg_name}" \
-#     -m "${mode}"
+#     -m "${perturbation_type}" \
+#     -e "${extraction_method}" \
+#     -c "${context_length}"
 
-# mode="mor"
+# perturbation_type="mor"
 # bash "${script_path}" \
 #     -i "${input_path}" \
 #     -o "${output_path}" \
@@ -39,10 +42,12 @@ script_path="${current_dir}/${script_file}"
 #     -a "${src_name}" \
 #     -t "${trg_lang}" \
 #     -b "${trg_name}" \
-#     -m "${mode}"
+#     -m "${perturbation_type}" \
+#     -e "${extraction_method}" \
+#     -c "${context_length}"
 
 # TODO
-#mode="syn"
+#perturbation_type="syn"
 
 
 # +++++++++++++++++++++++++++++++++++++++++++++++
@@ -53,7 +58,7 @@ trg_lang="deu"
 trg_name="German"
 echo "Processing: ${src_name} and ${trg_name}"
 
-mode="lex"
+perturbation_type="lex"
 bash "${script_path}" \
     -i "${input_path}" \
     -o "${output_path}" \
@@ -61,9 +66,11 @@ bash "${script_path}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
     -b "${trg_name}" \
-    -m "${mode}"
+    -m "${perturbation_type}" \
+    -e "${extraction_method}" \
+    -c "${context_length}"
 
-mode="mor"
+perturbation_type="mor"
 bash "${script_path}" \
     -i "${input_path}" \
     -o "${output_path}" \
@@ -71,8 +78,10 @@ bash "${script_path}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
     -b "${trg_name}" \
-    -m "${mode}"
+    -m "${perturbation_type}" \
+    -e "${extraction_method}" \
+    -c "${context_length}"
 
 # TODO
-#mode="syn"
+#perturbation_type="syn"
 

@@ -7,23 +7,24 @@
 # Initialize variables and default values
 input_path="/media/AllBlue/LanguageData/FEATURES"
 output_path="/media/AllBlue/LanguageData/PERTURBS"
-src_lang="als"
-src_name="Alemannic"
-trg_lang="deu"
-trg_name="German"
-mode="" # lex | mor | syn
-mode2="" # "RightToLeft" | "LeftToRight"
+src_lang="" # "als"
+src_name="" # "Alemannic"
+trg_lang="" # "deu"
+trg_name="" # "German"
+perturbation_type="" # lex | mor | syn
+feature_validity="" # guess | rreason | authentic
+dict_direction="" # "RightToLeft" | "LeftToRight"
 current_dir="$(dirname "$0")"
 script_file="../function/extract/perturbations_lex.sh"
 
 # Function to print usage
 usage() {
-echo "Usage: $0 -i input_path -o output_path -s src_lang -a src_name -b trg_name -t trg_lang -m mode -n mode2"
+echo "Usage: $0 -i input_path -o output_path -s src_lang -a src_name -b trg_name -t trg_lang -m perturbation_type -n dict_direction -f feature_validity"
 exit 1
 }
 
 # Parse command-line options
-while getopts ":i:o:s:a:b:t:m:n:" opt; do
+while getopts ":i:o:s:a:b:t:m:n:f:" opt; do
     case $opt in
         i)
             input_path=$OPTARG
@@ -44,10 +45,13 @@ while getopts ":i:o:s:a:b:t:m:n:" opt; do
             trg_name=$OPTARG
             ;;
 		m)
-            mode=$OPTARG
+            perturbation_type=$OPTARG
             ;;
         n)
-            mode2=$OPTARG
+            dict_direction=$OPTARG
+            ;;
+        f)
+            feature_validity=$OPTARG
             ;;
         *)
             usage
@@ -56,78 +60,83 @@ while getopts ":i:o:s:a:b:t:m:n:" opt; do
 done
 
 # Check if all required arguments are provided
-if [ -z "$input_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ] || [ -z "$mode" ] || [ -z "$mode2" ] ; then
+if [ -z "$input_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ] || [ -z "$perturbation_type" ] || [ -z "$dict_direction" ] || [ -z "$feature_validity" ] ; then
     usage
 fi
 
-if [ $mode2 = "LeftToRight" ]; then
-    if [ $mode = "lex" ]; then
+if [ $dict_direction = "LeftToRight" ]; then
+    if [ $perturbation_type = "lex" ]; then
         script_file="../function/extract/perturbations_lex.sh"
         script_path="${current_dir}/${script_file}"
         echo "Lexicographic replacements for: ${src_name} and ${trg_name}"
         bash "${script_path}" \
         -i "${input_path}/${src_name}" \
-        -o "${output_path}/${src_name}/${trg_name}" \
+        -o "${output_path}/${src_name}/${trg_name}/${feature_validity}" \
         -s "${src_lang}" \
         -a "${src_name}" \
         -t "${trg_lang}" \
         -b "${trg_name}" \
-        -m "${mode2}"
+        -m "${dict_direction}" \
+        -f "${feature_validity}"
     fi
-    if [ $mode = "mor" ]; then
+    if [ $perturbation_type = "mor" ]; then
         script_file="../function/extract/perturbations_mor.sh"
         script_path="${current_dir}/${script_file}"
         echo "Morphological replacements for: ${src_name} and ${trg_name}"
         bash "${script_path}" \
         -i "${input_path}/${src_name}/frequencies" \
-        -o "${output_path}/${src_name}/${trg_name}" \
+        -o "${output_path}/${src_name}/${trg_name}/${feature_validity}" \
         -s "${src_lang}" \
         -a "${src_name}" \
         -t "${trg_lang}" \
         -b "${trg_name}" \
-        -m "${mode2}"
+        -m "${dict_direction}" \
+        -f "${feature_validity}"
     fi
 fi
 
- if [ $mode2 = "RightToLeft" ]; then
-    if [ $mode = "lex" ]; then
+ if [ $dict_direction = "RightToLeft" ]; then
+    if [ $perturbation_type = "lex" ]; then
         script_file="../function/extract/perturbations_lex.sh"
         script_path="${current_dir}/${script_file}"
         echo "Lexicographic replacements for: ${src_name} and ${trg_name}"
         bash "${script_path}" \
         -i "${input_path}/${trg_name}" \
-        -o "${output_path}/${src_name}/${trg_name}" \
+        -o "${output_path}/${src_name}/${trg_name}/${feature_validity}" \
         -s "${src_lang}" \
         -a "${src_name}" \
         -t "${trg_lang}" \
         -b "${trg_name}" \
-        -m "${mode2}"
+        -m "${dict_direction}" \
+        -f "${feature_validity}"
         fi
-    if [ $mode = "mor" ]; then
+    if [ $perturbation_type = "mor" ]; then
         script_file="../function/extract/perturbations_mor.sh"
         script_path="${current_dir}/${script_file}"
         echo "Morphological replacements for: ${src_name} and ${trg_name}"
         bash "${script_path}" \
         -i "${input_path}/${trg_name}/frequencies" \
-        -o "${output_path}/${src_name}/${trg_name}" \
+        -o "${output_path}/${src_name}/${trg_name}/${feature_validity}" \
         -s "${src_lang}" \
         -a "${src_name}" \
         -t "${trg_lang}" \
         -b "${trg_name}" \
-        -m "${mode2}"
+        -m "${dict_direction}" \
+        -f "${feature_validity}"
     fi
 fi
 
-# if [ $mode = "syn" ]; then
+# if [ $perturbation_type = "syn" ]; then
 #     script_file="../function/extract/perturbations_syn.sh"
 #     script_path="${current_dir}/${script_file}"
 #     echo "Syntactical replacements for: ${src_name} and ${trg_name}"
 #     bash "${script_path}" \
 #     -i "${input_path}/${src_name}" \
-#     -o "${output_path}/${src_name}/${trg_name}" \
+#     -o "${output_path}/${src_name}/${trg_name}/${feature_validity}" \
 #     -s "${src_lang}" \
 #     -a "${src_name}" \
 #     -t "${trg_lang}" \
 #     -b "${trg_name}" \
-#     -m "${mode2}"
+#     -m "${dict_direction}" \
+        -f "${feature_validity}"
 # fi

@@ -11,18 +11,20 @@ src_lang="" # "als"
 src_name="" # "Alemannic"
 trg_lang="" # "deu"
 trg_name="" # "German"
-mode="" # lex | mor | syn
+perturbation_type="" # lex | mor | syn
+extraction_method="direct" # direct | ?? something heuristic based ??
+context_length="" # 1 | 2 | 3 # NOTE: Currently only used for morphemes, not for lex
 current_dir="$(dirname "$0")"
 script_file="../function/extract/features_lex.sh"
 
 # Function to print usage
 usage() {
-echo "Usage: $0 -i input_path -o output_path -s src_lang -a src_name -b trg_name -t trg_lang -m mode"
+echo "Usage: $0 -i input_path -o output_path -s src_lang -a src_name -b trg_name -t trg_lang -m perturbation_type -e extraction_method -c context_length"
 exit 1
 }
 
 # Parse command-line options
-while getopts ":i:o:s:a:b:t:m:" opt; do
+while getopts ":i:o:s:a:b:t:m:e:c:" opt; do
     case $opt in
         i)
             input_path=$OPTARG
@@ -43,7 +45,13 @@ while getopts ":i:o:s:a:b:t:m:" opt; do
             trg_name=$OPTARG
             ;;
 		m)
-            mode=$OPTARG
+            perturbation_type=$OPTARG
+            ;;
+        e)
+            extraction_method=$OPTARG
+            ;;
+        c)
+            context_length=$OPTARG
             ;;
         *)
             usage
@@ -52,44 +60,45 @@ while getopts ":i:o:s:a:b:t:m:" opt; do
 done
 
 # Check if all required arguments are provided
-if [ -z "$input_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ]  || [ -z "$mode" ] ; then
+if [ -z "$input_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ]  || [ -z "$perturbation_type" ] || [ -z "$extraction_method" ] || [ -z "$context_length" ]; then
     usage
 fi
 
 
-if [ $mode = "lex" ]; then
+if [ $perturbation_type = "lex" ]; then
     script_file="../function/extract/features_lex.sh"
     script_path="${current_dir}/${script_file}"
     echo "Lexicographic features for: ${src_name} and ${trg_name}"
     bash "${script_path}" \
     -i "${input_path}/${src_name}" \
-    -o "${output_path}/${src_name}" \
+    -o "${output_path}/${src_name}/${extraction_method}" \
     -s "${src_lang}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
     -b "${trg_name}"
 fi
 
-if [ $mode = "mor" ]; then
+if [ $perturbation_type = "mor" ]; then
     script_file="../function/extract/features_mor.sh"
     script_path="${current_dir}/${script_file}"
     echo "Morphological features for: ${src_name} and ${trg_name}"
     bash "${script_path}" \
     -i "${input_path}/${src_name}" \
-    -o "${output_path}/${src_name}" \
+    -o "${output_path}/${src_name}/${extraction_method}" \
     -s "${src_lang}" \
     -a "${src_name}" \
     -t "${trg_lang}" \
-    -b "${trg_name}"
+    -b "${trg_name}" \
+    -c "${context_length}"
 fi
 
-# if [ $mode = "syn" ]; then
+# if [ $perturbation_type = "syn" ]; then
 #     script_file="../function/extract/features_syn.sh"
 #     script_path="${current_dir}/${script_file}"
 #     echo "Syntactical features for: ${src_name} and ${trg_name}"
 #     bash "${script_path}" \
 #     -i "${input_path}/${src_name}" \
-#     -o "${output_path}/${src_name}" \
+#     -o "${output_path}/${src_name}/${extraction_method}" \
 #     -s "${src_lang}" \
 #     -a "${src_name}" \
 #     -t "${trg_lang}" \

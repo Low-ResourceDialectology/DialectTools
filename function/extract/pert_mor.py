@@ -80,7 +80,8 @@ if __name__ == "__main__":
     parser.add_argument("-a","--src_name", type=str, help="Language name of source language, part of file naming.")
     parser.add_argument("-t","--trg_lang", type=str, help="Language code of target language, part of file naming.") # TODO: Make optional
     parser.add_argument("-b","--trg_name", type=str, help="Language name of target language, part of file naming.") # TODO: Make optional
-    parser.add_argument("-m","--mode", type=str, help="Switch the order in which the linguistic features are read.")
+    parser.add_argument("-m","--dict_direction", type=str, help="Switch the order in which the linguistic features are read.")
+    parser.add_argument("-f","--feature_validity", type=str, help="Quality level of features to extract.")
 
     args = parser.parse_args()
     dir_maker(args.output_dir)
@@ -97,7 +98,7 @@ if __name__ == "__main__":
         # Inside the initial word lists, the dialect word was on position 0, while the standard word was on position 1
         # To process these such that the dialect side is the "source" side, use "LeftToRight"
         # For processing such that the standard side is the "source" side, use "RightToLeft" instead.
-        if args.mode == "LeftToRight":
+        if args.dict_direction == "LeftToRight":
             # "a-u": 301,
             # "ie-y": 291,
             # "a-o": 284,
@@ -139,7 +140,7 @@ if __name__ == "__main__":
                             global_replacements[src][trg] = global_replacements[src][trg] + freq
                             #print(f'INFO: Duplicate rule {src} - {trg} adding the value {freq} to {global_replacements[src][trg]}')
         
-        elif args.mode == "RightToLeft":
+        elif args.dict_direction == "RightToLeft":
             for pair, freq in data.items():
                 if len(pair.split('-')[0]) > 0:
                     trg = pair.split('-')[0]

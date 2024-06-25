@@ -11,12 +11,13 @@ src_lang="" #"als"
 src_name="" #"Alemannic"
 trg_lang="" #"deu"
 trg_name="" #"German"
+context_length="" # 1 | 2 | 3
 current_dir="$(dirname "$0")"
 script_file="features_mor.py"
 
 # Function to print usage
 usage() {
-echo "Usage: $0 -i input_path -o output_path -s src_lang -a srg_name -b trg_name -t trg_lang -c script_file"
+echo "Usage: $0 -i input_path -o output_path -s src_lang -a srg_name -b trg_name -t trg_lang -c context_length"
 exit 1
 }
 
@@ -42,7 +43,7 @@ while getopts ":i:o:s:a:t:b:c:" opt; do
             trg_name=$OPTARG
             ;;
 		c)
-	        script_file=$OPTARG
+	        context_length=$OPTARG
 	        ;;
         *)
             usage
@@ -64,4 +65,5 @@ python3 "${script_path}" \
     --src_lang "${src_lang}" \
     --src_name "${src_name}" \
     --trg_lang "${trg_lang}" \
-    --trg_name "${trg_name}"
+    --trg_name "${trg_name}" \
+    --context_length "${context_length}"

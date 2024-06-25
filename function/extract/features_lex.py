@@ -31,7 +31,7 @@ def normalize_text(text):
     return unicodedata.normalize('NFKD', text)
 
 
-# Read perturbation rules
+# Read linguistic features (aligned across language pair)
 def read_bidict(dict_file):
     """ Read bidict from single file and keep alternative pairs for each entry (key) """
     bidict = {}
