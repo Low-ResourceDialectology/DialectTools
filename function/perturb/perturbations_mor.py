@@ -196,10 +196,32 @@ if __name__ == "__main__":
     else:
         source_language_code = args.src_lang
 
+    # Processing rules with a context length of 0
+    dict_file = f'{args.input_dir}/*-infixes_0.json'
+    rulebook_infixes = read_perturbation_rules(dict_file)
+    dict_file = f'{args.input_dir}/*-prefixes_0.json'
+    rulebook_prefixes = read_perturbation_rules(dict_file)
+    dict_file = f'{args.input_dir}/*-suffixes_0.json'
+    rulebook_suffixes = read_perturbation_rules(dict_file)
+
+
+
+    # Processing rules with a context length of 1
+    dict_file = f'{args.input_dir}/*-infixes_1.json'
+    rulebook_infixes = read_perturbation_rules(dict_file)
+    dict_file = f'{args.input_dir}/*-prefixes_1.json'
+    rulebook_prefixes = read_perturbation_rules(dict_file)
+    dict_file = f'{args.input_dir}/*-suffixes_1.json'
+    rulebook_suffixes = read_perturbation_rules(dict_file)
+
+    # TODO: Make more modular and flexible/dynamic
     #print(args)
-    dict_files = glob.glob(f'{args.input_dir}/*-mor.json', recursive = False)
+    dict_files = glob.glob(f'{args.input_dir}/*.json', recursive = False)
     for dict_file in dict_files:
         # TODO: Change to only use one of the dictionary-files and print warning if more than 1 exists
+        
+        # os.path.basename(dict_file).split('.')[0] # 2023ArteDial-infixes_0
+        #context_length = os.path.basename(dict_file).split('.')[0].split('_')[1] # NOTE: Some files don't have an _
 
         # Read perturbation rules
         rulebook = read_perturbation_rules(dict_file)

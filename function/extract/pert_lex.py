@@ -66,6 +66,7 @@ if __name__ == "__main__":
     parser.add_argument("-b","--trg_name", type=str, help="Language name of target language, part of file naming.") # TODO: Make optional
     parser.add_argument("-m","--dict_direction", type=str, help="Switch the order in which the linguistic features are read.")
     parser.add_argument("-f","--feature_validity", type=str, help="Quality level of features to extract.")
+    parser.add_argument("-e","--extraction_method", type=str, help="Method of how features were previously processed.")
 
 
 

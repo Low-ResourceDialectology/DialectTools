@@ -13,17 +13,20 @@ trg_lang="" # "deu"
 trg_name="" # "German"
 dict_direction="" # "RightToLeft" | "LeftToRight"
 feature_validity="" # guess | reason | authentic
+extraction_method="" # direct | ?? something heuristic based ??
+unit_frequency="" # 5
+unit_length="" # 5
 current_dir="$(dirname "$0")"
 script_file="pert_mor.py"
 
 # Function to print usage
 usage() {
-echo "Usage: $0 -i input_path -o output_path -s src_lang -a srg_name -b trg_name -t trg_lang -c script_file -m dict_direction -f feature_validity"
+echo "Usage: $0 -i input_path -o output_path -s src_lang -a srg_name -b trg_name -t trg_lang -c script_file -m dict_direction -f feature_validity -e extraction_method -n unit_frequency -l unit_length"
 exit 1
 }
 
 # Parse command-line options
-while getopts ":i:o:s:a:t:b:c:m:f:" opt; do
+while getopts ":i:o:s:a:t:b:c:m:f:e:n:l:" opt; do
     case $opt in
         i)
             input_path=$OPTARG
@@ -52,6 +55,15 @@ while getopts ":i:o:s:a:t:b:c:m:f:" opt; do
         f)
 	        feature_validity=$OPTARG
 	        ;;
+        e)
+            extraction_method=$OPTARG
+            ;;
+        n)
+            unit_frequency=$OPTARG
+            ;;
+        l)
+            unit_length=$OPTARG
+            ;;
         *)
             usage
             ;;
@@ -59,7 +71,7 @@ while getopts ":i:o:s:a:t:b:c:m:f:" opt; do
 done
 
 # Check if all required arguments are provided
-if [ -z "$input_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ] || [ -z "$script_file" ] || [ -z "$dict_direction" ] || [ -z "$feature_validity" ]; then
+if [ -z "$input_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ] || [ -z "$script_file" ] || [ -z "$dict_direction" ] || [ -z "$feature_validity" ] || [ -z "$extraction_method" ] || [ -z "$unit_frequency" ] || [ -z "$unit_length" ] ; then
     usage
 fi
 
@@ -74,4 +86,8 @@ python3 "${script_path}" \
     --trg_lang "${trg_lang}" \
     --trg_name "${trg_name}" \
     --dict_direction "${dict_direction}" \
-    --feature_validity "${feature_validity}"
+    --feature_validity "${feature_validity}" \
+    --extraction_method "${extraction_method}" \
+    --unit_frequency "${unit_frequency}" \
+    --unit_length "${unit_length}"
+    

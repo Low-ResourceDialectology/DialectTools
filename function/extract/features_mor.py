@@ -248,21 +248,21 @@ if __name__ == "__main__":
 
         # Save dictionaries to file without sorting to better track the processes
         json_object = json.dumps(infix_freq, indent=4, ensure_ascii=False)
-        with open(f'{args.output_dir}/frequencies/{output_filename}-infixes.json', "w") as outfile:
+        with open(f'{args.output_dir}/frequencies/{output_filename}-infixes_0.json', "w") as outfile:
             outfile.write(json_object)
         json_object = json.dumps(infix_freq_context, indent=4, ensure_ascii=False)
         with open(f'{args.output_dir}/frequencies/{output_filename}-infixes_{context_length_str}.json', "w") as outfile:
             outfile.write(json_object)
             
         json_object = json.dumps(prefix_freq, indent=4, ensure_ascii=False)
-        with open(f'{args.output_dir}/frequencies/{output_filename}-prefixes.json', "w") as outfile:
+        with open(f'{args.output_dir}/frequencies/{output_filename}-prefixes_0.json', "w") as outfile:
             outfile.write(json_object)
         json_object = json.dumps(prefix_freq_context, indent=4, ensure_ascii=False)
         with open(f'{args.output_dir}/frequencies/{output_filename}-prefixes_{context_length_str}.json', "w") as outfile:
             outfile.write(json_object)
 
         json_object = json.dumps(suffix_freq, indent=4, ensure_ascii=False)
-        with open(f'{args.output_dir}/frequencies/{output_filename}-suffixes.json', "w") as outfile:
+        with open(f'{args.output_dir}/frequencies/{output_filename}-suffixes_0.json', "w") as outfile:
             outfile.write(json_object)
         json_object = json.dumps(suffix_freq_context, indent=4, ensure_ascii=False)
         with open(f'{args.output_dir}/frequencies/{output_filename}-suffixes_{context_length_str}.json', "w") as outfile:

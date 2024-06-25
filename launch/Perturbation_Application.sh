@@ -12,15 +12,15 @@ src_lang="" # "als"
 src_name="" # "Alemannic"
 trg_lang="" # "deu"
 trg_name="" # "German"
-mode="" # lex | mor | syn
-mode2="" # naive | clean | informed
+perturbation_type="" # lex | mor | syn
+data_quality="" # naive | clean | informed
 data_file_extension="" # "en" (due to using data previously translated into English via NLLB)
 current_dir="$(dirname "$0")"
 script_file="../function/perturb/perturbations_lex.py"
 
 # Function to print usage
 usage() {
-echo "Usage: $0 -i input_path -d data_path -o output_path -s src_lang -a src_name -t trg_lang -b trg_name -m mode -n mode2 -e data_file_extension"
+echo "Usage: $0 -i input_path -d data_path -o output_path -s src_lang -a src_name -t trg_lang -b trg_name -m perturbation_type -n data_quality -e data_file_extension"
 exit 1
 }
 
@@ -49,10 +49,10 @@ while getopts ":i:d:o:s:a:t:b:m:n:e:" opt; do
             trg_name=$OPTARG
             ;;
 		m)
-            mode=$OPTARG
+            perturbation_type=$OPTARG
             ;;
 		n)
-            mode2=$OPTARG
+            data_quality=$OPTARG
             ;;
         e)
             data_file_extension=$OPTARG
@@ -64,12 +64,12 @@ while getopts ":i:d:o:s:a:t:b:m:n:e:" opt; do
 done
 
 # Check if all required arguments are provided
-if [ -z "$input_path" ] || [ -z "$data_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ]  || [ -z "$mode" ] || [ -z "$mode2" ] ; then
+if [ -z "$input_path" ] || [ -z "$data_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ]  || [ -z "$perturbation_type" ] || [ -z "$data_quality" ] ; then
     usage
 fi
 
 
-if [ $mode = "lex" ]; then
+if [ $perturbation_type = "lex" ]; then
     script_file="../function/perturb/perturbations_lex.py"
     script_path="${current_dir}/${script_file}"
     echo "Lexicographic perturbation for: ${src_name} and ${trg_name}"
@@ -85,7 +85,7 @@ if [ $mode = "lex" ]; then
     -e "${data_file_extension}"
 fi
 
-if [ $mode = "mor" ]; then
+if [ $perturbation_type = "mor" ]; then
     script_file="../function/perturb/perturbations_mor.py"
     script_path="${current_dir}/${script_file}"
     echo "Morphological perturbation for: ${src_name} and ${trg_name}"
@@ -101,7 +101,7 @@ if [ $mode = "mor" ]; then
     -e "${data_file_extension}"
 fi
 
-if [ $mode = "all" ]; then
+if [ $perturbation_type = "all" ]; then
     script_file="../function/perturb/perturbations_mor.py"
     script_path="${current_dir}/${script_file}"
     echo "Lexicographical and Morphological perturbation for: ${src_name} and ${trg_name}"
@@ -114,11 +114,11 @@ if [ $mode = "all" ]; then
     -t "${trg_lang}" \
     -b "${trg_name}" \
     -m "${data_quality}" \
-    -n "${mode}" \
+    -n "${perturbation_type}" \
     -e "${data_file_extension}"
 fi
 
-# if [ $mode = "syn" ]; then
+# if [ $perturbation_type = "syn" ]; then
 #     script_file="../function/perturb/perturbations_syn.py"
 #     script_path="${current_dir}/${script_file}"
 #     echo "Syntactical perturbation for: ${src_name} and ${trg_name}"
@@ -131,6 +131,6 @@ fi
 #     -t "${trg_lang}" \
 #     -b "${trg_name}" \
 #     -m "${data_quality}" \
-#     -n "${mode}" \
+#     -n "${perturbation_type}" \
 #     -e "${data_file_extension}"
 # fi
