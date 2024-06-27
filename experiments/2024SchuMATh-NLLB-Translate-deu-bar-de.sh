@@ -13,7 +13,223 @@ author_id="facebook"
 model_id="nllb-200-3.3B"
 model_name="3.3B"
 
+experiment="Baseline-Preprocess-Postprocess"
 
+for data_set in test dev train ; do
+    input_file="${data_set}"
+    output_file="${data_set}"
+
+    for data_quality in clean naive ; do
+
+        # # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        # # REFERENCE data (Original Bavarian and German text each into English)
+
+        # # Translate Bavarian text to English
+        # src_name="Bavarian"
+        # src_lang="bar"
+
+        # trg_name="German"
+        # trg_lang="de"
+        # input_code="deu_Latn"
+
+        # translate_name="English"
+        # translate_lang="en"
+        # output_code="eng_Latn"
+
+        # input_path="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
+        # output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_lang}-${trg_lang}/${data_quality}/reference/${src_name}/${translate_name}/NLLB"
+
+        # echo "Translating ${input_file} via ${model_id} from ${src_lang} to ${translate_lang}"; 
+        # bash "${script_file}" \
+        #     -a ${input_path} \
+        #     -b ${input_file} \
+        #     -c ${src_lang} \
+        #     -d ${input_code} \
+        #     -e ${output_path} \
+        #     -f ${output_file} \
+        #     -g ${trg_lang} \
+        #     -h ${output_code} \
+        #     -i ${experiment} \
+        #     -j ${author_id} \
+        #     -k ${model_id} \
+        #     -l ${model_name}
+
+        # # Translate German text to English
+        # src_name="Bavarian"
+        # src_lang="bar"
+
+        # trg_name="German"
+        # trg_lang="de"
+        # input_code="deu_Latn"
+
+        # translate_name="English"
+        # translate_lang="en"
+        # output_code="eng_Latn"
+
+        # input_path="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
+        # output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_lang}-${trg_lang}/${data_quality}/reference/${trg_name}/${translate_name}/NLLB"
+
+        # echo "Translating ${input_file} via ${model_id} from ${trg_lang} to ${translate_lang}"; 
+        # bash "${script_file}" \
+        #     -a ${input_path} \
+        #     -b ${input_file} \
+        #     -c ${trg_lang} \
+        #     -d ${input_code} \
+        #     -e ${output_path} \
+        #     -f ${output_file} \
+        #     -g ${trg_lang} \
+        #     -h ${output_code} \
+        #     -i ${experiment} \
+        #     -j ${author_id} \
+        #     -k ${model_id} \
+        #     -l ${model_name}
+
+        for feature_validity in reason guess ; do
+            # ++++++++++++++++++++++++++++++++++++++++++
+            # Actual "Phase data" for different combinations of "data_quality" and "feature_validity"
+
+            #data_quality="clean" # "naive" | "clean" | "informed"
+            experiment="baseline" # "preprocessing" | "postprocessing"
+
+            for perturbation_type in lex mor all ; do
+                # Translate Bavarian text to English
+                src_name="Bavarian"
+                src_lang="bar"
+
+                trg_name="German"
+                trg_lang="de"
+                input_code="deu_Latn"
+
+                translate_name="English"
+                translate_lang="en"
+                output_code="eng_Latn"
+                input_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}"
+                output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}/${translate_name}/NLLB"
+
+                echo "Translating ${input_file} via ${model_id} from ${src_name} to ${translate_name}"; 
+                bash "${script_file}" \
+                    -a ${input_path} \
+                    -b ${input_file} \
+                    -c ${src_lang} \
+                    -d ${input_code} \
+                    -e ${output_path} \
+                    -f ${output_file} \
+                    -g ${translate_lang} \
+                    -h ${output_code} \
+                    -i ${experiment} \
+                    -j ${author_id} \
+                    -k ${model_id} \
+                    -l ${model_name}
+
+                # Translate German text to English
+                src_name="Bavarian"
+                src_lang="bar"
+
+                trg_name="German"
+                trg_lang="de"
+                input_code="deu_Latn"
+
+                translate_name="English"
+                translate_lang="en"
+                output_code="eng_Latn"
+
+                input_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${trg_name}/${data_quality}/${src_name}/${feature_validity}/${perturbation_type}"
+                output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${trg_name}/${data_quality}/${src_name}/${feature_validity}/${perturbation_type}/${translate_name}/NLLB"
+
+                echo "Translating ${input_file} via ${model_id} from ${trg_name} to ${translate_name}"; 
+                bash "${script_file}" \
+                    -a ${input_path} \
+                    -b ${input_file} \
+                    -c ${trg_lang} \
+                    -d ${input_code} \
+                    -e ${output_path} \
+                    -f ${output_file} \
+                    -g ${translate_lang} \
+                    -h ${output_code} \
+                    -i ${experiment} \
+                    -j ${author_id} \
+                    -k ${model_id} \
+                    -l ${model_name}
+            done
+        done
+    done
+done
+
+
+# NOTE: Due to time-constraints, the "re-translation" of the following parts will be pushed to the end of the script.
+#       I actually already translated these- but as is custom → Might be best to redo "all in one neat package" prior to the end?
+#       Let's see what the speed of the GPU has to offer!
+
+for data_set in test dev train ; do
+    input_file="${data_set}"
+    output_file="${data_set}"
+
+    for data_quality in clean naive ; do
+
+        # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        # REFERENCE data (Original Bavarian and German text each into English)
+
+        # Translate Bavarian text to English
+        src_name="Bavarian"
+        src_lang="bar"
+
+        trg_name="German"
+        trg_lang="de"
+        input_code="deu_Latn"
+
+        translate_name="English"
+        translate_lang="en"
+        output_code="eng_Latn"
+
+        input_path="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
+        output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_lang}-${trg_lang}/${data_quality}/reference/${src_name}/${translate_name}/NLLB"
+
+        echo "Translating ${input_file} via ${model_id} from ${src_lang} to ${translate_lang}"; 
+        bash "${script_file}" \
+            -a ${input_path} \
+            -b ${input_file} \
+            -c ${src_lang} \
+            -d ${input_code} \
+            -e ${output_path} \
+            -f ${output_file} \
+            -g ${trg_lang} \
+            -h ${output_code} \
+            -i ${experiment} \
+            -j ${author_id} \
+            -k ${model_id} \
+            -l ${model_name}
+
+        # Translate German text to English
+        src_name="Bavarian"
+        src_lang="bar"
+
+        trg_name="German"
+        trg_lang="de"
+        input_code="deu_Latn"
+
+        translate_name="English"
+        translate_lang="en"
+        output_code="eng_Latn"
+
+        input_path="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
+        output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_lang}-${trg_lang}/${data_quality}/reference/${trg_name}/${translate_name}/NLLB"
+
+        echo "Translating ${input_file} via ${model_id} from ${trg_lang} to ${translate_lang}"; 
+        bash "${script_file}" \
+            -a ${input_path} \
+            -b ${input_file} \
+            -c ${trg_lang} \
+            -d ${input_code} \
+            -e ${output_path} \
+            -f ${output_file} \
+            -g ${trg_lang} \
+            -h ${output_code} \
+            -i ${experiment} \
+            -j ${author_id} \
+            -k ${model_id} \
+            -l ${model_name}
+    done
+done
 
 
 
@@ -39,142 +255,142 @@ model_name="3.3B"
 # /PREP/2024SchuMATh/Bavarian/clean/German/lex/test.de → /EXPERIMENT/2024SchuMATh/Bavarian/clean/German/lex/English/NLLB/test.en
 # /PREP/2024SchuMATh/Bavarian/clean/German/mor/test.de → /EXPERIMENT/2024SchuMATh/Bavarian/clean/German/mor/English/NLLB/test.en
 
-# ++++++++++++++++++++++++++++++++++++++++++
-# REFERENCE data
+# # ++++++++++++++++++++++++++++++++++++++++++
+# # REFERENCE data
 
-data_quality="clean" # "naive" | "clean" | "informed"
-experiment="baseline" # "preprocessing" | "postprocessing"
+# data_quality="clean" # "naive" | "clean" | "informed"
+# experiment="baseline" # "preprocessing" | "postprocessing"
 
-# Translate Bavarian text to English
-src_name="Bavarian"
-src_lang="bar"
+# # Translate Bavarian text to English
+# src_name="Bavarian"
+# src_lang="bar"
 
-trg_name="German"
-trg_lang="de"
-input_code="deu_Latn"
+# trg_name="German"
+# trg_lang="de"
+# input_code="deu_Latn"
 
-translate_name="English"
-translate_lang="en"
-output_code="eng_Latn"
+# translate_name="English"
+# translate_lang="en"
+# output_code="eng_Latn"
 
-input_path="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
-output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_lang}-${trg_lang}/${data_quality}/reference/${src_name}/${translate_name}/NLLB"
+# input_path="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
+# output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_lang}-${trg_lang}/${data_quality}/reference/${src_name}/${translate_name}/NLLB"
 
-echo "Translating ${input_file} via ${model_id} from ${src_lang} to ${translate_lang}"; 
-bash "${script_file}" \
-    -a ${input_path} \
-    -b ${input_file} \
-    -c ${src_lang} \
-    -d ${input_code} \
-    -e ${output_path} \
-    -f ${output_file} \
-    -g ${trg_lang} \
-    -h ${output_code} \
-    -i ${experiment} \
-    -j ${author_id} \
-    -k ${model_id} \
-    -l ${model_name}
-
-
-# Translate German text to English
-src_name="Bavarian"
-src_lang="bar"
-
-trg_name="German"
-trg_lang="de"
-input_code="deu_Latn"
-
-translate_name="English"
-translate_lang="en"
-output_code="eng_Latn"
-
-input_path="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
-output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_lang}-${trg_lang}/${data_quality}/reference/${trg_name}/${translate_name}/NLLB"
-
-echo "Translating ${input_file} via ${model_id} from ${trg_lang} to ${translate_lang}"; 
-bash "${script_file}" \
-    -a ${input_path} \
-    -b ${input_file} \
-    -c ${trg_lang} \
-    -d ${input_code} \
-    -e ${output_path} \
-    -f ${output_file} \
-    -g ${trg_lang} \
-    -h ${output_code} \
-    -i ${experiment} \
-    -j ${author_id} \
-    -k ${model_id} \
-    -l ${model_name}
+# echo "Translating ${input_file} via ${model_id} from ${src_lang} to ${translate_lang}"; 
+# bash "${script_file}" \
+#     -a ${input_path} \
+#     -b ${input_file} \
+#     -c ${src_lang} \
+#     -d ${input_code} \
+#     -e ${output_path} \
+#     -f ${output_file} \
+#     -g ${trg_lang} \
+#     -h ${output_code} \
+#     -i ${experiment} \
+#     -j ${author_id} \
+#     -k ${model_id} \
+#     -l ${model_name}
 
 
+# # Translate German text to English
+# src_name="Bavarian"
+# src_lang="bar"
 
-# ++++++++++++++++++++++++++++++++++++++++++
-# Actual "Phase data"
+# trg_name="German"
+# trg_lang="de"
+# input_code="deu_Latn"
 
-data_quality="clean" # "naive" | "clean" | "informed"
-experiment="baseline" # "preprocessing" | "postprocessing"
+# translate_name="English"
+# translate_lang="en"
+# output_code="eng_Latn"
 
-for perturbation_type in lex mor all;
-do
-    # Translate Bavarian text to English
-    src_name="Bavarian"
-    src_lang="bar"
+# input_path="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
+# output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_lang}-${trg_lang}/${data_quality}/reference/${trg_name}/${translate_name}/NLLB"
 
-    trg_name="German"
-    trg_lang="de"
-    input_code="deu_Latn"
+# echo "Translating ${input_file} via ${model_id} from ${trg_lang} to ${translate_lang}"; 
+# bash "${script_file}" \
+#     -a ${input_path} \
+#     -b ${input_file} \
+#     -c ${trg_lang} \
+#     -d ${input_code} \
+#     -e ${output_path} \
+#     -f ${output_file} \
+#     -g ${trg_lang} \
+#     -h ${output_code} \
+#     -i ${experiment} \
+#     -j ${author_id} \
+#     -k ${model_id} \
+#     -l ${model_name}
 
-    translate_name="English"
-    translate_lang="en"
-    output_code="eng_Latn"
-    input_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}"
-    output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}/${translate_name}/NLLB"
 
-    echo "Translating ${input_file} via ${model_id} from ${src_name} to ${translate_name}"; 
-    bash "${script_file}" \
-        -a ${input_path} \
-        -b ${input_file} \
-        -c ${src_lang} \
-        -d ${input_code} \
-        -e ${output_path} \
-        -f ${output_file} \
-        -g ${translate_lang} \
-        -h ${output_code} \
-        -i ${experiment} \
-        -j ${author_id} \
-        -k ${model_id} \
-        -l ${model_name}
 
-    # Translate German text to English
-    src_name="Bavarian"
-    src_lang="bar"
+# # ++++++++++++++++++++++++++++++++++++++++++
+# # Actual "Phase data"
 
-    trg_name="German"
-    trg_lang="de"
-    input_code="deu_Latn"
+# data_quality="clean" # "naive" | "clean" | "informed"
+# experiment="baseline" # "preprocessing" | "postprocessing"
 
-    translate_name="English"
-    translate_lang="en"
-    output_code="eng_Latn"
+# for perturbation_type in lex mor all;
+# do
+#     # Translate Bavarian text to English
+#     src_name="Bavarian"
+#     src_lang="bar"
 
-    input_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${trg_name}/${data_quality}/${src_name}/${perturbation_type}"
-    output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${trg_name}/${data_quality}/${src_name}/${perturbation_type}/${translate_name}/NLLB"
+#     trg_name="German"
+#     trg_lang="de"
+#     input_code="deu_Latn"
 
-    echo "Translating ${input_file} via ${model_id} from ${trg_name} to ${translate_name}"; 
-    bash "${script_file}" \
-        -a ${input_path} \
-        -b ${input_file} \
-        -c ${trg_lang} \
-        -d ${input_code} \
-        -e ${output_path} \
-        -f ${output_file} \
-        -g ${translate_lang} \
-        -h ${output_code} \
-        -i ${experiment} \
-        -j ${author_id} \
-        -k ${model_id} \
-        -l ${model_name}
-done
+#     translate_name="English"
+#     translate_lang="en"
+#     output_code="eng_Latn"
+#     input_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}"
+#     output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}/${translate_name}/NLLB"
+
+#     echo "Translating ${input_file} via ${model_id} from ${src_name} to ${translate_name}"; 
+#     bash "${script_file}" \
+#         -a ${input_path} \
+#         -b ${input_file} \
+#         -c ${src_lang} \
+#         -d ${input_code} \
+#         -e ${output_path} \
+#         -f ${output_file} \
+#         -g ${translate_lang} \
+#         -h ${output_code} \
+#         -i ${experiment} \
+#         -j ${author_id} \
+#         -k ${model_id} \
+#         -l ${model_name}
+
+#     # Translate German text to English
+#     src_name="Bavarian"
+#     src_lang="bar"
+
+#     trg_name="German"
+#     trg_lang="de"
+#     input_code="deu_Latn"
+
+#     translate_name="English"
+#     translate_lang="en"
+#     output_code="eng_Latn"
+
+#     input_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${trg_name}/${data_quality}/${src_name}/${perturbation_type}"
+#     output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${trg_name}/${data_quality}/${src_name}/${perturbation_type}/${translate_name}/NLLB"
+
+#     echo "Translating ${input_file} via ${model_id} from ${trg_name} to ${translate_name}"; 
+#     bash "${script_file}" \
+#         -a ${input_path} \
+#         -b ${input_file} \
+#         -c ${trg_lang} \
+#         -d ${input_code} \
+#         -e ${output_path} \
+#         -f ${output_file} \
+#         -g ${translate_lang} \
+#         -h ${output_code} \
+#         -i ${experiment} \
+#         -j ${author_id} \
+#         -k ${model_id} \
+#         -l ${model_name}
+# done
 
 
 
