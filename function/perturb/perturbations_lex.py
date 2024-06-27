@@ -31,7 +31,7 @@ def dir_maker(path):
 def read_perturbation_rules(file_dir):
     with open(f'{file_dir}', 'r') as f:
         data = json.load(f)
-        print(f'Rulebook entries: {len(data.keys())}')
+        print(f'Rulebook entries for mor: {len(data.keys())}')
         return data
 
 
@@ -43,17 +43,16 @@ def replace_funny_characters(text):
 
 def normalize_text(text):
     """Normalize text using Unicode NFC normalization."""
-    #return unicodedata.normalize('NFC', text)
-    #return unicodedata.normalize('NFKC', text)
     return unicodedata.normalize('NFKD', text)
 
 
-def multireplace(string, replacements, ignore_case=False, word_boundary="NONE"):
+def multireplace_words(string, replacements, ignore_case=False, word_boundary=False):
     """
     Given a string and a replacement map, it returns the replaced string.
     :param str string: string to execute replacements on
     :param dict replacements: replacement dictionary {value to find: value to replace}
     :param bool ignore_case: whether the match should be case insensitive
+    :param bool word_boundary: whether to replace entire words only
     :rtype: str
     """
     if not replacements:
@@ -73,13 +72,11 @@ def multireplace(string, replacements, ignore_case=False, word_boundary="NONE"):
     if ignore_case:
         def normalize_old(s):
             return s.lower()
-
         re_mode = re.IGNORECASE
 
     else:
         def normalize_old(s):
             return s
-
         re_mode = 0
 
     # Apply normalization to the keys for case insensitivity
@@ -88,40 +85,34 @@ def multireplace(string, replacements, ignore_case=False, word_boundary="NONE"):
     # Place longer ones first to keep shorter substrings from matching where the longer ones should take place
     # For instance given the replacements {'ab': 'AB', 'abc': 'ABC'} against the string 'hey abc', it should produce
     # 'hey ABC' and not 'hey ABc'
-    rep_sorted = sorted(replacements, key=len, reverse=True)
-    rep_escaped = map(re.escape, rep_sorted)
-    
-    # Default
-    if word_boundary == "NONE":
-        # Create a big OR regex that matches any of the substrings to replace
+    #rep_sorted = sorted(replacements, key=len, reverse=True)
+    #rep_escaped = map(re.escape, rep_sorted)
+    rep_escaped = list(map(re.escape, replacements.keys()))
+
+    # Create a big OR regex that matches any of the substrings to replace
+    if word_boundary:
+        pattern = re.compile(r'\b(' + '|'.join(rep_escaped) + r')\b', re_mode)
+    else:
         pattern = re.compile("|".join(rep_escaped), re_mode)
 
-    # TODO: Make it use the given input string as a boundary element → for now: empty space as boundary element
-    else:
-        pattern = re.compile(r" (" + "|".join(rep_escaped) + r") ", re_mode)
-    
-    # For each match, look up the new string in the replacements, being the key the normalized old string
+    # NOTE: Without marking the replaced words
     def replace_func(match):
         key = normalize_old(normalize_text(match.group(0)))
         possible_replacements = replacements[key]
-        return random.choice(possible_replacements)
+        return random.choice(possible_replacements) if isinstance(possible_replacements, list) else possible_replacements
     
+    # Marking replaced words with special characters (for perturbation_types = "all")
+    # def replace_func(match):
+    #     key = normalize_old(normalize_text(match.group(0)))
+    #     possible_replacements = replacements[key]
+    #     replacement = random.choice(possible_replacements) if isinstance(possible_replacements, list) else possible_replacements
+    #     return '@@@' + replacement
+
     return pattern.sub(replace_func, string)
 
     # NOTE: Previous version which could only handle unambiguous rules with a single option for replacement.
     # For each match, look up the new string in the replacements, being the key the normalized old string
     #return pattern.sub(lambda match: replacements[normalize_old(normalize_text(match.group(0)))], string)
-
-
-# Write output json file
-def write_to_json(out_path, out_file, output_dictionary):
-    # Serializing json and write to file
-    json_object = json.dumps(output_dictionary, indent=4, ensure_ascii=False)
-    try:
-        with open(f'{out_path}/{out_file}-lex.json', "w") as json_file:
-            json_file.write(json_object)
-    except Exception as e:
-        logging.error(f"Error writing data to {out_path}/{out_file}.json: {e}")
 
 
 if __name__ == "__main__":
@@ -150,11 +141,11 @@ if __name__ == "__main__":
     else:
         source_language_code = args.src_lang
 
-    print(f'Source Language Code: {source_language_code}')
+    #print(f'Source Language Code: {source_language_code}')
     replacement_rules = {}
 
     dict_files = glob.glob(f'{args.input_dir}/*-lex.json', recursive = False)
-    print(f'Dict Files: \n {dict_files}')
+    #print(f'Dict Files: \n {dict_files}')
     for dict_file in dict_files:
         # TODO: Change to only use one of the dictionary-files and print warning if more than 1 exists
 
@@ -163,13 +154,13 @@ if __name__ == "__main__":
 
         # Select correct text files to perturb
         text_files = glob.glob(f'{args.data_dir}/*.{source_language_code}', recursive = False)
-        print(f'Text Files: \n {text_files}')
+        #print(f'Text Files: \n {text_files}')
 
         # Read input text and perturb line by line
         for text_file in text_files:
             out_text_file_name = os.path.basename(text_file)
             out_text_file = f'{args.output_dir}/{out_text_file_name}'
-            print(f'Processing file: {text_file}')
+            #print(f'Processing file: {text_file}')
             # Open the output file to write text lines to
             with open(out_text_file, 'w') as out_file:
             
@@ -182,29 +173,11 @@ if __name__ == "__main__":
                     #input_line = in_file.readline()
 
                         # Replace text units in text line
-                        perturbed_line = multireplace(input_line, rulebook, ignore_case=True).replace('\n','') #, word_boundary=' ')
+                        perturbed_line = multireplace_words(input_line, rulebook, ignore_case=True, word_boundary=True).replace('\n','')
                     
                         # Write text line to out file
                         out_file.write(f'{perturbed_line}\n')
-            print(f'Applied lexicographic replacements, writing to: \n{args.output_dir}/{out_text_file_name}')
-    print(f'End of script for lexicographic replacement application.')
-
-    # dict_files = glob.glob(f'{args.input_dir}/*-lex.json', recursive = False)
-    # for dict_file in dict_files:
-    #     #bidict = read_bidict(dict_file)
-    #     with open(f'{dict_file}', 'r') as f:
-    #         replacement_rules = json.load(f)
-        
-    #     #for index in bidict.keys():  # "a-u"
-    #     for src, trg in data.items():
-    #         # if (len(src) < 1):  # Do not replace empty strings with new content!
-    #         #     continue
-    #         if replacements.get(src,False): 
-    #             replacements[src].append(trg)
-    #         else:
-    #             replacements[src] = [trg]
-
-    #     output_filename = os.path.basename(dict_file).split('.')[0]
-    #     write_to_json(args.output_dir, output_filename, replacements)
+            #print(f'Applied lexicographic replacements, writing to: \n{args.output_dir}/{out_text_file_name}')
+    #print(f'End of script for lexicographic replacement application.')
 
     

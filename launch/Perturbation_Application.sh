@@ -76,7 +76,7 @@ fi
 if [ $perturbation_type = "lex" ]; then
     script_file="../function/perturb/perturbations_lex.py"
     script_path="${current_dir}/${script_file}"
-    echo "Lexicographic perturbation for: ${src_name} and ${trg_name}"
+    #echo "Lexicographic perturbation for: ${src_name} and ${trg_name}"
     python3 "${script_path}" \
     -i "${input_path}" \
     -d "${data_path}" \
@@ -92,7 +92,7 @@ fi
 if [ $perturbation_type = "mor" ]; then
     script_file="../function/perturb/perturbations_mor.py"
     script_path="${current_dir}/${script_file}"
-    echo "Morphological perturbation for: ${src_name} and ${trg_name}"
+    #echo "Morphological perturbation for: ${src_name} and ${trg_name}"
     python3 "${script_path}" \
     -i "${input_path}" \
     -d "${data_path}" \
@@ -107,9 +107,9 @@ if [ $perturbation_type = "mor" ]; then
 fi
 
 if [ $perturbation_type = "all" ]; then
-    script_file="../function/perturb/perturbations_mor.py"
+    script_file="../function/perturb/perturbations_all.py"
     script_path="${current_dir}/${script_file}"
-    echo "Lexicographical and Morphological perturbation for: ${src_name} and ${trg_name}"
+    #echo "Lexicographical and Morphological perturbation for: ${src_name} and ${trg_name}"
     python3 "${script_path}" \
     -i "${input_path}" \
     -d "${data_path}" \
