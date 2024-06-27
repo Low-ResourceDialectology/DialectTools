@@ -14,18 +14,19 @@ trg_lang="" # "deu"
 trg_name="" # "German"
 perturbation_type="" # lex | mor | syn
 data_quality="" # naive | clean | informed
+feature_validity="" # guess | reason | authentic
 data_file_extension="" # "en" (due to using data previously translated into English via NLLB)
 current_dir="$(dirname "$0")"
 script_file="../function/perturb/perturbations_lex.py"
 
 # Function to print usage
 usage() {
-echo "Usage: $0 -i input_path -d data_path -o output_path -s src_lang -a src_name -t trg_lang -b trg_name -m perturbation_type -n data_quality -e data_file_extension"
+echo "Usage: $0 -i input_path -d data_path -o output_path -s src_lang -a src_name -t trg_lang -b trg_name -m perturbation_type -n data_quality -e data_file_extension -f feature_validity"
 exit 1
 }
 
 # Parse command-line options
-while getopts ":i:d:o:s:a:t:b:m:n:e:" opt; do
+while getopts ":i:d:o:s:a:t:b:m:n:e:f:" opt; do
     case $opt in
         i)
             input_path=$OPTARG
@@ -57,6 +58,9 @@ while getopts ":i:d:o:s:a:t:b:m:n:e:" opt; do
         e)
             data_file_extension=$OPTARG
             ;;
+        f)
+            feature_validity=$OPTARG
+            ;;
         *)
             usage
             ;;
@@ -64,7 +68,7 @@ while getopts ":i:d:o:s:a:t:b:m:n:e:" opt; do
 done
 
 # Check if all required arguments are provided
-if [ -z "$input_path" ] || [ -z "$data_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ]  || [ -z "$perturbation_type" ] || [ -z "$data_quality" ] ; then
+if [ -z "$input_path" ] || [ -z "$data_path" ] || [ -z "$output_path" ] || [ -z "$src_lang" ] || [ -z "$src_name" ] || [ -z "$trg_lang" ] || [ -z "$trg_name" ]  || [ -z "$perturbation_type" ] || [ -z "$data_quality" ] || [ -z "$feature_validity" ] ; then
     usage
 fi
 
@@ -98,7 +102,8 @@ if [ $perturbation_type = "mor" ]; then
     -t "${trg_lang}" \
     -b "${trg_name}" \
     -m "${data_quality}" \
-    -e "${data_file_extension}"
+    -e "${data_file_extension}" \
+    -f "${feature_validity}"
 fi
 
 if [ $perturbation_type = "all" ]; then
@@ -115,7 +120,8 @@ if [ $perturbation_type = "all" ]; then
     -b "${trg_name}" \
     -m "${data_quality}" \
     -n "${perturbation_type}" \
-    -e "${data_file_extension}"
+    -e "${data_file_extension}" \
+    -f "${feature_validity}"
 fi
 
 # if [ $perturbation_type = "syn" ]; then

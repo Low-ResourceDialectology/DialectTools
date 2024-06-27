@@ -36,7 +36,8 @@ bash "${script_path}" \
     -b "${trg_name}" \
     -m "${perturbation_type}" \
     -n "${data_quality}" \
-    -e "${data_file_extension}"
+    -e "${data_file_extension}" \
+    -f "${feature_validity}"
 
 perturbation_type="mor"
 bash "${script_path}" \
@@ -49,7 +50,8 @@ bash "${script_path}" \
     -b "${trg_name}" \
     -m "${perturbation_type}" \
     -n "${data_quality}" \
-    -e "${data_file_extension}"
+    -e "${data_file_extension}" \
+    -f "${feature_validity}"
 
 # perturbation_type="all" # Again morphological, but on the results from the lexicographic perturbation process 
 # bash "${script_path}" \
@@ -62,7 +64,8 @@ bash "${script_path}" \
 #     -b "${trg_name}" \
 #     -m "${perturbation_type}" \
 #     -n "${data_quality}" \
-#     -e "${data_file_extension}"
+#     -e "${data_file_extension}" \
+#     -f "${feature_validity}"
 
 # # TODO
 # #perturbation_type="syn"
@@ -89,7 +92,8 @@ bash "${script_path}" \
     -b "${trg_name}" \
     -m "${perturbation_type}" \
     -n "${data_quality}" \
-    -e "${data_file_extension}"
+    -e "${data_file_extension}" \
+    -f "${feature_validity}"
 
 perturbation_type="mor"
 bash "${script_path}" \
@@ -102,7 +106,8 @@ bash "${script_path}" \
     -b "${trg_name}" \
     -m "${perturbation_type}" \
     -n "${data_quality}" \
-    -e "${data_file_extension}"
+    -e "${data_file_extension}" \
+    -f "${feature_validity}"
 
 # perturbation_type="all" # Again morphological, but on the results from the lexicographic perturbation process 
 # bash "${script_path}" \
@@ -115,7 +120,8 @@ bash "${script_path}" \
 #     -b "${trg_name}" \
 #     -m "${perturbation_type}" \
 #     -n "${data_quality}" \
-#     -e "${data_file_extension}"
+#     -e "${data_file_extension}" \
+#     -f "${feature_validity}"
 
 # TODO
 #perturbation_type="syn"
