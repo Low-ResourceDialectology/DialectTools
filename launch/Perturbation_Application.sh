@@ -119,7 +119,6 @@ if [ $perturbation_type = "all" ]; then
     -t "${trg_lang}" \
     -b "${trg_name}" \
     -m "${data_quality}" \
-    -n "${perturbation_type}" \
     -e "${data_file_extension}" \
     -f "${feature_validity}"
 fi

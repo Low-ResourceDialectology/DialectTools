@@ -28,15 +28,32 @@ def dir_maker(path):
     pathlib.Path(path).mkdir(parents=True, exist_ok=True)
 
 
-def read_perturbation_rules(file_dir):
+def read_perturbation_rules_lex(file_dir):
     with open(f'{file_dir}', 'r') as f:
         data = json.load(f)
-        print(f'Rulebook entries for mor: {len(data.keys())}')
+        print(f'Rulebook entries for all (lex): {len(data.keys())}')
         return data
 
 
+def keep_highest_frequency(json_data):
+    result = {}
+    for key, sub_dict in json_data.items():
+        # Find the sub-key with the highest frequency
+        max_key = max(sub_dict, key=sub_dict.get)
+        result[key] = max_key
+    return result
+
+
+def read_perturbation_rules_mor(file_dir):
+    with open(f'{file_dir}', 'r') as f:
+        data = json.load(f)
+        # NOTE: For the time being we exclude all possible replacements that do not have the highest frequency
+        json_data = keep_highest_frequency(data)
+        print(f'Rulebook entries for all (mor): {len(json_data.keys())}')
+        return json_data
+
+
 def replace_funny_characters(text):
-#def replace_long_s_with_s(text):
     """Replace long 's' character (ſ) with standard 's'."""
     return text.replace('ſ', 's').replace('ı', 'i')
 
@@ -133,14 +150,10 @@ def preprocess_replacement_dictionary(replacements, ignore_case=False):
     rep_escaped = list(map(re.escape, rep_sorted)) # Convert the map object to a list
 
     # Return the escaped, sorted keys and the regex mode
-    return rep_escaped, replacements, re_mode
+    return rep_escaped, replacements, re_mode # == prefix_keys, preprocessed_...fixes, re_mode_...fixes
 
 
-def multireplace_substrings(string, replacements, rep_escaped, replacement_type, replacement_mode):
-#def multireplace_substrings(string, replacements, replacement_dict, replacement_type, replacement_mode):
-    
-    #string, replacements, replacement_type, ignore_case=False):
-    #(string, replacements, replacement_dict, replacement_type, replacement_mode):
+def multireplace_substrings(string, replacements, replacement_dict, replacement_type, replacement_mode):
     """
     Replace substrings in a string according to their position (prefix, suffix, infix).
     :param str string: string to execute replacements on
@@ -152,25 +165,40 @@ def multireplace_substrings(string, replacements, rep_escaped, replacement_type,
     if not replacements:
         return string
 
+    # Normalize the input string
     string = normalize_text(string)
     string = replace_funny_characters(string)
 
     if replacement_type == "PREFIX":
-        pattern = re.compile(r'\b(' + '|'.join(rep_escaped) + ')', replacement_mode)
+        pattern = re.compile(r'\b(' + '|'.join(replacements) + ')', replacement_mode)
     elif replacement_type == "SUFFIX":
-        pattern = re.compile(r'(' + '|'.join(rep_escaped) + r')\b', replacement_mode)
+        pattern = re.compile(r'(' + '|'.join(replacements) + r')\b', replacement_mode)
     elif replacement_type == "INFIX":
-        pattern = re.compile(r'(?<!\b)(' + '|'.join(rep_escaped) + r')(?!\b)', replacement_mode)
+        pattern = re.compile(r'(?<!\b)(' + '|'.join(replacements) + r')(?!\b)', replacement_mode)
     else:
         raise ValueError("Invalid replacement_type provided!")
 
-    def replace_func(match):
-        if match.group(0).startswith('@@'):
-            return match.group(0)
-        key = normalize_text(match.group(0))
-        return replacements[key]
+    def normalize_old(s):
+        return s.lower() if replacement_mode == re.IGNORECASE else s
 
-    return pattern.sub(replace_func, string)
+    # def replace_func(match):
+    #     if match.group(0).startswith('@@'):
+    #         return match.group(0)
+    #     key = normalize_old(normalize_text(match.group(0)))
+    #     return replacements[key]
+
+    #return pattern.sub(replace_func, string)
+
+    return pattern.sub(lambda match: match.group(0) if match.group(0).startswith('@@') else replacement_dict[normalize_old(normalize_text(match.group(0)))], string)
+
+
+    # def replace_func(match):
+    #     if match.group(0).startswith('@@'):
+    #         return match.group(0)
+    #     key = normalize_text(match.group(0))
+    #     return replacements[key]
+
+    
 
     # def normalize_old(s):
     #     return s.lower() if replacement_mode == re.IGNORECASE else s
@@ -245,7 +273,7 @@ if __name__ == "__main__":
     parser.add_argument("-m","--data_quality", type=str, help="Level of data quality for experiment: naive, clean, informed.")
     parser.add_argument("-e","--data_file_extension", type=str, default="noname", help="Optional file extension for more flexibility during script call.")
     parser.add_argument("-f","--feature_validity", type=str, help="Quality level of the feature sources: guess, reason, authentic.")
-
+    
     args = parser.parse_args()
     dir_maker(args.output_dir)
 
@@ -261,12 +289,12 @@ if __name__ == "__main__":
         source_language_code = args.src_lang
 
     # Lexicographic replacement rules as dictionary from json file.
-    dict_files = glob.glob(f'{args.input_dir}/*-lex.json', recursive = False)
+    dict_files = glob.glob(f'{args.input_dir}/*.json', recursive = False)
     for dict_file in dict_files:
         # TODO: Change to only use one of the dictionary-files and print warning if more than 1 exists
-
+        if dict_file.endswith("-lex.json"):
         # Read perturbation rules
-        rulebook_lex = read_perturbation_rules(dict_file)
+            rulebook_lex = read_perturbation_rules_lex(dict_file)
 
     # Morphological replacement rules as dictionaries from json files.
     # NOTE: Processing steps for feature_validity = "guess"
@@ -275,13 +303,13 @@ if __name__ == "__main__":
         for dict_file in dict_files:
             if dict_file.endswith("-prefixes_0.json"):
                 #dict_file = f'{args.input_dir}/*-prefixes_0.json'
-                rulebook_prefixes = read_perturbation_rules(dict_file)
+                rulebook_prefixes = read_perturbation_rules_mor(dict_file)
             if dict_file.endswith("-suffixes_0.json"):
                 #dict_file = f'{args.input_dir}/*-suffixes_0.json'
-                rulebook_suffixes = read_perturbation_rules(dict_file)
+                rulebook_suffixes = read_perturbation_rules_mor(dict_file)
             if dict_file.endswith("-infixes_0.json"):
                 #dict_file = f'{args.input_dir}/*-infixes_0.json'
-                rulebook_infixes = read_perturbation_rules(dict_file)
+                rulebook_infixes = read_perturbation_rules_mor(dict_file)
 
 
     # NOTE: Processing steps for feature_validity = "reason"
@@ -290,20 +318,23 @@ if __name__ == "__main__":
         for dict_file in dict_files:
             if dict_file.endswith("-prefixes_1.json"):
                 #dict_file = f'{args.input_dir}/*-prefixes_1.json'
-                rulebook_prefixes = read_perturbation_rules(dict_file)
+                rulebook_prefixes = read_perturbation_rules_mor(dict_file)
             if dict_file.endswith("-suffixes_1.json"):
                 #dict_file = f'{args.input_dir}/*-suffixes_1.json'
-                rulebook_suffixes = read_perturbation_rules(dict_file)
+                rulebook_suffixes = read_perturbation_rules_mor(dict_file)
             if dict_file.endswith("-infixes_1.json"):
                 #dict_file = f'{args.input_dir}/*-infixes_1.json'
-                rulebook_infixes = read_perturbation_rules(dict_file)
-
+                rulebook_infixes = read_perturbation_rules_mor(dict_file)
 
     # NOTE: Processing steps for feature_validity = "authentic"
     if args.feature_validity == "authentic":
         print(f'Feature validity level "authentic" not yet implemented.')
 
-
+    # Preprocess replacement dictionaries for substrings
+    prefix_keys, preprocessed_prefixes, re_mode_prefix = preprocess_replacement_dictionary(rulebook_prefixes, ignore_case=True)
+    suffix_keys, preprocessed_suffixes, re_mode_suffix = preprocess_replacement_dictionary(rulebook_suffixes, ignore_case=True)
+    infix_keys, preprocessed_infixes, re_mode_infix = preprocess_replacement_dictionary(rulebook_infixes, ignore_case=True)
+        
     # Select correct text files to perturb
     text_files = glob.glob(f'{args.data_dir}/*.{source_language_code}', recursive = False)
     #print(f'Text Files: \n {text_files}')
@@ -325,15 +356,10 @@ if __name__ == "__main__":
                     # Apply the word replacements
                     perturbed_line = multireplace_words(input_line, rulebook_lex, ignore_case=True, word_boundary=True)
 
-                    # Preprocess replacement dictionaries for substrings
-                    prefix_keys, re_mode_prefix, prefix_replacements = preprocess_replacement_dictionary(rulebook_prefixes, ignore_case=True)
-                    suffix_keys, re_mode_suffix, suffix_replacements = preprocess_replacement_dictionary(rulebook_suffixes, ignore_case=True)
-                    infix_keys, re_mode_infix, infix_replacements = preprocess_replacement_dictionary(rulebook_infixes, ignore_case=True)
-
                     # Apply the substring replacements
-                    text = multireplace_substrings(perturbed_line, prefix_keys, prefix_replacements, "PREFIX", re_mode_prefix)
-                    text = multireplace_substrings(perturbed_line, suffix_keys, suffix_replacements, "SUFFIX", re_mode_suffix)
-                    text = multireplace_substrings(perturbed_line, infix_keys, infix_replacements, "INFIX", re_mode_infix).replace('\n','').replace('@@','')
+                    text = multireplace_substrings(perturbed_line, prefix_keys, preprocessed_prefixes, "PREFIX", re_mode_prefix).replace('\n','')
+                    text = multireplace_substrings(perturbed_line, suffix_keys, preprocessed_suffixes, "SUFFIX", re_mode_suffix)
+                    text = multireplace_substrings(perturbed_line, infix_keys, preprocessed_infixes, "INFIX", re_mode_infix).replace('@@','')
 
                     # Write text line to out file
                     out_file.write(f'{perturbed_line}\n')

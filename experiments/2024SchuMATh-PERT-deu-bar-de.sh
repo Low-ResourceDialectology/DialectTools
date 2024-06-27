@@ -25,40 +25,40 @@ for data_quality in naive clean; do
         trg_lang="deu"
         trg_name="German"
         data_file_extension="noname"
-        echo "#============# \n Perturbing: ${src_name} into ${trg_name} - (${data_quality}, ${feature_validity})"
+        echo "### Perturbing: ${src_name} into ${trg_name} - (${data_quality}, ${feature_validity})"
 
-        perturbation_type="lex"
-        bash "${script_path}" \
-            -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
-            -d "${data_path}/${data_quality}" \
-            -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
-            -s "${src_lang}" \
-            -a "${src_name}" \
-            -t "${trg_lang}" \
-            -b "${trg_name}" \
-            -m "${perturbation_type}" \
-            -n "${data_quality}" \
-            -e "${data_file_extension}" \
-            -f "${feature_validity}"
+        # perturbation_type="lex"
+        # bash "${script_path}" \
+        #     -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
+        #     -d "${data_path}/${data_quality}" \
+        #     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
+        #     -s "${src_lang}" \
+        #     -a "${src_name}" \
+        #     -t "${trg_lang}" \
+        #     -b "${trg_name}" \
+        #     -m "${perturbation_type}" \
+        #     -n "${data_quality}" \
+        #     -e "${data_file_extension}" \
+        #     -f "${feature_validity}"
 
-        perturbation_type="mor"
-        bash "${script_path}" \
-            -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
-            -d "${data_path}/${data_quality}" \
-            -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
-            -s "${src_lang}" \
-            -a "${src_name}" \
-            -t "${trg_lang}" \
-            -b "${trg_name}" \
-            -m "${perturbation_type}" \
-            -n "${data_quality}" \
-            -e "${data_file_extension}" \
-            -f "${feature_validity}"
+        # perturbation_type="mor"
+        # bash "${script_path}" \
+        #     -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
+        #     -d "${data_path}/${data_quality}" \
+        #     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
+        #     -s "${src_lang}" \
+        #     -a "${src_name}" \
+        #     -t "${trg_lang}" \
+        #     -b "${trg_name}" \
+        #     -m "${perturbation_type}" \
+        #     -n "${data_quality}" \
+        #     -e "${data_file_extension}" \
+        #     -f "${feature_validity}"
 
         perturbation_type="all" # Again morphological, but on the results from the lexicographic perturbation process 
         bash "${script_path}" \
             -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
-            -d "${output_path}/${data_quality}" \
+            -d "${data_path}/${data_quality}" \
             -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
             -s "${src_lang}" \
             -a "${src_name}" \
@@ -81,40 +81,40 @@ for data_quality in naive clean; do
         trg_lang="bar"
         trg_name="Bavarian"
         data_file_extension="noname"
-        echo "#============# \n Perturbing: ${src_name} into ${trg_name} - (${data_quality}, ${feature_validity})"
+        echo "### Perturbing: ${src_name} into ${trg_name} - (${data_quality}, ${feature_validity})"
 
-        perturbation_type="lex"
-        bash "${script_path}" \
-            -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
-            -d "${data_path}/${data_quality}" \
-            -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
-            -s "${src_lang}" \
-            -a "${src_name}" \
-            -t "${trg_lang}" \
-            -b "${trg_name}" \
-            -m "${perturbation_type}" \
-            -n "${data_quality}" \
-            -e "${data_file_extension}" \
-            -f "${feature_validity}"
+        # perturbation_type="lex"
+        # bash "${script_path}" \
+        #     -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
+        #     -d "${data_path}/${data_quality}" \
+        #     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
+        #     -s "${src_lang}" \
+        #     -a "${src_name}" \
+        #     -t "${trg_lang}" \
+        #     -b "${trg_name}" \
+        #     -m "${perturbation_type}" \
+        #     -n "${data_quality}" \
+        #     -e "${data_file_extension}" \
+        #     -f "${feature_validity}"
 
-        perturbation_type="mor"
-        bash "${script_path}" \
-            -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
-            -d "${data_path}/${data_quality}" \
-            -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
-            -s "${src_lang}" \
-            -a "${src_name}" \
-            -t "${trg_lang}" \
-            -b "${trg_name}" \
-            -m "${perturbation_type}" \
-            -n "${data_quality}" \
-            -e "${data_file_extension}" \
-            -f "${feature_validity}"
+        # perturbation_type="mor"
+        # bash "${script_path}" \
+        #     -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
+        #     -d "${data_path}/${data_quality}" \
+        #     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
+        #     -s "${src_lang}" \
+        #     -a "${src_name}" \
+        #     -t "${trg_lang}" \
+        #     -b "${trg_name}" \
+        #     -m "${perturbation_type}" \
+        #     -n "${data_quality}" \
+        #     -e "${data_file_extension}" \
+        #     -f "${feature_validity}"
 
         perturbation_type="all" # Again morphological, but on the results from the lexicographic perturbation process 
         bash "${script_path}" \
             -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
-            -d "${output_path}/${data_quality}" \
+            -d "${data_path}/${data_quality}" \
             -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
             -s "${src_lang}" \
             -a "${src_name}" \

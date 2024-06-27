@@ -41,17 +41,8 @@ def read_perturbation_rules(file_dir):
         data = json.load(f)
         # NOTE: For the time being we exclude all possible replacements that do not have the highest frequency
         json_data = keep_highest_frequency(data)
-        print(f'Rulebook entries for lex: {len(json_data.keys())}')
+        print(f'Rulebook entries for mor: {len(json_data.keys())}')
         return json_data
-
-
-def read_text(input_file):
-    input_text = []
-    with open(f'{input_file}', 'r', encoding='utf-8') as in_file:
-        for text_line in in_file.readlines():
-            normalized_string = normalize_text(text_line.strip())
-            input_text.append(normalized_string)
-    return input_text
 
 
 def replace_funny_characters(text):
@@ -98,7 +89,7 @@ def preprocess_replacement_dictionary(replacements, ignore_case=False):
     rep_escaped = list(map(re.escape, rep_sorted)) # Convert the map object to a list
 
     # Return the escaped, sorted keys and the regex mode
-    return rep_escaped, replacements, re_mode
+    return rep_escaped, replacements, re_mode # == prefix_keys, preprocessed_...fixes, re_mode_...fixes
 
 
 def multireplace(string, replacements, replacement_dict, replacement_type, replacement_mode):
@@ -143,7 +134,6 @@ if __name__ == "__main__":
     parser.add_argument("-t","--trg_lang", type=str, help="Language code of target language, part of file naming.") # TODO: Make optional
     parser.add_argument("-b","--trg_name", type=str, help="Language name of target language, part of file naming.") # TODO: Make optional
     parser.add_argument("-m","--data_quality", type=str, help="Level of data quality for experiment: naive, clean, informed.")
-    parser.add_argument("-n","--multi_perturb", type=str, default="", help="Level of data quality for experiment: naive, clean, informed.") # Optional flag for perturbing lexicographically perturbed data again, but this time morphologically
     parser.add_argument("-e","--data_file_extension", type=str, default="noname", help="Optional file extension for more flexibility during script call.")
     parser.add_argument("-f","--feature_validity", type=str, help="Quality level of the feature sources: guess, reason, authentic.")
 
@@ -195,7 +185,6 @@ if __name__ == "__main__":
     prefix_keys, preprocessed_prefixes, re_mode_prefixes = preprocess_replacement_dictionary(rulebook_prefixes, ignore_case=True)
     suffix_keys, preprocessed_suffixes, re_mode_suffixes = preprocess_replacement_dictionary(rulebook_suffixes, ignore_case=True)
     infix_keys, preprocessed_infixes, re_mode_infixes = preprocess_replacement_dictionary(rulebook_infixes, ignore_case=True)
-
 
     # Select correct text files to perturb
     text_files = glob.glob(f'{args.data_dir}/*.{source_language_code}', recursive = False)

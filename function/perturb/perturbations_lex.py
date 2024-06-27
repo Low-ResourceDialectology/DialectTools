@@ -31,7 +31,7 @@ def dir_maker(path):
 def read_perturbation_rules(file_dir):
     with open(f'{file_dir}', 'r') as f:
         data = json.load(f)
-        print(f'Rulebook entries for mor: {len(data.keys())}')
+        print(f'Rulebook entries for lex: {len(data.keys())}')
         return data
 
 
