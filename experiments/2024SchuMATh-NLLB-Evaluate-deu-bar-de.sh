@@ -36,36 +36,107 @@ feature_validity="" # "guess" | "reason" | "authentic"
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Temporary code to run very specific experiment conditions
-for data_quality in naive clean ; do
-    #for feature_validity in guess reason ; do
-        # ++++++++++++++++++++++++++++++++++++++++++++
-        # Evaluate basic differences between original Bavarian text compared to the aligned German text
-        input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/${data_quality}" 
-        input_file_ref="test.de"
 
-        # Evaluate the basic language variety differences
-        src_name="Bavarian"
-        src_lang="bar"
-        trg_name="German"
-        trg_lang="de"
 
-        echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
-        input_path_inf="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
-        input_file_inf="test.bar"
-        output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
-        output_file="PERT.txt"
-        bash "${script_file}" \
-            -a "${input_path_ref}" \
-            -b "${input_file_ref}" \
-            -c "${input_path_inf}" \
-            -d "${input_file_inf}" \
-            -e "${output_path}" \
-            -f "${output_file}" \
-            -h "${metrics}" \
-            -i "${precision}" \
-            -j "${options}"
-    #done
+# for data_quality in naive clean ; do
+#         # ++++++++++++++++++++++++++++++++++++++++++++
+#         # Evaluate basic differences between original Bavarian text compared to the aligned German text
+#         input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/${data_quality}" 
+#         input_file_ref="test.de"
+
+#         # Evaluate the basic language variety differences
+#         src_name="Bavarian"
+#         src_lang="bar"
+#         trg_name="German"
+#         trg_lang="de"
+
+#         echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
+#         input_path_inf="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
+#         input_file_inf="test.bar"
+#         output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
+#         output_file="PERT.txt"
+#         bash "${script_file}" \
+#             -a "${input_path_ref}" \
+#             -b "${input_file_ref}" \
+#             -c "${input_path_inf}" \
+#             -d "${input_file_inf}" \
+#             -e "${output_path}" \
+#             -f "${output_file}" \
+#             -h "${metrics}" \
+#             -i "${precision}" \
+#             -j "${options}"
+# done
+
+
+
+# for data_quality in naive clean; # naive clean informed
+# do
+#     # # ++++++++++++++++++++++++++++++++++++++++++++
+#     # # Evaluate Perturbations (How close do we get to the other language variety?)
+#     input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/${data_quality}" 
+#     input_file_ref="test.de"
+#     src_name="Bavarian"
+#     src_lang="bar"
+#     trg_name="German"
+#     trg_lang="de"
+#     echo "Evaluating perturbations via sacreBLEU for: ${src_name} to ${trg_name}";
+
+#     for feature_validity in guess reason; # guess reason authentic
+#     do
+#         for perturbation_type in lex mor all;
+#         do
+#             input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}"
+#             input_file_inf="test.${src_lang}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_file="PERT.txt"
+#             bash "${script_file}" \
+#                 -a "${input_path_ref}" \
+#                 -b "${input_file_ref}" \
+#                 -c "${input_path_inf}" \
+#                 -d "${input_file_inf}" \
+#                 -e "${output_path}" \
+#                 -f "${output_file}" \
+#                 -h "${metrics}" \
+#                 -i "${precision}" \
+#                 -j "${options}" 
+#         done
+#     done
+# done
+
+
+
+#for data_quality in naive clean; # naive clean informed
+for data_quality in clean; # naive clean informed
+do
+    input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/${data_quality}" 
+    input_file_ref="test.de"
+    src_name="German"
+    src_lang="de"
+    trg_name="Bavarian"
+    trg_lang="bar"
+    echo "Evaluating perturbations via sacreBLEU for: ${src_name} to ${trg_name}";
+    for feature_validity in guess reason; # guess reason authentic
+    do
+        for perturbation_type in all lex mor;
+        do
+            input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}"
+            input_file_inf="test.${src_lang}"
+            output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+            output_file="PERT.txt"
+            bash "${script_file}" \
+                -a "${input_path_ref}" \
+                -b "${input_file_ref}" \
+                -c "${input_path_inf}" \
+                -d "${input_file_inf}" \
+                -e "${output_path}" \
+                -f "${output_file}" \
+                -h "${metrics}" \
+                -i "${precision}" \
+                -j "${options}" 
+        done
+    done
 done
+
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
