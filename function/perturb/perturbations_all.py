@@ -355,7 +355,7 @@ if __name__ == "__main__":
                     # Apply the substring replacements
                     text = multireplace_substrings(perturbed_line, prefix_keys, preprocessed_prefixes, "PREFIX", re_mode_prefix).replace('\n','')
                     text = multireplace_substrings(perturbed_line, suffix_keys, preprocessed_suffixes, "SUFFIX", re_mode_suffix)
-                    text = multireplace_substrings(perturbed_line, infix_keys, preprocessed_infixes, "INFIX", re_mode_infix).replace('@@','')
+                    text = multireplace_substrings(perturbed_line, infix_keys, preprocessed_infixes, "INFIX", re_mode_infix).replace('@@@','')
 
                     # Write text line to out file
                     out_file.write(f'{perturbed_line}\n')
