@@ -39,7 +39,7 @@ for data_quality in naive clean ; do
     input_path="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
     output_path="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${translate_name}/NLLB"
 
-    echo "Translating ${input_file} via ${model_id} from ${src_lang} to ${translate_lang}"; 
+    echo "Translating ${input_file} via ${model_id} from ${trg_lang} to ${translate_lang}"; 
     bash "${script_file}" \
         -a ${input_path} \
         -b ${input_file} \
