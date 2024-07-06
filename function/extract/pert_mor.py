@@ -262,4 +262,83 @@ if __name__ == "__main__":
         #output_filename = f'{output_filename_inter.split("-")[0]}-mor' # 2023ArteDial-mor
         #write_to_json(args.output_dir, output_filename, global_replacements)
 
+    # A new approach to the aggregation of replacement rules
+    if args.feature_validity == "relaxed":
+        dict_files = glob.glob(f'{args.input_dir}/*.json', recursive = False)
+        for dict_file in dict_files:
+            output_name_part = os.path.basename(dict_file)[0].split('.')[0] # 2023ArteDial-infixes
+            # if "prefix" in dict_file:
+            #     # Process the plain prefix replacements (no context considered)
+            #     pass
+            # if "prefix_" in dict_file:
+            #     # Process the prefix replacements (context considered)
+            #     pass
+            # if "suffix" in dict_file:
+            #     # Process the plain suffix replacements (no context considered)
+            #     pass
+            # if "prefix_" in dict_file:
+            #     # Process the suffix replacements (context considered)
+            #     pass
+            # if "infix" in dict_file:
+            #     # Process the plain infix replacements (no context considered)
+            #     pass
+            # if "infix_" in dict_file:
+            #     # Process the infix replacements (context considered)
+            #     pass
+
+            with open(f'{dict_file}', 'r') as f:
+                data = json.load(f)
+            replacements = {}
+
+            # Inside the initial word lists, the dialect word was on position 0, while the standard word was on position 1
+            # To process these such that the dialect side is the "source" side, use "LeftToRight"
+            # For processing such that the standard side is the "source" side, use "RightToLeft" instead.
+            if args.dict_direction == "LeftToRight":
+                # "a-u": 301,
+                # "ie-y": 291,
+                # "a-o": 284,
+                #for key_pair in bidict.keys():  # "a-u"
+                for pair, freq in data.items():
+                    if len(pair.split('-')[0]) > 0:
+                        src = pair.split('-')[0]
+                    else:
+                        src = ""
+                    if (len(pair.split('-')) > 1): # len(pair.split('-')[1] > 0)
+                        trg = pair.split('-')[1]
+                    else:
+                        trg = ""
+
+                    # Filter for specific requirements to derive all replacement rules
+                    if (len(src) < length_upper_limit) and (freq > frequency_lower_limit):
+                        if not src in replacements.keys():
+                            replacements[src] = {}
+                            replacements[src][trg] = freq
+                        else:
+                            replacements[src][trg] = freq
+                            
+            elif args.dict_direction == "RightToLeft":
+                for pair, freq in data.items():
+                    if len(pair.split('-')[0]) > 0:
+                        trg = pair.split('-')[0]
+                    else:
+                        trg = ""
+                    if (len(pair.split('-')) > 1): # len(pair.split('-')[1] > 0)
+                        src = pair.split('-')[1]
+                    else:
+                        src = ""
+                
+                    # Filter for specific requirements to derive all replacement rules
+                    if (len(src) < length_upper_limit) and (freq > frequency_lower_limit):
+                        if not src in replacements.keys():
+                            replacements[src] = {}
+                            replacements[src][trg] = freq
+                        else:
+                            replacements[src][trg] = freq
+
+            output_filename = os.path.basename(dict_file).split('.')[0]
+            write_to_json(args.output_dir, output_filename, replacements)
+        #output_filename_inter = os.path.basename(dict_files[0]).split('.')[0] # 2023ArteDial-fixes
+        #output_filename = f'{output_filename_inter.split("-")[0]}-mor' # 2023ArteDial-mor
+        #write_to_json(args.output_dir, output_filename, global_replacements)
+
     print(f'Morphological replacements have successfully been extracted and written to: {args.output_dir}.')

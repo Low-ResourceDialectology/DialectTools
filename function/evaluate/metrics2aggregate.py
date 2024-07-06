@@ -15,7 +15,7 @@ def collect_evaluation_data(root_dir):
         for filename in filenames:
             if filename.endswith(".txt"):
                 file_path = os.path.join(dirpath, filename)
-                
+                print(f'file_path: {file_path}')
                 # Extract directory components
                 rel_path = os.path.relpath(file_path, root_dir)
                 path_parts = rel_path.split(os.sep)
@@ -24,6 +24,7 @@ def collect_evaluation_data(root_dir):
                     continue  # Skip any files that do not meet the depth criteria
 
                 lang, quality, validity, perturbation, experiment_file = path_parts
+                #print(f'path_parts: {path_parts}')
 
                 # Read the JSON file
                 with open(file_path, 'r') as file:
@@ -35,7 +36,7 @@ def collect_evaluation_data(root_dir):
                         metric_score = metric["score"]
                         experiment_file_name = os.path.basename(experiment_file).split('.')[0]
                         data[lang][quality][validity][perturbation][f"{experiment_file_name}_{metric_name}"] = metric_score
-
+                #print(f'data: {data}')
     return data
 
 def save_aggregated_data(data, output_path, out_name):

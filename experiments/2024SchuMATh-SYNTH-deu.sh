@@ -8,11 +8,11 @@
 input_path="/media/AllBlue/LanguageData/FEATURES"
 output_path="/media/AllBlue/LanguageData/PERTURBS"
 perturbation_type="" # lex | mor | syn
-feature_validity="" # guess | reason | authentic
+feature_validity="" # guess | relaxed | reason | authentic
 dict_direction="" # "RightToLeft" | "LeftToRight"
 extraction_method="direct" # direct | ?? something heuristic based ??
-unit_frequency="5" # 5 # NOTE: Currently only used in mor, not in lex
-unit_length="5" # 5 # NOTE: Currently only used in mor, not in lex
+unit_frequency="1" # 5 # NOTE: Currently only used in mor, not in lex
+unit_length="6" # 5 # NOTE: Currently only used in mor, not in lex
 current_dir="$(dirname "$0")"
 script_file="../launch/Perturbation_Extraction.sh"
 script_path="${current_dir}/${script_file}"
@@ -26,7 +26,7 @@ trg_lang="deu"
 trg_name="German"
 echo "Processing: ${src_name} and ${trg_name}"
 
-for feature_validity in guess reason ; do # guess reason authentic
+for feature_validity in relaxed ; do # guess relaxed reason authentic
     for perturbation_type in lex mor ; do
         #perturbation_type="lex"
         dict_direction="LeftToRight"
@@ -71,7 +71,7 @@ trg_lang="bar"
 trg_name="Bavarian"
 echo "Processing: ${src_name} and ${trg_name}"
 
-for feature_validity in guess reason ; do # guess reason authentic
+for feature_validity in relaxed ; do # guess reason authentic
     for perturbation_type in lex mor ; do
         #perturbation_type="lex"
         dict_direction="RightToLeft"

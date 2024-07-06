@@ -9,8 +9,11 @@ current_dir="$(dirname "$0")"
 # Aggregation of the metrics from various files
 script_file="$current_dir/../function/evaluate/metrics2aggregate.py"
 
-input_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10"
-output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/evals"
+# input_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10"
+# output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/evals"
+
+input_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10"
+output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/evals"
 
 # Current date
 printf -v date '%(%Y%m%d)T' -1 

@@ -10,14 +10,15 @@ data_path="/media/AllBlue/LanguageData/PREP/opustools/bar-de" # TODO: Split up a
 output_path="/media/AllBlue/LanguageData/PREP/2024SchuMATh"
 perturbation_type="" # lex | mor | syn 
 data_quality="" # naive | clean | informed  # → Change variable here for each "Phase"
-feature_validity="" # guess | reason | authentic # → Change variable here for each "Phase"
+feature_validity="" # guess | relaxed | reason | authentic # → Change variable here for each "Phase"
 current_dir="$(dirname "$0")"
 script_file="../launch/Perturbation_Application.sh"
 script_path="${current_dir}/${script_file}"
 
 
 for data_quality in naive clean; do
-    for feature_validity in guess reason; do
+    #for feature_validity in guess reason; do
+    for feature_validity in relaxed; do
         # +++++++++++++++++++++++++++++++++++++++++++++++
         # Bavarian - German 
         src_lang="bar"
@@ -41,21 +42,7 @@ for data_quality in naive clean; do
         #     -e "${data_file_extension}" \
         #     -f "${feature_validity}"
 
-        # perturbation_type="mor"
-        # bash "${script_path}" \
-        #     -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
-        #     -d "${data_path}/${data_quality}" \
-        #     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
-        #     -s "${src_lang}" \
-        #     -a "${src_name}" \
-        #     -t "${trg_lang}" \
-        #     -b "${trg_name}" \
-        #     -m "${perturbation_type}" \
-        #     -n "${data_quality}" \
-        #     -e "${data_file_extension}" \
-        #     -f "${feature_validity}"
-
-        perturbation_type="all" # Again morphological, but on the results from the lexicographic perturbation process 
+        perturbation_type="mor"
         bash "${script_path}" \
             -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
             -d "${data_path}/${data_quality}" \
@@ -68,6 +55,20 @@ for data_quality in naive clean; do
             -n "${data_quality}" \
             -e "${data_file_extension}" \
             -f "${feature_validity}"
+
+        # perturbation_type="all" # Again morphological, but on the results from the lexicographic perturbation process 
+        # bash "${script_path}" \
+        #     -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
+        #     -d "${data_path}/${data_quality}" \
+        #     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
+        #     -s "${src_lang}" \
+        #     -a "${src_name}" \
+        #     -t "${trg_lang}" \
+        #     -b "${trg_name}" \
+        #     -m "${perturbation_type}" \
+        #     -n "${data_quality}" \
+        #     -e "${data_file_extension}" \
+        #     -f "${feature_validity}"
 
         # # TODO
         # #perturbation_type="syn"
@@ -97,21 +98,7 @@ for data_quality in naive clean; do
         #     -e "${data_file_extension}" \
         #     -f "${feature_validity}"
 
-        # perturbation_type="mor"
-        # bash "${script_path}" \
-        #     -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
-        #     -d "${data_path}/${data_quality}" \
-        #     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
-        #     -s "${src_lang}" \
-        #     -a "${src_name}" \
-        #     -t "${trg_lang}" \
-        #     -b "${trg_name}" \
-        #     -m "${perturbation_type}" \
-        #     -n "${data_quality}" \
-        #     -e "${data_file_extension}" \
-        #     -f "${feature_validity}"
-
-        perturbation_type="all" # Again morphological, but on the results from the lexicographic perturbation process 
+        perturbation_type="mor"
         bash "${script_path}" \
             -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
             -d "${data_path}/${data_quality}" \
@@ -124,6 +111,20 @@ for data_quality in naive clean; do
             -n "${data_quality}" \
             -e "${data_file_extension}" \
             -f "${feature_validity}"
+
+        # perturbation_type="all" # Again morphological, but on the results from the lexicographic perturbation process 
+        # bash "${script_path}" \
+        #     -i "${input_path}/${src_name}/${trg_name}/${feature_validity}" \
+        #     -d "${data_path}/${data_quality}" \
+        #     -o "${output_path}/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}" \
+        #     -s "${src_lang}" \
+        #     -a "${src_name}" \
+        #     -t "${trg_lang}" \
+        #     -b "${trg_name}" \
+        #     -m "${perturbation_type}" \
+        #     -n "${data_quality}" \
+        #     -e "${data_file_extension}" \
+        #     -f "${feature_validity}"
 
         # TODO
         #perturbation_type="syn"

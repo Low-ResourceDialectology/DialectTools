@@ -181,6 +181,20 @@ if __name__ == "__main__":
                 #dict_file = f'{args.input_dir}/*-infixes_1.json'
                 rulebook_infixes = read_perturbation_rules(dict_file)
         
+    # NOTE: Processing steps for feature_validity = "relaxed"
+    if args.feature_validity == "relaxed":
+        # Processing replacement-rules with a context length of 1 #TODO: Make the context_length variable
+        for dict_file in dict_files:
+            if dict_file.endswith("-prefixes_1.json"):
+                #dict_file = f'{args.input_dir}/*-prefixes_1.json'
+                rulebook_prefixes = read_perturbation_rules(dict_file)
+            if dict_file.endswith("-suffixes_1.json"):
+                #dict_file = f'{args.input_dir}/*-suffixes_1.json'
+                rulebook_suffixes = read_perturbation_rules(dict_file)
+            if dict_file.endswith("-infixes_1.json"):
+                #dict_file = f'{args.input_dir}/*-infixes_1.json'
+                rulebook_infixes = read_perturbation_rules(dict_file)
+
     # Preprocess the replacement rules
     prefix_keys, preprocessed_prefixes, re_mode_prefixes = preprocess_replacement_dictionary(rulebook_prefixes, ignore_case=True)
     suffix_keys, preprocessed_suffixes, re_mode_suffixes = preprocess_replacement_dictionary(rulebook_suffixes, ignore_case=True)

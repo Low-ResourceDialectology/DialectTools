@@ -6,6 +6,8 @@
 
 # bash LosingMyMind-QuickFixTextLines.sh -i /media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/reason/all/test.bar -o /media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/reason/all/test.bar -s '@@@' -t /media/AllBlue/TempData/temp.txt
 
+# bash LosingMyMind-QuickFixTextLines.sh -i /media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/relaxed/all/test.bar -o /media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/relaxed/all/test.bar -s '@@@' -t /media/AllBlue/TempData/temp.txt
+
 # Function to remove empty lines and specific substrings, then save to a new file
 input_file=""
 output_file=""
