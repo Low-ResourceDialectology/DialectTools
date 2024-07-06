@@ -2,15 +2,33 @@
 # Project: Any
 # Get information of text inside the files of a directory
 
+# TODO: Check why it does not work for the Bavarian Wikidump Freqdicts → Is it due to empty space in filename???
+# # --- Classifying Wikidumps
+# filename_part=""
+# thresholds=6000,12000,18000,24000
+
+# input_path="/media/AllBlue/LanguageData/CLEAN/wikidumps/aggregated_freqdicts/bar"
+# python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
 
 
-# ---
+---
 # Checking data quantities
 filename_part="bar-de"
 thresholds=100,200,300,400,500,1000
 
 input_path="/media/AllBlue/LanguageData/CLEAN/opustools/bar-de/clean"
 python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
+
+
+
+
+# ---
+# # Checking data quantities
+# filename_part="bar-de"
+# thresholds=100,200,300,400,500,1000
+
+# input_path="/media/AllBlue/LanguageData/CLEAN/opustools/bar-de/clean"
+# python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
 
 
 

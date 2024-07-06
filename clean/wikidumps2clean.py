@@ -30,7 +30,7 @@ logging.basicConfig(filename=f'{args.log_dir}/processing_errors-wikidumps2clean.
 
 nlp = stanza.Pipeline(lang='de', processors='tokenize')
 
-""" Helper fucntion for text preprocessing """
+""" Helper function for text preprocessing """
 def preprocess(text):
     # NOTE: Leave this step for later to better compare with DialectBLI data
     #text = str(text).lower()

@@ -6,18 +6,10 @@
 #   Output: (Sub-)Dialect-Tagged articles from wikidumps (as txt-files) 
 
 import argparse
-from collections import defaultdict
-import csv
 import glob
 import json
-import logging
 import os
 import pathlib
-import random
-import re # Regular expressions for replacing strings in files
-import unicodedata
-import shutil
-import sys
 
 
 """
