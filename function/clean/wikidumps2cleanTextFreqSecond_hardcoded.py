@@ -9,6 +9,7 @@ import csv
 import sys
 import collections
 import json
+import shutil
 
 def process_csv_file(file_path):
     word_freq = collections.Counter()
@@ -51,13 +52,13 @@ def main(input_dir, output_dir):
         if filename.endswith(".csv"):
             file_path = os.path.join(input_dir, filename)
             word_freq = process_csv_file(file_path)
-            output_path = os.path.join(output_dir, f"{os.path.splitext(filename)[0]}_word_freq.json")
+            output_path = os.path.join(output_dir, f"{os.path.splitext(filename)[0].replace('new-','').replace('correct-','').replace('-file','')}.json")
             save_word_freq(word_freq, output_path)
             print(f"Processed {filename} and saved word frequency to {output_path}")
         elif filename.endswith(".txt"):
             file_path = os.path.join(input_dir, filename)
             word_freq = process_txt_file(file_path)
-            output_path = os.path.join(output_dir, f"{os.path.splitext(filename)[0]}_word_freq.json")
+            output_path = os.path.join(output_dir, f"{os.path.splitext(filename)[0].replace('new-','').replace('correct-','').replace('-file','')}.json")
             save_word_freq(word_freq, output_path)
             print(f"Processed {filename} and saved word frequency to {output_path}")
 
@@ -74,7 +75,31 @@ if __name__ == "__main__":
     #     print(f"The provided path '{args.input_dir}' is not a valid directory.")
 
 
-    # NOTE: First run based on pre-tagged wikidump article data
-    input_dir = '/media/AllBlue/LanguageData/CLEAN/wikidumps/clean-text/bar'
-    output_dir = '/media/AllBlue/LanguageData/CLEAN/wikidumps/clean-text-freq/bar'
-    main(input_dir, output_dir)
+    # NOTE: Second run based on the newly-tagged (silver) wikidump article data
+    input_silver_dir = '/media/AllBlue/LanguageData/CLEAN/wikidumps/informed/bar/silver'
+    output_silver_dir = '/media/AllBlue/LanguageData/CLEAN/wikidumps/informed/bar/silver'
+    main(input_silver_dir, output_silver_dir)
+    
+    # NOTE: And also for the "golden" texts for consistency
+    input_gold_dir = '/media/AllBlue/LanguageData/CLEAN/wikidumps/informed/bar/gold'
+    output_gold_dir = '/media/AllBlue/LanguageData/CLEAN/wikidumps/informed/bar/gold'
+    main(input_gold_dir, output_gold_dir)
+
+    # NOTE: Should now be taken care of by an earlier executed script.
+        # # NOTE: Additionally the "golden default Bavarian" based on the assumption, that "untagged articles" denote the "default Bavarian" variant
+        # # NOTE: Only single file, not directory-based processing!
+        # input_gold_default_file_dir = '/media/AllBlue/LanguageData/CLEAN/wikidumps/clean-text/bar/'
+        # input_gold_default_filename = 'UNKNOWN.txt'
+        # output_gold_dir = '/media/AllBlue/LanguageData/CLEAN/wikidumps/informed/bar/gold'
+
+        # # Get word frequencies for the "gold default variant"
+        # input_file_path = os.path.join(input_gold_default_file_dir, input_gold_default_filename)
+        # word_freq = process_txt_file(input_file_path)
+        # output_freq_path = os.path.join(output_gold_dir, "Bavarian.json")
+        # save_word_freq(word_freq, output_freq_path)
+
+        # # Also move the text file of the "gold default variant" to the "informed" output directory
+        # shutil.copy(input_file_path, f'{output_gold_dir}/Bavarian.txt')
+
+        # print(f"Processed {input_gold_default_filename} and saved word frequency and original text file to {output_gold_dir}")
+

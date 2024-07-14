@@ -11,13 +11,20 @@
 # python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
 
 
----
-# Checking data quantities
-filename_part="bar-de"
-thresholds=100,200,300,400,500,1000
+# ---
+# For "Untangling Language Data" Project
+filename_part="Bavarian.txt"
+thresholds=500
 
-input_path="/media/AllBlue/LanguageData/CLEAN/opustools/bar-de/clean"
+#input_path="/media/AllBlue/LanguageData/CLEAN/wikidumps/informed/bar/gold"
+#input_path="/media/AllBlue/LanguageData/CLEAN/wikidumps/informed/bar/silver"
+#input_path="/media/AllBlue/LanguageData/PROJECTS/2024SchuTang/input/silver/equally"
+#input_path="/media/AllBlue/LanguageData/PROJECTS/2024SchuTang/input/silver/proportionally"
+#input_path="/media/AllBlue/LanguageData/PROJECTS/2024SchuTang/input/gold/equally"
+input_path="/media/AllBlue/LanguageData/PROJECTS/2024SchuTang/input/gold/proportionally"
 python3 ../function/evaluate/textfiles.py -i "${input_path}" -f "${filename_part}" -t "${thresholds}"
+
+
 
 
 

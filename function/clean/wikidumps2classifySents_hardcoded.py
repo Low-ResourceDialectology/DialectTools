@@ -186,7 +186,6 @@ if __name__ == "__main__":
 
     sentences = read_sentences_from_txt_dir(input_dir)
 
-
     tagged_sentences = inspect_and_tag_sentences(sentences, wordlists)
 
     # with open(correct_dialect_files, 'r', encoding='utf-8') as f:
