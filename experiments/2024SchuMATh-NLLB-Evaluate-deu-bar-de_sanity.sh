@@ -41,107 +41,91 @@ feature_validity="" # "guess" | "reason" | "authentic"
         # German Reference and Bavarian Reference
         # ++++++++++++++++++++++++++++++++++++++++++++
         # Evaluate basic differences between original Bavarian text compared to the aligned German text
-        # input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/clean" 
-        # input_file_ref="test.de"
+input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/clean" 
+input_file_ref="test.de"
 
-        # # Evaluate the basic language variety differences
-        # src_name="Bavarian"
-        # src_lang="bar"
-        # trg_name="German"
-        # trg_lang="de"
+# Evaluate the basic language variety differences
+src_name="Bavarian"
+src_lang="bar"
+trg_name="German"
+trg_lang="de"
 
-        # echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
-        # input_path_inf="/media/AllBlue/LanguageData/PREP/opustools/bar-de/clean"
-        # input_file_inf="test.bar"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/none/none"
-        # output_file="PERT.txt"
-        # bash "${script_file}" \
-        #     -a "${input_path_ref}" \
-        #     -b "${input_file_ref}" \
-        #     -c "${input_path_inf}" \
-        #     -d "${input_file_inf}" \
-        #     -e "${output_path}" \
-        #     -f "${output_file}" \
-        #     -h "${metrics}" \
-        #     -i "${precision}" \
-        #     -j "${options}"
+echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
+input_path_inf="/media/AllBlue/LanguageData/PREP/opustools/bar-de/clean"
+input_file_inf="test.bar"
+output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/none/none"
+output_file="PERT.txt"
+bash "${script_file}" \
+    -a "${input_path_ref}" \
+    -b "${input_file_ref}" \
+    -c "${input_path_inf}" \
+    -d "${input_file_inf}" \
+    -e "${output_path}" \
+    -f "${output_file}" \
+    -h "${metrics}" \
+    -i "${precision}" \
+    -j "${options}"
 
 
-        # # German Reference and perturbed Bavarian
-        # # ++++++++++++++++++++++++++++++++++++++++++++
-        # # Evaluate basic differences between perturbed Bavarian text compared to the aligned German text
-        # input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/clean" 
-        # input_file_ref="test.de"
+        # German Reference and perturbed Bavarian
+        # ++++++++++++++++++++++++++++++++++++++++++++
+        # Evaluate basic differences between perturbed Bavarian text compared to the aligned German text
+input_path_ref="/media/AllBlue/LanguageData/PREP/opustools/bar-de/clean" 
+input_file_ref="test.de"
 
-        # # Evaluate the basic language variety differences
-        # src_name="Bavarian"
-        # src_lang="bar"
-        # trg_name="German"
-        # trg_lang="de"
+# Evaluate the basic language variety differences
+src_name="Bavarian"
+src_lang="bar"
+trg_name="German"
+trg_lang="de"
 
-        # echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
-        # input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/relaxed/mor"
-        # input_file_inf="test.bar"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/relaxed/mor"
-        # output_file="PERT.txt"
-        # bash "${script_file}" \
-        #     -a "${input_path_ref}" \
-        #     -b "${input_file_ref}" \
-        #     -c "${input_path_inf}" \
-        #     -d "${input_file_inf}" \
-        #     -e "${output_path}" \
-        #     -f "${output_file}" \
-        #     -h "${metrics}" \
-        #     -i "${precision}" \
-        #     -j "${options}"
+echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
+input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/relaxed/mor"
+input_file_inf="test.bar"
+output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/relaxed/mor"
+output_file="PERT.txt"
+bash "${script_file}" \
+        -a "${input_path_ref}" \
+        -b "${input_file_ref}" \
+        -c "${input_path_inf}" \
+        -d "${input_file_inf}" \
+        -e "${output_path}" \
+        -f "${output_file}" \
+        -h "${metrics}" \
+        -i "${precision}" \
+        -j "${options}"
 
-        # echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
-        # input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/reason/mor"
-        # input_file_inf="test.bar"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/reason/mor"
-        # output_file="PERT.txt"
-        # bash "${script_file}" \
-        #     -a "${input_path_ref}" \
-        #     -b "${input_file_ref}" \
-        #     -c "${input_path_inf}" \
-        #     -d "${input_file_inf}" \
-        #     -e "${output_path}" \
-        #     -f "${output_file}" \
-        #     -h "${metrics}" \
-        #     -i "${precision}" \
-        #     -j "${options}"
+echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
+input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/reason/mor"
+input_file_inf="test.bar"
+output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/reason/mor"
+output_file="PERT.txt"
+bash "${script_file}" \
+        -a "${input_path_ref}" \
+        -b "${input_file_ref}" \
+        -c "${input_path_inf}" \
+        -d "${input_file_inf}" \
+        -e "${output_path}" \
+        -f "${output_file}" \
+        -h "${metrics}" \
+        -i "${precision}" \
+        -j "${options}"
 
-        # echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
-        # input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/guess/mor"
-        # input_file_inf="test.bar"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/guess/mor"
-        # output_file="PERT.txt"
-        # bash "${script_file}" \
-        #     -a "${input_path_ref}" \
-        #     -b "${input_file_ref}" \
-        #     -c "${input_path_inf}" \
-        #     -d "${input_file_inf}" \
-        #     -e "${output_path}" \
-        #     -f "${output_file}" \
-        #     -h "${metrics}" \
-        #     -i "${precision}" \
-        #     -j "${options}"
-
-        # echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
-        # input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/reason/lex"
-        # input_file_inf="test.bar"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/reason/lex"
-        # output_file="PERT.txt"
-        # bash "${script_file}" \
-        #     -a "${input_path_ref}" \
-        #     -b "${input_file_ref}" \
-        #     -c "${input_path_inf}" \
-        #     -d "${input_file_inf}" \
-        #     -e "${output_path}" \
-        #     -f "${output_file}" \
-        #     -h "${metrics}" \
-        #     -i "${precision}" \
-        #     -j "${options}"
+echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
+input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/reason/lex"
+input_file_inf="test.bar"
+output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/reason/lex"
+output_file="PERT.txt"
+bash "${script_file}" \
+        -a "${input_path_ref}" \
+        -b "${input_file_ref}" \
+        -c "${input_path_inf}" \
+        -d "${input_file_inf}" \
+        -e "${output_path}" \
+        -f "${output_file}" \
+        -h "${metrics}" \
+        -i "${precision}" \
+        -j "${options}"
 
 # Bavarian Reference and perturbed German
 # ++++++++++++++++++++++++++++++++++++++++++++
@@ -158,7 +142,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
         # echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
         # input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/German/clean/Bavarian/relaxed/mor"
         # input_file_inf="test.de"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/relaxed/mor"
+        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/relaxed/mor"
         # output_file="PERT.txt"
         # bash "${script_file}" \
         #     -a "${input_path_ref}" \
@@ -174,7 +158,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
         # echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
         # input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/German/clean/Bavarian/reason/mor"
         # input_file_inf="test.de"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/reason/mor"
+        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/reason/mor"
         # output_file="PERT.txt"
         # bash "${script_file}" \
         #     -a "${input_path_ref}" \
@@ -190,7 +174,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
         # echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
         # input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/German/clean/Bavarian/guess/mor"
         # input_file_inf="test.de"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/guess/mor"
+        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/guess/mor"
         # output_file="PERT.txt"
         # bash "${script_file}" \
         #     -a "${input_path_ref}" \
@@ -206,7 +190,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
         # echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
         # input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/German/clean/Bavarian/reason/lex"
         # input_file_inf="test.de"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/reason/lex"
+        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/reason/lex"
         # output_file="PERT.txt"
         # bash "${script_file}" \
         #     -a "${input_path_ref}" \
@@ -238,8 +222,8 @@ feature_validity="" # "guess" | "reason" | "authentic"
         #     echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
         #     input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/${data_quality}/reference/Bavarian/English/NLLB"
         #     input_file_inf="test.en"
-        #     #output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
-        #     output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
+        #     #output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}/${data_quality}/none/none"
+        #     output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/${data_quality}/none/none"
         #     output_file="NLLB.txt"
         #     bash "${script_file}" \
         #         -a "${input_path_ref}" \
@@ -271,8 +255,8 @@ feature_validity="" # "guess" | "reason" | "authentic"
         # echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
         # input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/relaxed/mor/English/NLLB"
         # input_file_inf="test.en"
-        # #output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/relaxed/mor"
+        # #output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}/${data_quality}/none/none"
+        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/relaxed/mor"
         # output_file="NLLB.txt"
         # bash "${script_file}" \
         #     -a "${input_path_ref}" \
@@ -288,8 +272,8 @@ feature_validity="" # "guess" | "reason" | "authentic"
         # echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
         # input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/reason/mor/English/NLLB"
         # input_file_inf="test.en"
-        # #output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/reason/mor"
+        # #output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}/${data_quality}/none/none"
+        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/reason/mor"
         # output_file="NLLB.txt"
         # bash "${script_file}" \
         #     -a "${input_path_ref}" \
@@ -305,8 +289,8 @@ feature_validity="" # "guess" | "reason" | "authentic"
         # echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
         # input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/reason/lex/English/NLLB"
         # input_file_inf="test.en"
-        # #output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/reason/lex"
+        # #output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}/${data_quality}/none/none"
+        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/reason/lex"
         # output_file="NLLB.txt"
         # bash "${script_file}" \
         #     -a "${input_path_ref}" \
@@ -322,8 +306,8 @@ feature_validity="" # "guess" | "reason" | "authentic"
         # echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
         # input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/guess/mor/English/NLLB"
         # input_file_inf="test.en"
-        # #output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
-        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-10/${src_name}/clean/guess/mor"
+        # #output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}/${data_quality}/none/none"
+        # output_path="/media/AllBlue/LanguageData/EVAL/2024SchuMATh/Pipeline-11/${src_name}/clean/guess/mor"
         # output_file="NLLB.txt"
         # bash "${script_file}" \
         #     -a "${input_path_ref}" \
@@ -335,6 +319,8 @@ feature_validity="" # "guess" | "reason" | "authentic"
         #     -h "${metrics}" \
         #     -i "${precision}" \
         #     -j "${options}"
+
+
 
 
 
@@ -365,7 +351,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         for perturbation_type in lex mor all; do
 #             input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}/${translate_name}/NLLB"
 #             input_file_inf="test.en"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="NLLB.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \
@@ -393,7 +379,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         for perturbation_type in lex mor all; do
 #             input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}/${translate_name}/NLLB"
 #             input_file_inf="test.en"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="NLLB.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \
@@ -429,7 +415,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #     echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
 #     input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/${data_quality}/reference/Bavarian/English/NLLB"
 #     input_file_inf="test.en"
-#     output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
+#     output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}/${data_quality}/none/none"
 #     output_file="NLLB.txt"
 #     bash "${script_file}" \
 #         -a "${input_path_ref}" \
@@ -469,7 +455,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
 #         input_path_inf="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
 #         input_file_inf="test.bar"
-#         output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
+#         output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}/${data_quality}/none/none"
 #         output_file="PERT.txt"
 #         bash "${script_file}" \
 #             -a "${input_path_ref}" \
@@ -503,7 +489,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         do
 #             input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}"
 #             input_file_inf="test.${src_lang}"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="PERT.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \
@@ -536,7 +522,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         do
 #             input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${feature_validity}/${perturbation_type}"
 #             input_file_inf="test.${src_lang}"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="PERT.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \
@@ -592,7 +578,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #     echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
 #     input_path_inf="/media/AllBlue/LanguageData/PREP/opustools/${src_lang}-${trg_lang}/${data_quality}"
 #     input_file_inf="test.bar"
-#     output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
+#     output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}/${data_quality}/none/none"
 #     output_file="PERT.txt"
 #     bash "${script_file}" \
 #         -a "${input_path_ref}" \
@@ -625,7 +611,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         do
 #             input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}"
 #             input_file_inf="test.${src_lang}"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="PERT.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \
@@ -658,7 +644,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         do
 #             input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}"
 #             input_file_inf="test.${src_lang}"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="PERT.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \
@@ -692,7 +678,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 # echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
 # input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/clean/reference/Bavarian/English/NLLB"
 # input_file_inf="test.en"
-# output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/clean/none/none"
+# output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}/clean/none/none"
 # output_file="NLLB.txt"
 # bash "${script_file}" \
 #     -a "${input_path_ref}" \
@@ -729,7 +715,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         do
 #             input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}/${translate_name}/NLLB"
 #             input_file_inf="test.en"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="NLLB.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \
@@ -762,7 +748,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         do
 #             input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}/${translate_name}/NLLB"
 #             input_file_inf="test.en"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="NLLB.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \
@@ -811,7 +797,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 # echo "Evaluating basic difference of language varieties via sacreBLEU for: ${src_name} to ${trg_name}";
 # input_path_inf="/media/AllBlue/LanguageData/PREP/opustools/bar-de/${data_quality}"
 # input_file_inf="test.bar"
-# output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/${data_quality}/none/none"
+# output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}/${data_quality}/none/none"
 # output_file="PERT.txt"
 # bash "${script_file}" \
 #     -a "${input_path_ref}" \
@@ -844,7 +830,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         do
 #             input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}"
 #             input_file_inf="test.${src_lang}"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="PERT.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \
@@ -877,7 +863,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         do
 #             input_path_inf="/media/AllBlue/LanguageData/PREP/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}"
 #             input_file_inf="test.${src_lang}"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="PERT.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \
@@ -911,7 +897,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 # echo "Evaluating machine translation via sacreBLEU for: ${src_name} to ${translate_name}";
 # input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/bar-de/naive/reference/Bavarian/English/NLLB"
 # input_file_inf="test.en"
-# output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}/naive/none/none"
+# output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}/naive/none/none"
 # output_file="NLLB.txt"
 # bash "${script_file}" \
 #     -a "${input_path_ref}" \
@@ -948,7 +934,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         do
 #             input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}/${translate_name}/NLLB"
 #             input_file_inf="test.en"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="NLLB.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \
@@ -981,7 +967,7 @@ feature_validity="" # "guess" | "reason" | "authentic"
 #         do
 #             input_path_inf="/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/${src_name}/${data_quality}/${trg_name}/${perturbation_type}/${translate_name}/NLLB"
 #             input_file_inf="test.en"
-#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-10/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
+#             output_path="/media/AllBlue/LanguageData/LOGS/2024SchuMATh/Pipeline-11/${src_name}_${trg_name}/${data_quality}/${feature_validity}/${perturbation_type}"
 #             output_file="NLLB.txt"
 #             bash "${script_file}" \
 #                 -a "${input_path_ref}" \

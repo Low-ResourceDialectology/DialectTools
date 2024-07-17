@@ -66,10 +66,24 @@ files_to_process = [
     # "/media/AllBlue/LanguageData/PREP/2024SchuMATh/German/clean/Bavarian/reason/lex/test.de",
     # "/media/AllBlue/LanguageData/PREP/2024SchuMATh/German/clean/Bavarian/guess/mor/test.de"
 
-    "/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/relaxed/mor/English/NLLB/test.en",
-    "/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/reason/mor/English/NLLB/test.en",
-    "/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/reason/lex/English/NLLB/test.en",
-    "/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/guess/mor/English/NLLB/test.en"
+    # "/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/relaxed/mor/English/NLLB/test.en",
+    # "/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/reason/mor/English/NLLB/test.en",
+    # "/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/reason/lex/English/NLLB/test.en",
+    # "/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/Bavarian/clean/German/guess/mor/English/NLLB/test.en"
+
+    # NOTE: Prior to sending data to Sina
+    # "/media/AllBlue/LanguageData/PREP/opustools/bar-en/clean/test.en", # Reference Ger-
+    # "/media/AllBlue/LanguageData/PREP/opustools/bar-en/clean/test.bar" # Reference Bar-
+    # "/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/reason/all/test.bar",
+    # "/media/AllBlue/LanguageData/PREP/2024SchuMATh/Bavarian/clean/German/relaxed/all/test.bar"
+    # "/media/AllBlue/LanguageData/PREP/2024SchuMATh/German/clean/Bavarian/reason/all/test.de",
+    # "/media/AllBlue/LanguageData/PREP/2024SchuMATh/German/clean/Bavarian/relaxed/all/test.de"
+    "/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/German/clean/Bavarian/reason/lex/English/NLLB/test.en",
+    "/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/German/clean/Bavarian/reason/mor/English/NLLB/test.en",
+    "/media/AllBlue/LanguageData/EXPERIMENT/2024SchuMATh/German/clean/Bavarian/relaxed/mor/English/NLLB/test.en"
+    
+    
+
 ]
 
 
